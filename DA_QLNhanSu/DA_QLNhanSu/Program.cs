@@ -1,3 +1,4 @@
+using DA_QLNhanSu.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DA_QLNhanSu
@@ -10,7 +11,8 @@ namespace DA_QLNhanSu
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            
+            var connectionString = builder.Configuration.GetConnectionString("AppConnectionString");
+            builder.Services.AddDbContext<DaQlNhanvienContext>(x => x.UseSqlServer(connectionString));
 
             var app = builder.Build();
 
