@@ -2,7 +2,8 @@
 
 namespace DA_QLNhanSu.Areas.Admins.Controllers
 {
-    public class DashboardController : Controller
+    //[Area("Admins")]
+    public class DashboardController : BaseController
     {
         public IActionResult Index()
         {

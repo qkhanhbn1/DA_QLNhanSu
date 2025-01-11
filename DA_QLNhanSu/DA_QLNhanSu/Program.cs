@@ -14,6 +14,16 @@ namespace DA_QLNhanSu
             var connectionString = builder.Configuration.GetConnectionString("AppConnectionString");
             builder.Services.AddDbContext<DaQlNhanvienContext>(x => x.UseSqlServer(connectionString));
 
+            // Cấu hình sử dụng session
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(60);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+                options.Cookie.Name = "DATotNghiep.Session";
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -30,6 +40,9 @@ namespace DA_QLNhanSu
             app.UseRouting();
 
             app.UseAuthorization();
+
+            // Sử dụng session đã khai báo ở trên
+            app.UseSession();
 
             app.MapControllerRoute(
                 name: "areas",
