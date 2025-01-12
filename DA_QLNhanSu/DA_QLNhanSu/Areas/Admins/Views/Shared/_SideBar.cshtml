@@ -1,5 +1,5 @@
 ﻿﻿@using Microsoft.AspNetCore.Http;
-@* @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor *@
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="" class="brand-link">
@@ -15,8 +15,7 @@
                 <img src="~/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a asp-action="Logout" asp-controller="Login">Đăng xuất</a>
-                @* @{
+                @{
                     if (HttpContextAccessor.HttpContext.Session.GetString("AdminLogin") != null)
                     {
                         <a href="#" class="d-block">@HttpContextAccessor.HttpContext.Session.GetString("AdminLogin")</a>
@@ -26,7 +25,7 @@
                     {
                         <a href="#" class="d-block">Admins</a>
                     }
-                } *@
+                }
             </div>
         </div>
         <!-- Sidebar Menu -->

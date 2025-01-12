@@ -24,6 +24,9 @@ namespace DA_QLNhanSu
                 options.Cookie.Name = "DATotNghiep.Session";
             });
 
+            // Đăng ký dịch vụ cho HttpContextAccessor
+            builder.Services.AddHttpContextAccessor();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
