@@ -1,0 +1,78 @@
+﻿@model IEnumerable<DA_QLNhanSu.Models.Contract>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SigningDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReleaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpirationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContractDuration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DailyWage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdeNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdpNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SigningDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpirationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContractDuration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DailyWage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdeNavigation.Ide)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdpNavigation.Idp)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

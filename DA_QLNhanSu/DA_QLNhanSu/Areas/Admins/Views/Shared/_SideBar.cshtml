@@ -36,11 +36,39 @@
                         <i class="fas fa-th me-3"></i> Bảng điều khiển
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="/admins/employees" class="nav-link d-flex align-items-center py-2">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link d-flex align-items-center py-2 dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#employeeMenu" aria-expanded="true">
                         <i class="fas fa-user-astronaut me-3"></i> Quản lý nhân sự
                     </a>
+                    <ul id="employeeMenu" class="collapse list-unstyled ps-4 show">
+                        <li>
+                            <a href="/admins/employees" class="nav-link py-2 ">
+                                <i class="fas fa-plus me-2"></i>Danh sách nhân sự
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admins/Contracts" class="nav-link py-2 ">
+                                <i class="fas fa-list me-2"></i> Hợp đồng nhân sự
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admins/positions" class="nav-link py-2 ">
+                                <i class="fas fa-list me-2"></i> Chức vụ nhân viên
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admins/departments" class="nav-link py-2 ">
+                                <i class="fas fa-list me-2"></i>Phòng ban
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admins/qualifications" class="nav-link py-2 ">
+                                <i class="fas fa-list me-2"></i>Trình độ nhân viên
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+
                 <li class="nav-item">
                     <a href="/admins/customers" class="nav-link d-flex align-items-center py-2">
                         <i class="fas fa-user me-3"></i> Tài khoản khách hàng
@@ -87,6 +115,37 @@
 </aside>
 
 <style>
+    /* Định dạng menu con */
+    #employeeMenu .nav-link {
+        font-size: 0.9rem;
+        color: #003366;
+        padding-left: 1.5rem;
+    }
+
+        /* Hiệu ứng hover cho menu con */
+        #employeeMenu .nav-link:hover {
+            background-color: #e0f7ff;
+            color: #003366;
+        }
+
+        /* Hiệu ứng active cho menu con */
+        #employeeMenu .nav-link.active {
+            background-color: #e0f7ff;
+            border-right: 3px solid #003366;
+            color: #003366;
+        }
+
+    /* Không áp dụng active cho mục chính */
+    .nav-item .dropdown-toggle {
+        color: #003366;
+    }
+
+        .nav-item .dropdown-toggle:hover {
+            background-color: #f8f9fa; /* Hiệu ứng hover */
+        }
+
+
+
     /* Cài đặt mặc định cho menu */
     .nav-link {
         font-weight: bolder; /* Chữ đậm */
