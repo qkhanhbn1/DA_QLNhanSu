@@ -1,126 +1,139 @@
 ﻿﻿@using Microsoft.AspNetCore.Http;
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="" class="brand-link">
-        <img src="~/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Quản trị hệ thống</span>
-    </a>
+<aside class="main-sidebar bg-white border-end">
+    <!-- Logo thương hiệu -->
+    <div class="brand-section d-flex align-items-center p-3 border-bottom">
+        <img src="~/dist/img/AdminLTELogo.png" alt="Logo" class="rounded-circle me-3" style="width: 40px; height: 40px;">
+        <span class="font-weight-light text-primary">Quản trị hệ thống</span>
+    </div>
 
     <!-- Sidebar -->
-    <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="~/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
+    <div class="sidebar p-3">
+        <!-- Thông tin người dùng -->
+        <div class="user-panel d-flex align-items-center mb-4">
+            <img src="~/dist/img/user2-160x160.jpg" class="rounded-circle me-3 shadow-sm" alt="Ảnh người dùng" style="width: 50px; height: 50px;">
+            <div>
                 @{
                     if (HttpContextAccessor.HttpContext.Session.GetString("AdminLogin") != null)
                     {
-                        <a href="#" class="d-block">@HttpContextAccessor.HttpContext.Session.GetString("AdminLogin")</a>
-                        <a asp-action="Logout" asp-controller="Login">Đăng xuất</a>
+                        <a href="#" class="text-primary text-decoration-none fw-bold">@HttpContextAccessor.HttpContext.Session.GetString("AdminLogin")</a>
+                        <br />
+                        <a asp-action="Logout" asp-controller="Login" class="text-danger text-decoration-none">Đăng xuất</a>
                     }
                     else
                     {
-                        <a href="#" class="d-block">Admins</a>
+                        <span class="text-muted">Admins</span>
                     }
                 }
             </div>
         </div>
-        <!-- Sidebar Menu -->
-        <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item">
-                    <a href="~/admins" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Bảng điều khiển
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/admins/adminusers" class="nav-link">
-                        <i class="nav-icon fas fa-user-astronaut"></i>
-                        <p>
-                            Tài khoản quản lý
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/admins/customers" class="nav-link">
-                        <i class="nav-icon fas fa-user-astronaut"></i>
-                        <p>
-                            Tài khoản khách hàng
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/admins/categories" class="nav-link">
-                        <i class="nav-icon fas fa-circle"></i>
-                        <p>
-                            Quản lý danh mục
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/admins/banners" class="nav-link">
-                        <i class="nav-icon fas fa-circle"></i>
-                        <p>
-                            Quản lý Banner
-                        </p>
-                    </a>
 
+        <!-- Menu Sidebar -->
+        <nav>
+            <ul class="list-unstyled">
+                <li class="nav-item">
+                    <a href="~/admins" class="nav-link d-flex align-items-center py-2">
+                        <i class="fas fa-th me-3"></i> Bảng điều khiển
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/admins/news" class="nav-link">
-                        <i class="nav-icon fas fa-file-signature"></i>
-                        <p>
-                            Danh mục tin tức
-                        </p>
+                    <a href="/admins/employees" class="nav-link d-flex align-items-center py-2">
+                        <i class="fas fa-user-astronaut me-3"></i> Quản lý nhân sự
                     </a>
-
                 </li>
                 <li class="nav-item">
-                    <a href="/admins/partners" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
-                        <p>
-                            Quản lý đối tác
-                        </p>
+                    <a href="/admins/customers" class="nav-link d-flex align-items-center py-2">
+                        <i class="fas fa-user me-3"></i> Tài khoản khách hàng
                     </a>
-
                 </li>
                 <li class="nav-item">
-                    <a href="/admins/contacts" class="nav-link">
-                        <i class="nav-icon fas fa-user-astronaut"></i>
-                        <p>
-                            Danh sách liên hệ
-                        </p>
+                    <a href="/admins/categories" class="nav-link d-flex align-items-center py-2">
+                        <i class="fas fa-list me-3"></i> Quản lý danh mục
                     </a>
-
                 </li>
                 <li class="nav-item">
-                    <a href="/admins/orders" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
-                        <p>
-                            Quản lý đơn hàng
-                        </p>
+                    <a href="/admins/banners" class="nav-link d-flex align-items-center py-2">
+                        <i class="fas fa-image me-3"></i> Quản lý Banner
                     </a>
-
                 </li>
                 <li class="nav-item">
-                    <a href="/admins/products" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
-                        <p>
-                            Quản lý sản phẩm
-                        </p>
+                    <a href="/admins/news" class="nav-link d-flex align-items-center py-2">
+                        <i class="fas fa-newspaper me-3"></i> Danh mục tin tức
                     </a>
-                    
                 </li>
-
+                <li class="nav-item">
+                    <a href="/admins/partners" class="nav-link d-flex align-items-center py-2">
+                        <i class="fas fa-handshake me-3"></i> Quản lý đối tác
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admins/contacts" class="nav-link d-flex align-items-center py-2">
+                        <i class="fas fa-envelope me-3"></i> Danh sách liên hệ
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admins/orders" class="nav-link d-flex align-items-center py-2">
+                        <i class="fas fa-shopping-cart me-3"></i> Quản lý đơn hàng
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admins/products" class="nav-link d-flex align-items-center py-2">
+                        <i class="fas fa-box-open me-3"></i> Quản lý sản phẩm
+                    </a>
+                </li>
             </ul>
         </nav>
-        <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
 </aside>
+
+<style>
+    /* Cài đặt mặc định cho menu */
+    .nav-link {
+        font-weight: bolder; /* Chữ đậm */
+        color: #003366; /* Màu chữ xanh dương đậm */
+        transition: background-color 0.3s ease, border-right 0.3s ease;
+        position: relative;
+    }
+
+        /* Hiệu ứng hover */
+        .nav-link:hover {
+            background-color: #e0f7ff; /* Nền xanh dương nhạt */
+            color: #003366; /* Giữ màu xanh dương đậm */
+        }
+
+        /* Hiệu ứng active */
+        .nav-link.active {
+            background-color: #e0f7ff; /* Nền xanh dương nhạt */
+            border-right: 3px solid #003366; /* Thanh cột dọc xanh dương đậm */
+            color: #003366; /* Giữ màu chữ đậm */
+        }
+</style>
+
+<script>
+    // Thêm lớp "active" dựa trên URL hiện tại
+    document.addEventListener("DOMContentLoaded", function () {
+        const navLinks = document.querySelectorAll(".nav-link");
+        const currentUrl = window.location.pathname; // Lấy URL hiện tại
+
+        navLinks.forEach(link => {
+            if (link.getAttribute("href") === currentUrl) {
+                link.classList.add("active");
+            }
+
+            // Hiệu ứng hover
+            link.addEventListener("mouseover", () => {
+                if (!link.classList.contains("active")) {
+                    link.style.backgroundColor = "#e0f7ff";
+                }
+            });
+            link.addEventListener("mouseout", () => {
+                if (!link.classList.contains("active")) {
+                    link.style.backgroundColor = "transparent";
+                }
+            });
+        });
+    });
+</script>
+
+
+

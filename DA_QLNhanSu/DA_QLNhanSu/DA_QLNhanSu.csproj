@@ -24,4 +24,13 @@
     <Folder Include="Areas\Admins\Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\plugins\ckfinder\src\CKFinder.Connector.Plugin.DiskQuota\CKFinder.Connector.Plugin.DiskQuota.csproj" />
+    <None Include="wwwroot\plugins\ckfinder\src\CKFinder.Connector.Plugin.GetFileInfo\CKFinder.Connector.Plugin.GetFileInfo.csproj" />
+    <None Include="wwwroot\plugins\ckfinder\src\CKFinder.Connector.Plugin.UserActionsLogger\CKFinder.Connector.Plugin.UserActionsLogger.csproj" />
+    <None Include="wwwroot\plugins\ckfinder\src\CKFinder.Connector.Plugin.Watermark\CKFinder.Connector.Plugin.Watermark.csproj" />
+    <None Include="wwwroot\plugins\ckfinder\src\CKFinder.Connector.Samples.sln" />
+    <None Include="wwwroot\plugins\ckfinder\src\CKFinder.Connector.WebApp\CKFinder.Connector.WebApp.csproj" />
+  </ItemGroup>
+
 </Project>
