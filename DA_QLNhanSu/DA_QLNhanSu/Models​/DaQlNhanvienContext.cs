@@ -19,8 +19,6 @@ public partial class DaQlNhanvienContext : DbContext
 
     public virtual DbSet<Allowance> Allowances { get; set; }
 
-    public virtual DbSet<CompanyPolicy> CompanyPolicies { get; set; }
-
     public virtual DbSet<Contract> Contracts { get; set; }
 
     public virtual DbSet<Department> Departments { get; set; }
@@ -83,25 +81,6 @@ public partial class DaQlNhanvienContext : DbContext
                 .HasColumnName("NAME");
         });
 
-        modelBuilder.Entity<CompanyPolicy>(entity =>
-        {
-            entity.ToTable("COMPANY_POLICY");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Content)
-                .HasMaxLength(250)
-                .HasColumnName("CONTENT");
-            entity.Property(e => e.ExpirationDate)
-                .HasColumnType("datetime")
-                .HasColumnName("EXPIRATION_DATE");
-            entity.Property(e => e.Name)
-                .HasMaxLength(250)
-                .HasColumnName("NAME");
-            entity.Property(e => e.ReleaseDate)
-                .HasColumnType("datetime")
-                .HasColumnName("RELEASE_DATE");
-        });
-
         modelBuilder.Entity<Contract>(entity =>
         {
             entity.ToTable("CONTRACT");
@@ -111,9 +90,8 @@ public partial class DaQlNhanvienContext : DbContext
                 .HasMaxLength(250)
                 .HasColumnName("CONTENT");
             entity.Property(e => e.ContractDuration)
-                .HasMaxLength(50)
+                .HasMaxLength(250)
                 .HasColumnName("CONTRACT_DURATION");
-            entity.Property(e => e.DailyWage).HasColumnName("DAILY_WAGE");
             entity.Property(e => e.ExpirationDate)
                 .HasColumnType("datetime")
                 .HasColumnName("EXPIRATION_DATE");
@@ -190,7 +168,6 @@ public partial class DaQlNhanvienContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("EMAIL");
             entity.Property(e => e.Gender).HasColumnName("GENDER");
-            entity.Property(e => e.IdAccount).HasColumnName("ID_ACCOUNT");
             entity.Property(e => e.Idd).HasColumnName("IDD");
             entity.Property(e => e.Idp).HasColumnName("IDP");
             entity.Property(e => e.Idq).HasColumnName("IDQ");
@@ -221,9 +198,7 @@ public partial class DaQlNhanvienContext : DbContext
         {
             entity.ToTable("EMPLOYEE_ALLOWANCE");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.IdAllowances).HasColumnName("ID_ALLOWANCES");
             entity.Property(e => e.Ide).HasColumnName("IDE");
             entity.Property(e => e.Money)
@@ -248,7 +223,9 @@ public partial class DaQlNhanvienContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("EXPIRATION_DATE");
             entity.Property(e => e.Ide).HasColumnName("IDE");
-            entity.Property(e => e.Number).HasColumnName("NUMBER");
+            entity.Property(e => e.Number)
+                .HasMaxLength(50)
+                .HasColumnName("NUMBER");
             entity.Property(e => e.ReleaseDate)
                 .HasColumnType("datetime")
                 .HasColumnName("RELEASE_DATE");
@@ -384,7 +361,7 @@ public partial class DaQlNhanvienContext : DbContext
         {
             entity.HasKey(e => e.Ids);
 
-            entity.ToTable("SALARY_CALCULATION", tb => tb.HasTrigger("trg_calculate_salary"));
+            entity.ToTable("SALARY_CALCULATION");
 
             entity.Property(e => e.Ids).HasColumnName("IDS");
             entity.Property(e => e.Date)

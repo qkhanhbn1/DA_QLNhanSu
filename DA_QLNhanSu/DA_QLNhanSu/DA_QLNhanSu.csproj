@@ -22,6 +22,8 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admins\Models\" />
+    <Folder Include="wwwroot\images\nam\" />
+    <Folder Include="wwwroot\images\nu\" />
   </ItemGroup>
 
   <ItemGroup>

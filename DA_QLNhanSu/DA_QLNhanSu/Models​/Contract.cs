@@ -21,8 +21,6 @@ public partial class Contract
 
     public int? Idp { get; set; }
 
-    public double? DailyWage { get; set; }
-
     public virtual Employee? IdeNavigation { get; set; }
 
     public virtual Position? IdpNavigation { get; set; }

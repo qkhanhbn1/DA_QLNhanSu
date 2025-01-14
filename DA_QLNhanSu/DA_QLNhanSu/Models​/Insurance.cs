@@ -9,7 +9,7 @@ public partial class Insurance
 
     public int? Ide { get; set; }
 
-    public int? Number { get; set; }
+    public string? Number { get; set; }
 
     public DateTime? ReleaseDate { get; set; }
 

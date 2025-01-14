@@ -5,10 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\areas\\admins\\views\\shared\\_sidebar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\areas\\admins\\views\\shared\\_sidebar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\areas\\admins\\controllers\\insurancescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\areas\\admins\\controllers\\insurancescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,24 +14,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "InsurancesController.cs",
-              "DocumentMoniker": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Controllers\\InsurancesController.cs",
-              "RelativeDocumentMoniker": "DA_QLNhanSu\\Areas\\Admins\\Controllers\\InsurancesController.cs",
-              "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Controllers\\InsurancesController.cs",
-              "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Controllers\\InsurancesController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-14T03:12:00.467Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -45,9 +28,9 @@
               "RelativeDocumentMoniker": "DA_QLNhanSu\\Areas\\Admins\\Views\\Shared\\_SideBar.cshtml",
               "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\Shared\\_SideBar.cshtml",
               "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Views\\Shared\\_SideBar.cshtml",
-              "ViewState": "AQIAAC4AAAAAAAAAAAAYwEcAAAAgAAAA",
+              "ViewState": "AQIAAF0AAAAAAAAAAAAAAGwAAABRAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-01-11T08:26:22.73Z",
+              "WhenOpened": "2025-01-14T09:28:04.234Z",
               "EditorCaption": ""
             }
           ]

@@ -27,8 +27,6 @@ public partial class Employee
 
     public int? Idp { get; set; }
 
-    public int? IdAccount { get; set; }
-
     public int? Idq { get; set; }
 
     public virtual ICollection<Contract> Contracts { get; set; } = new List<Contract>();
