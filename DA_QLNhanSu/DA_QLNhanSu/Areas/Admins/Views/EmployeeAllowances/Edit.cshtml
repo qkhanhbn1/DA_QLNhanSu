@@ -1,0 +1,42 @@
+﻿@model DA_QLNhanSu.Models.EmployeeAllowance
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>EmployeeAllowance</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Ide" class="control-label"></label>
+                <select asp-for="Ide" class="form-control" asp-items="ViewBag.Ide"></select>
+                <span asp-validation-for="Ide" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdAllowances" class="control-label"></label>
+                <select asp-for="IdAllowances" class="form-control" asp-items="ViewBag.IdAllowances"></select>
+                <span asp-validation-for="IdAllowances" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Money" class="control-label"></label>
+                <input asp-for="Money" class="form-control" />
+                <span asp-validation-for="Money" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

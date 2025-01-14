@@ -1,0 +1,75 @@
+﻿@model DA_QLNhanSu.Models.SalaryCalculation
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>SalaryCalculation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Ide" class="control-label"></label>
+                <select asp-for="Ide" class ="form-control" asp-items="ViewBag.Ide"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdPosition" class="control-label"></label>
+                <select asp-for="IdPosition" class ="form-control" asp-items="ViewBag.IdPosition"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdOvertime" class="control-label"></label>
+                <select asp-for="IdOvertime" class ="form-control" asp-items="ViewBag.IdOvertime"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdEmployeeallowance" class="control-label"></label>
+                <select asp-for="IdEmployeeallowance" class ="form-control" asp-items="ViewBag.IdEmployeeallowance"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdTimesheet" class="control-label"></label>
+                <select asp-for="IdTimesheet" class ="form-control" asp-items="ViewBag.IdTimesheet"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdSalaryadvance" class="control-label"></label>
+                <select asp-for="IdSalaryadvance" class ="form-control" asp-items="ViewBag.IdSalaryadvance"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Month" class="control-label"></label>
+                <input asp-for="Month" class="form-control" />
+                <span asp-validation-for="Month" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Year" class="control-label"></label>
+                <input asp-for="Year" class="form-control" />
+                <span asp-validation-for="Year" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Workday" class="control-label"></label>
+                <input asp-for="Workday" class="form-control" />
+                <span asp-validation-for="Workday" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalSalary" class="control-label"></label>
+                <input asp-for="TotalSalary" class="form-control" />
+                <span asp-validation-for="TotalSalary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

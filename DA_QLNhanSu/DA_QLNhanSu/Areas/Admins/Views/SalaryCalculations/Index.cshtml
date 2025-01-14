@@ -1,0 +1,96 @@
+﻿@model IEnumerable<DA_QLNhanSu.Models.SalaryCalculation>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Month)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Workday)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalSalary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEmployeeallowanceNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdOvertimeNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPositionNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdSalaryadvanceNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTimesheetNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdeNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Month)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Workday)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalSalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEmployeeallowanceNavigation.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdOvertimeNavigation.Ido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPositionNavigation.Idp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdSalaryadvanceNavigation.Idsa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdTimesheetNavigation.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdeNavigation.Ide)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Ids">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Ids">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Ids">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

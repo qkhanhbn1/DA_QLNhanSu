@@ -1,0 +1,50 @@
+﻿@model DA_QLNhanSu.Models.Overtime
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Overtime</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Ide" class="control-label"></label>
+                <select asp-for="Ide" class ="form-control" asp-items="ViewBag.Ide"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="WorkingHours" class="control-label"></label>
+                <input asp-for="WorkingHours" class="form-control" />
+                <span asp-validation-for="WorkingHours" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalaryCoeficient" class="control-label"></label>
+                <input asp-for="SalaryCoeficient" class="form-control" />
+                <span asp-validation-for="SalaryCoeficient" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HourlyWage" class="control-label"></label>
+                <input asp-for="HourlyWage" class="form-control" />
+                <span asp-validation-for="HourlyWage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OvertimePay" class="control-label"></label>
+                <input asp-for="OvertimePay" class="form-control" />
+                <span asp-validation-for="OvertimePay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
