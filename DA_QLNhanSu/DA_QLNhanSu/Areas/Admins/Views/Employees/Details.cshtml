@@ -60,23 +60,16 @@
             @Html.DisplayFor(model => model.Image)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Idp)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Idp)
-        </dd>
-        
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Idd1)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Idd1.Idp)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IddNavigation)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IddNavigation.Idd)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdpNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdpNavigation.Idp)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdqNavigation)

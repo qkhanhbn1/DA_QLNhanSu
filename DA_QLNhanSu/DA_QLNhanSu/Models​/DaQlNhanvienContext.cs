@@ -185,9 +185,9 @@ public partial class DaQlNhanvienContext : DbContext
                 .HasForeignKey(d => d.Idd)
                 .HasConstraintName("FK_EMPLOYEE_DEPARTMENT");
 
-            entity.HasOne(d => d.Idd1).WithMany(p => p.Employees)
-                .HasForeignKey(d => d.Idd)
-                .HasConstraintName("FK_EMPLOYEE_POSITION");
+            entity.HasOne(d => d.IdpNavigation).WithMany(p => p.Employees)
+                .HasForeignKey(d => d.Idp)
+                .HasConstraintName("FK_EMPLOYEE_POSITION1");
 
             entity.HasOne(d => d.IdqNavigation).WithMany(p => p.Employees)
                 .HasForeignKey(d => d.Idq)

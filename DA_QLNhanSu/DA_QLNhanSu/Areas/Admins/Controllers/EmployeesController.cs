@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DA_QLNhanSu.Models;
+using X.PagedList;
 
 namespace DA_QLNhanSu.Areas.Admins.Controllers
 {
@@ -20,10 +21,25 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         }
 
         // GET: Admins/Employees
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string name, int page = 1)
         {
-            var daQlNhanvienContext = _context.Employees.Include(e => e.Idd1).Include(e => e.IddNavigation).Include(e => e.IdqNavigation);
-            return View(await daQlNhanvienContext.ToListAsync());
+            int limit = 5; // Số bản ghi trên mỗi trang
+
+            var query = _context.Employees
+                .Include(e => e.IddNavigation)  // Include Department
+                .Include(e => e.IdpNavigation)          // Include Position
+                .Include(e => e.IdqNavigation) // Include Qualification
+                .OrderBy(c => c.Ide);
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(c => c.Name.Contains(name)).OrderBy(c => c.Ide);
+            }
+
+            var employee = await query.ToPagedListAsync(page, limit);
+
+            ViewBag.keyword = name;
+            return View(employee);
         }
 
         // GET: Admins/Employees/Details/5
@@ -35,8 +51,8 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
             }
 
             var employee = await _context.Employees
-                .Include(e => e.Idd1)
                 .Include(e => e.IddNavigation)
+                .Include(e => e.IdpNavigation)
                 .Include(e => e.IdqNavigation)
                 .FirstOrDefaultAsync(m => m.Ide == id);
             if (employee == null)
@@ -50,8 +66,8 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/Employees/Create
         public IActionResult Create()
         {
-            ViewData["Idd"] = new SelectList(_context.Positions, "Idp", "Idp");
             ViewData["Idd"] = new SelectList(_context.Departments, "Idd", "Idd");
+            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Idp");
             ViewData["Idq"] = new SelectList(_context.Qualifications, "Idq", "Idq");
             return View();
         }
@@ -61,18 +77,34 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Ide,Name,Gender,Birthday,Email,Phone,Cccd,Address,Image,Idd,Idp,IdAccount,Idq")] Employee employee)
+        public async Task<IActionResult> Create([Bind("Ide,Name,Gender,Birthday,Email,Phone,Cccd,Address,Image,Idd,Idp,Idq")] Employee employee)
         {
-            if (ModelState.IsValid)
+            try
             {
+                var files = HttpContext.Request.Form.Files;
+                if (files.Count() > 0 && files[0].Length > 0)
+                {
+                    var file = files[0];
+                    var FileName = file.FileName;
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Images", FileName);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                        employee.Image = "/Images/" + FileName;
+                    }
+                }
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Idd"] = new SelectList(_context.Positions, "Idp", "Idp", employee.Idd);
-            ViewData["Idd"] = new SelectList(_context.Departments, "Idd", "Idd", employee.Idd);
-            ViewData["Idq"] = new SelectList(_context.Qualifications, "Idq", "Idq", employee.Idq);
-            return View(employee);
+            catch (Exception ex)
+            {
+                ViewData["Idd"] = new SelectList(_context.Departments, "Idd", "Idd", employee.Idd);
+                ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Idp", employee.Idp);
+                ViewData["Idq"] = new SelectList(_context.Qualifications, "Idq", "Idq", employee.Idq);
+                ViewBag.error = ex.Message;
+                return View(employee);
+            }
         }
 
         // GET: Admins/Employees/Edit/5
@@ -88,8 +120,8 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
             {
                 return NotFound();
             }
-            ViewData["Idd"] = new SelectList(_context.Positions, "Idp", "Idp", employee.Idd);
             ViewData["Idd"] = new SelectList(_context.Departments, "Idd", "Idd", employee.Idd);
+            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Idp", employee.Idp);
             ViewData["Idq"] = new SelectList(_context.Qualifications, "Idq", "Idq", employee.Idq);
             return View(employee);
         }
@@ -99,7 +131,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Ide,Name,Gender,Birthday,Email,Phone,Cccd,Address,Image,Idd,Idp,IdAccount,Idq")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("Ide,Name,Gender,Birthday,Email,Phone,Cccd,Address,Image,Idd,Idp,Idq")] Employee employee)
         {
             if (id != employee.Ide)
             {
@@ -110,8 +142,21 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
             {
                 try
                 {
+                    var files = HttpContext.Request.Form.Files;
+                    if (files.Count() > 0 && files[0].Length > 0)
+                    {
+                        var file = files[0];
+                        var FileName = file.FileName;
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Images", FileName);
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            file.CopyTo(stream);
+                            employee.Image = "/Images/" + FileName;
+                        }
+                    }
                     _context.Update(employee);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -121,13 +166,22 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                     }
                     else
                     {
-                        throw;
+                        return View(employee);
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                
             }
-            ViewData["Idd"] = new SelectList(_context.Positions, "Idp", "Idp", employee.Idd);
+            // Đưa ra lỗi của modelState để bạn có thể debug
+            var errorMessages = ModelState.Values.SelectMany(v => v.Errors)
+                                                  .Select(e => e.ErrorMessage)
+                                                  .ToList();
+            // Xem danh sách lỗi trong debug console hoặc log
+            foreach (var errorMessage in errorMessages)
+            {
+                Console.WriteLine(errorMessage);
+            }
             ViewData["Idd"] = new SelectList(_context.Departments, "Idd", "Idd", employee.Idd);
+            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Idp", employee.Idp);
             ViewData["Idq"] = new SelectList(_context.Qualifications, "Idq", "Idq", employee.Idq);
             return View(employee);
         }
@@ -141,8 +195,8 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
             }
 
             var employee = await _context.Employees
-                .Include(e => e.Idd1)
                 .Include(e => e.IddNavigation)
+                .Include(e => e.IdpNavigation)
                 .Include(e => e.IdqNavigation)
                 .FirstOrDefaultAsync(m => m.Ide == id);
             if (employee == null)

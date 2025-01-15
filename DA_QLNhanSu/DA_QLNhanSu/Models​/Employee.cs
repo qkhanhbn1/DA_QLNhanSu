@@ -35,9 +35,9 @@ public partial class Employee
 
     public virtual ICollection<EmployeeAllowance> EmployeeAllowances { get; set; } = new List<EmployeeAllowance>();
 
-    public virtual Position? Idd1 { get; set; }
-
     public virtual Department? IddNavigation { get; set; }
+
+    public virtual Position? IdpNavigation { get; set; }
 
     public virtual Qualification? IdqNavigation { get; set; }
 
