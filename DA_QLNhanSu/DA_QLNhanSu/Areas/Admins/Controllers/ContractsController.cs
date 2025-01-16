@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DA_QLNhanSu.Models;
+using X.PagedList;
 
 namespace DA_QLNhanSu.Areas.Admins.Controllers
 {
@@ -20,10 +21,25 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         }
 
         // GET: Admins/Contracts
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string name, int page = 1)
         {
-            var daQlNhanvienContext = _context.Contracts.Include(c => c.IdeNavigation).Include(c => c.IdpNavigation);
-            return View(await daQlNhanvienContext.ToListAsync());
+            int limit = 8; // Số bản ghi trên mỗi trang
+
+            var query = _context.Contracts
+                  // Include Department
+                .Include(e => e.IdeNavigation)          // Include Position
+                .Include(e => e.IdpNavigation) // Include Qualification
+                .OrderBy(c => c.Ide);
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(c => c.IdeNavigation.Name.Contains(name)).OrderBy(c => c.Ide);
+            }
+
+            var contracts = await query.ToPagedListAsync(page, limit);
+
+            ViewBag.keyword = name;
+            return View(contracts);
         }
 
         // GET: Admins/Contracts/Details/5
@@ -49,8 +65,8 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/Contracts/Create
         public IActionResult Create()
         {
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide");
-            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Idp");
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name");
+            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Name");
             return View();
         }
 
@@ -67,8 +83,8 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", contract.Ide);
-            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Idp", contract.Idp);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", contract.Ide);
+            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Name", contract.Idp);
             return View(contract);
         }
 
@@ -85,8 +101,8 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
             {
                 return NotFound();
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", contract.Ide);
-            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Idp", contract.Idp);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", contract.Ide);
+            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Name", contract.Idp);
             return View(contract);
         }
 
@@ -122,8 +138,8 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", contract.Ide);
-            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Idp", contract.Idp);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", contract.Ide);
+            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Name", contract.Idp);
             return View(contract);
         }
 

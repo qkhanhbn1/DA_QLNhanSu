@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DA_QLNhanSu.Models;
+using X.PagedList;
 
 namespace DA_QLNhanSu.Areas.Admins.Controllers
 {
@@ -20,9 +21,25 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         }
 
         // GET: Admins/Positions
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string name, int page = 1)
         {
-            return View(await _context.Positions.ToListAsync());
+            int limit = 5; // Số bản ghi trên mỗi trang
+
+            var query = _context.Positions
+                  // Include Department
+                        // Include Position
+                 // Include Qualification
+                .OrderBy(c => c.Idp);
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(c => c.Name.Contains(name)).OrderBy(c => c.Idp);
+            }
+
+            var position = await query.ToPagedListAsync(page, limit);
+
+            ViewBag.keyword = name;
+            return View(position);
         }
 
         // GET: Admins/Positions/Details/5

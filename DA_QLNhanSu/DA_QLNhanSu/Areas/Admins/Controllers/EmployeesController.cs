@@ -66,9 +66,9 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/Employees/Create
         public IActionResult Create()
         {
-            ViewData["Idd"] = new SelectList(_context.Departments, "Idd", "Idd");
-            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Idp");
-            ViewData["Idq"] = new SelectList(_context.Qualifications, "Idq", "Idq");
+            ViewData["Idd"] = new SelectList(_context.Departments, "Idd", "Name");
+            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Name");
+            ViewData["Idq"] = new SelectList(_context.Qualifications, "Idq", "Name");
             return View();
         }
 
@@ -99,9 +99,9 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
             }
             catch (Exception ex)
             {
-                ViewData["Idd"] = new SelectList(_context.Departments, "Idd", "Idd", employee.Idd);
-                ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Idp", employee.Idp);
-                ViewData["Idq"] = new SelectList(_context.Qualifications, "Idq", "Idq", employee.Idq);
+                ViewData["Idd"] = new SelectList(_context.Departments, "Idd", "Name", employee.Idd);
+                ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Name", employee.Idp);
+                ViewData["Idq"] = new SelectList(_context.Qualifications, "Idq", "Name", employee.Idq);
                 ViewBag.error = ex.Message;
                 return View(employee);
             }
@@ -120,9 +120,9 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
             {
                 return NotFound();
             }
-            ViewData["Idd"] = new SelectList(_context.Departments, "Idd", "Idd", employee.Idd);
-            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Idp", employee.Idp);
-            ViewData["Idq"] = new SelectList(_context.Qualifications, "Idq", "Idq", employee.Idq);
+            ViewData["Idd"] = new SelectList(_context.Departments, "Idd", "Name", employee.Idd);
+            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Name", employee.Idp);
+            ViewData["Idq"] = new SelectList(_context.Qualifications, "Idq", "Name", employee.Idq);
             return View(employee);
         }
 
@@ -180,9 +180,9 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
             {
                 Console.WriteLine(errorMessage);
             }
-            ViewData["Idd"] = new SelectList(_context.Departments, "Idd", "Idd", employee.Idd);
-            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Idp", employee.Idp);
-            ViewData["Idq"] = new SelectList(_context.Qualifications, "Idq", "Idq", employee.Idq);
+            ViewData["Idd"] = new SelectList(_context.Departments, "Idd", "Name", employee.Idd);
+            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Name", employee.Idp);
+            ViewData["Idq"] = new SelectList(_context.Qualifications, "Idq", "Name", employee.Idq);
             return View(employee);
         }
 
