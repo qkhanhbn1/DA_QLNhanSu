@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "PEmi1TmDIgNLJTArVnvolRFwbOYFvRLUOea09VFbpBU=",
+  "Hash": "6bnQX11gW7H2/176EL2d/zda/B9hJQ5q+tdixazBMl8=",
   "Source": "DA_QLNhanSu",
   "BasePath": "_content/DA_QLNhanSu",
   "Mode": "Default",
@@ -2601,12 +2601,12 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\1.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\1.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/1.jpg",
+      "RelativePath": "Images/employee/1.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2617,15 +2617,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\1.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\1.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nam\\1.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\2.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nam/1.jpg",
+      "RelativePath": "Images/employee/2.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2636,15 +2636,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nam\\1.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\2.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nam\\10.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nam\\1.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nam/10.jpg",
+      "RelativePath": "Images/employee/nam/1.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2655,15 +2655,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nam\\10.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nam\\1.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nam\\11.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nam\\10.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nam/11.jpg",
+      "RelativePath": "Images/employee/nam/10.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2674,15 +2674,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nam\\11.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nam\\10.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nam\\12.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nam\\11.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nam/12.jpg",
+      "RelativePath": "Images/employee/nam/11.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2693,15 +2693,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nam\\12.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nam\\11.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nam\\2.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nam\\12.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nam/2.jpg",
+      "RelativePath": "Images/employee/nam/12.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2712,15 +2712,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nam\\2.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nam\\12.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nam\\3.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nam\\2.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nam/3.jpg",
+      "RelativePath": "Images/employee/nam/2.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2731,15 +2731,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nam\\3.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nam\\2.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nam\\4.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nam\\3.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nam/4.jpg",
+      "RelativePath": "Images/employee/nam/3.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2750,15 +2750,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nam\\4.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nam\\3.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nam\\5.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nam\\4.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nam/5.jpg",
+      "RelativePath": "Images/employee/nam/4.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2769,15 +2769,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nam\\5.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nam\\4.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nam\\6.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nam\\5.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nam/6.jpg",
+      "RelativePath": "Images/employee/nam/5.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2788,15 +2788,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nam\\6.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nam\\5.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nam\\7.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nam\\6.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nam/7.jpg",
+      "RelativePath": "Images/employee/nam/6.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2807,15 +2807,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nam\\7.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nam\\6.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nam\\8.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nam\\7.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nam/8.jpg",
+      "RelativePath": "Images/employee/nam/7.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2826,15 +2826,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nam\\8.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nam\\7.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nam\\9.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nam\\8.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nam/9.jpg",
+      "RelativePath": "Images/employee/nam/8.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2845,15 +2845,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nam\\9.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nam\\8.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nu\\1.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nam\\9.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nu/1.jpg",
+      "RelativePath": "Images/employee/nam/9.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2864,15 +2864,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nu\\1.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nam\\9.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nu\\2.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nu\\1.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nu/2.jpg",
+      "RelativePath": "Images/employee/nu/1.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2883,15 +2883,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nu\\2.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nu\\1.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nu\\3.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nu\\2.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nu/3.jpg",
+      "RelativePath": "Images/employee/nu/2.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2902,15 +2902,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nu\\3.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nu\\2.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nu\\4.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nu\\3.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nu/4.jpg",
+      "RelativePath": "Images/employee/nu/3.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2921,15 +2921,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nu\\4.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nu\\3.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nu\\5.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nu\\4.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nu/5.jpg",
+      "RelativePath": "Images/employee/nu/4.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2940,15 +2940,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nu\\5.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nu\\4.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nu\\6.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nu\\5.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nu/6.jpg",
+      "RelativePath": "Images/employee/nu/5.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2959,15 +2959,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nu\\6.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nu\\5.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nu\\7.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nu\\6.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nu/7.jpg",
+      "RelativePath": "Images/employee/nu/6.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2978,15 +2978,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nu\\7.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nu\\6.jpg"
     },
     {
-      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\images\\nu\\8.jpg",
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nu\\7.jpg",
       "SourceId": "DA_QLNhanSu",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
       "BasePath": "_content/DA_QLNhanSu",
-      "RelativePath": "images/nu/8.jpg",
+      "RelativePath": "Images/employee/nu/7.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2997,7 +2997,26 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\nu\\8.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nu\\7.jpg"
+    },
+    {
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\nu\\8.jpg",
+      "SourceId": "DA_QLNhanSu",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
+      "BasePath": "_content/DA_QLNhanSu",
+      "RelativePath": "Images/employee/nu/8.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\employee\\nu\\8.jpg"
     },
     {
       "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\js\\site.js",

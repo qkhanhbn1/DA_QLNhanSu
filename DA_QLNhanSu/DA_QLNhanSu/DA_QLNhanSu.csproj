@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Images\nam\**" />
+    <Compile Remove="wwwroot\Images\nu\**" />
+    <Content Remove="wwwroot\Images\nam\**" />
+    <Content Remove="wwwroot\Images\nu\**" />
+    <EmbeddedResource Remove="wwwroot\Images\nam\**" />
+    <EmbeddedResource Remove="wwwroot\Images\nu\**" />
+    <None Remove="wwwroot\Images\nam\**" />
+    <None Remove="wwwroot\Images\nu\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.11">
@@ -25,8 +36,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admins\Models\" />
-    <Folder Include="wwwroot\images\nam\" />
-    <Folder Include="wwwroot\images\nu\" />
   </ItemGroup>
 
   <ItemGroup>

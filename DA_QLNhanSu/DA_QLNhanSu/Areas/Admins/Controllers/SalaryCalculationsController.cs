@@ -55,10 +55,11 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         {
             ViewData["IdEmployeeallowance"] = new SelectList(_context.EmployeeAllowances, "Id", "Id");
             ViewData["IdOvertime"] = new SelectList(_context.Overtimes, "Ido", "Ido");
-            ViewData["IdPosition"] = new SelectList(_context.Positions, "Idp", "Idp");
+            ViewData["IdPosition"] = new SelectList(_context.Positions, "Idp", "Name");
             ViewData["IdSalaryadvance"] = new SelectList(_context.SalaryAdvances, "Idsa", "Idsa");
             ViewData["IdTimesheet"] = new SelectList(_context.TimeSheets, "Id", "Id");
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide");
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name");
+
             return View();
         }
 
@@ -71,16 +72,36 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Lấy thông tin liên quan đến nhân viên, vị trí, tăng ca, phụ cấp, bảng công, ứng lương
+                var position = await _context.Positions.FindAsync(salaryCalculation.IdPosition);
+                var overtime = await _context.Overtimes.FindAsync(salaryCalculation.IdOvertime);
+                var employeeAllowance = await _context.EmployeeAllowances.FindAsync(salaryCalculation.IdEmployeeallowance);
+                var salaryAdvance = await _context.SalaryAdvances.FindAsync(salaryCalculation.IdSalaryadvance);
+                var timesheet = await _context.TimeSheets.FindAsync(salaryCalculation.IdTimesheet);
+
+                // Tính toán TotalSalary
+                decimal dailyWage = position?.DailyWage ?? 0;
+                int workdays = salaryCalculation.Workday ?? 0;
+                decimal overtimePay = overtime?.OvertimePay ?? 0;
+                decimal allowances = employeeAllowance?.Money ?? 0;
+                decimal salaryAdvances = salaryAdvance?.Money ?? 0;
+
+                salaryCalculation.TotalSalary = (dailyWage * workdays) + overtimePay + allowances - salaryAdvances;
+
+                salaryCalculation.Date = DateTime.Now;
                 _context.Add(salaryCalculation);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            // Nếu Model không hợp lệ, giữ lại các giá trị đã chọn trong các dropdown
             ViewData["IdEmployeeallowance"] = new SelectList(_context.EmployeeAllowances, "Id", "Id", salaryCalculation.IdEmployeeallowance);
             ViewData["IdOvertime"] = new SelectList(_context.Overtimes, "Ido", "Ido", salaryCalculation.IdOvertime);
             ViewData["IdPosition"] = new SelectList(_context.Positions, "Idp", "Idp", salaryCalculation.IdPosition);
             ViewData["IdSalaryadvance"] = new SelectList(_context.SalaryAdvances, "Idsa", "Idsa", salaryCalculation.IdSalaryadvance);
             ViewData["IdTimesheet"] = new SelectList(_context.TimeSheets, "Id", "Id", salaryCalculation.IdTimesheet);
             ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", salaryCalculation.Ide);
+
             return View(salaryCalculation);
         }
 
@@ -190,5 +211,130 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         {
             return _context.SalaryCalculations.Any(e => e.Ids == id);
         }
+
+        //tinh luong
+        [HttpGet]
+        public async Task<IActionResult> GetData(int id, string type)
+        {
+            if (string.IsNullOrEmpty(type))
+            {
+                return BadRequest("Type is required.");
+            }
+
+            switch (type.ToLower())
+            {
+                case "dailywage":
+                    var position = await _context.Positions.FindAsync(id);
+                    if (position == null) return NotFound();
+                    return Json(new { value = position.DailyWage });
+
+                case "overtimepay":
+                    var overtime = await _context.Overtimes.FindAsync(id);
+                    if (overtime == null) return NotFound();
+                    return Json(new { value = overtime.OvertimePay });
+
+                case "allowancemoney":
+                    var allowance = await _context.EmployeeAllowances.FindAsync(id);
+                    if (allowance == null) return NotFound();
+                    return Json(new { value = allowance.Money });
+
+                case "advancemoney":
+                    var salaryAdvance = await _context.SalaryAdvances.FindAsync(id);
+                    if (salaryAdvance == null) return NotFound();
+                    return Json(new { value = salaryAdvance.Money });
+
+                default:
+                    return BadRequest("Invalid type.");
+            }
+        }
+        //tinh workday
+        [HttpGet]
+        public async Task<IActionResult> GetWorkday(int ide, int month, int year)
+        {
+            var timeSheet = await _context.TimeSheets
+                .FirstOrDefaultAsync(t => t.Ide == ide && t.Month == month && t.Year == year);
+
+            if (timeSheet == null)
+            {
+                return NotFound(new { message = "TimeSheet not found for the given criteria." });
+            }
+
+            return Json(new { workday = timeSheet.Workday });
+        }
+        //lay dữ liệu từ Ide nhân viên
+        [HttpGet]
+        public JsonResult GetPositionAndDailyWage(int ide)
+        {
+            // Lấy IdPosition từ Employee theo Ide
+            var employee = _context.Employees
+                .Where(e => e.Ide == ide)
+                .FirstOrDefault();
+
+            // Lấy DailyWage từ bảng Position dựa trên IdPosition
+            var dailyWage = employee != null && employee.Idp.HasValue
+                ? _context.Positions
+                    .Where(p => p.Idp == employee.Idp)
+                    .Select(p => p.DailyWage)
+                    .FirstOrDefault()
+                : (decimal?)null;
+
+            return Json(new { idPosition = employee?.Idp, dailyWage });
+        }
+        [HttpGet]
+        public JsonResult GetEmployeeDetails(int ide)
+        {
+            // Lấy IdPosition từ bảng Employee
+            var employee = _context.Employees
+                .Where(e => e.Ide == ide)
+                .FirstOrDefault();
+
+            // Nếu không tìm thấy employee, trả về kết quả mặc định
+            if (employee == null)
+            {
+                return Json(new
+                {
+                    dailyWage = 0,
+                    overtimePay = 0,
+                    allowanceMoney = 0,
+                    advanceMoney = 0
+                });
+            }
+            // Lấy IdPosition từ bảng Employee
+            var idPosition = employee.Idp;
+            // Lấy DailyWage từ bảng Position theo IdPosition (Idp)
+            var position = _context.Positions
+                .Where(p => p.Idp == employee.Idp)
+                .FirstOrDefault();
+            var dailyWage = position?.DailyWage ?? 0;
+
+            // Lấy OvertimePay từ bảng Overtime theo Ide
+            var overtime = _context.Overtimes
+                .Where(o => o.Ide == ide)
+                .FirstOrDefault();
+            var overtimePay = overtime?.OvertimePay ?? 0;
+
+            // Lấy Money từ bảng EmployeeAllowance theo Ide
+            var employeeAllowance = _context.EmployeeAllowances
+                .Where(ea => ea.Ide == ide)
+                .FirstOrDefault();
+            var allowanceMoney = employeeAllowance?.Money ?? 0;
+
+            // Lấy Money từ bảng SalaryAdvance theo Ide
+            var salaryAdvance = _context.SalaryAdvances
+                .Where(sa => sa.Ide == ide)
+                .FirstOrDefault();
+            var advanceMoney = salaryAdvance?.Money ?? 0;
+
+            // Trả về kết quả
+            return Json(new
+            {
+                idPosition,
+                dailyWage,
+                overtimePay,
+                allowanceMoney,
+                advanceMoney
+            });
+        }
+
     }
 }

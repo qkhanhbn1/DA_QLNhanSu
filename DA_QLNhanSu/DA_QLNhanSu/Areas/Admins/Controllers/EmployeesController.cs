@@ -86,16 +86,16 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 {
                     var file = files[0];
                     var FileName = file.FileName;
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Images", FileName);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Images\\employee", FileName);
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
                         file.CopyTo(stream);
-                        employee.Image = "/Images/" + FileName;
+                        employee.Image = "/Images/employee/" + FileName;
                     }
                 }
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index)); 
             }
             catch (Exception ex)
             {
@@ -147,11 +147,17 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                     {
                         var file = files[0];
                         var FileName = file.FileName;
-                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Images", FileName);
+
+                        // Tạo đường dẫn lưu tệp vào một thư mục chung
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Images\\employee", FileName);
+
+                        // Tạo thư mục nếu chưa tồn tại
+                        Directory.CreateDirectory(Path.GetDirectoryName(path));
+
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
                             file.CopyTo(stream);
-                            employee.Image = "/Images/" + FileName;
+                            employee.Image = $"/Images/employee/{FileName}";
                         }
                     }
                     _context.Update(employee);
