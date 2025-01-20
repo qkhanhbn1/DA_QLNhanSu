@@ -1,4 +1,4 @@
-﻿@model DA_QLNhanSu.Models.SalaryCalculation
+﻿    @model DA_QLNhanSu.Models.SalaryCalculation
 
 @{
     ViewData["Title"] = "Create";
@@ -19,18 +19,19 @@
             </div>
 
             <div class="form-group">
-                <label for="Month">Tháng</label>
-                <input type="number" id="MonthInput" class="form-control" min="1" max="12" />
+                    <label asp-for="Month">Tháng</label>
+                    <input asp-for="Month" class="form-control" type="number" min="1" max="12" />
+                    <span asp-validation-for="Month" class="text-danger"></span>
             </div>
-
             <div class="form-group">
-                <label for="Year">Năm</label>
-                <input type="number" id="YearInput" class="form-control" />
+                    <label asp-for="Year">Năm</label>
+                    <input asp-for="Year" class="form-control" type="number" />
+                    <span asp-validation-for="Year" class="text-danger"></span>
             </div>
-
             <div class="form-group">
-                <label>Số ngày làm trong tháng</label>
-                <input type="text" id="Workday" class="form-control" readonly />
+                <label asp-for="Workday">Số ngày làm trong tháng</label>
+                <input asp-for="Workday" class="form-control" readonly />
+                <span asp-validation-for="Workday" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdPosition" class="control-label">Chức vụ</label>
@@ -40,26 +41,26 @@
                 <label>Tiền lương hàng ngày</label>
                 <input type="text" id="DailyWage" class="form-control" readonly />
             </div>
-            @* <div class="form-group">
+            <div class="form-group">
                 <label asp-for="IdOvertime" class="control-label"></label>
                 <select asp-for="IdOvertime" class="form-control" asp-items="ViewBag.IdOvertime" id="IdOvertimeDropdown" readonly></select>
-            </div> *@
+            </div>
             <div class="form-group">
                 <label>Tiền tăng ca</label>
                 <input type="text" id="OvertimePay" class="form-control" readonly />
             </div>
-            @* <div class="form-group">
+            <div class="form-group">
                 <label asp-for="IdEmployeeallowance" class="control-label"></label>
                 <select asp-for="IdEmployeeallowance" class="form-control" asp-items="ViewBag.IdEmployeeallowance" id="IdEmployeeAllowanceDropdown" readonly></select>
-            </div> *@
+            </div>
             <div class="form-group">
                 <label>Tiền phụ cấp</label>
                 <input type="text" id="AllowanceMoney" class="form-control" readonly />
             </div>
-            @* <div class="form-group">
+            <div class="form-group">
                 <label asp-for="IdSalaryadvance" class="control-label"></label>
                 <select asp-for="IdSalaryadvance" class="form-control" asp-items="ViewBag.IdSalaryadvance" id="IdSalaryAdvanceDropdown" readonly></select>
-            </div> *@
+            </div>
             <div class="form-group">
                 <label>Tiền ứng lương</label>
                 <input type="text" id="AdvanceMoney" class="form-control" readonly />
@@ -131,35 +132,46 @@
     @* tinh workday *@
     <script>
         $(document).ready(function () {
+            // Hàm fetch dữ liệu Workday
             function fetchWorkday(ide, month, year) {
                 if (ide && month && year) {
+                    // Gửi AJAX đến server
                     $.ajax({
                         url: '/Admins/SalaryCalculations/GetWorkday',
                         type: 'GET',
                         data: { ide: ide, month: month, year: year },
                         success: function (data) {
-                            $('#Workday').val(data.workday);
+                            // Nếu thành công, gán giá trị vào trường Workday
+                            if (data && data.workday !== undefined) {
+                                $('#Workday').val(data.workday); // Gán giá trị Workday
+                            } else {
+                                $('#Workday').val(''); // Reset nếu không có dữ liệu
+                                alert('No workday data available.');
+                            }
                         },
                         error: function () {
-                            alert('Workday not found for the given criteria.');
-                            $('#Workday').val('');
+                            alert('Error fetching workday data. Please try again.');
+                            $('#Workday').val(''); // Reset nếu lỗi xảy ra
                         }
                     });
                 } else {
-                    $('#Workday').val('');
+                    $('#Workday').val(''); // Reset nếu thiếu dữ liệu đầu vào
                 }
             }
 
-            // Trigger fetch when Ide, Month, or Year changes
-            $('#IdeDropdown, #MonthInput, #YearInput').change(function () {
+            // Gọi hàm fetch khi các trường Ide, Month, hoặc Year thay đổi
+            $('#IdeDropdown, #Month, #Year').change(function () {
+                // Lấy giá trị từ các trường
                 var ide = $('#IdeDropdown').val();
-                var month = $('#MonthInput').val();
-                var year = $('#YearInput').val();
+                var month = $('#Month').val();
+                var year = $('#Year').val();
 
+                // Gọi hàm fetchWorkday
                 fetchWorkday(ide, month, year);
             });
         });
     </script>
+
 
        @*  lay dữ liệu từ Ide nhân viên ---------------------------------------------------------*@
     <script>
@@ -213,31 +225,37 @@
     @* //tinh tong tien *@
     <script>
         $(document).ready(function () {
-            // Khi thay đổi Ide, Month, Year, tính TotalSalary
-            $('#IdeDropdown, #MonthInput, #YearInput').change(function () {
-                // Lấy các giá trị
-                var ide = $('#IdeDropdown').val();
-                var month = $('#MonthInput').val();
-                var year = $('#YearInput').val();
-                var workday = $('#Workday').val();
-                var dailyWage = $('#DailyWage').val();
-                var overtimePay = $('#OvertimePay').val();
-                var allowanceMoney = $('#AllowanceMoney').val();
-                var advanceMoney = $('#AdvanceMoney').val();
+            // Hàm tính tổng tiền lương
+            function calculateTotalSalary() {
+                // Lấy giá trị từ các trường
+                var workday = parseInt($('#Workday').val()) || 0; // Mặc định 0 nếu không có giá trị
+                var dailyWage = parseFloat($('#DailyWage').val()) || 0.0;
+                var overtimePay = parseFloat($('#OvertimePay').val()) || 0.0;
+                var allowanceMoney = parseFloat($('#AllowanceMoney').val()) || 0.0;
+                var advanceMoney = parseFloat($('#AdvanceMoney').val()) || 0.0;
 
                 // Kiểm tra các giá trị đã đủ chưa
-                if (ide && month && year && workday && dailyWage && overtimePay && allowanceMoney && advanceMoney) {
+                if (workday > 0 && dailyWage >= 0 && overtimePay >= 0 && allowanceMoney >= 0 && advanceMoney >= 0) {
                     // Tính TotalSalary theo công thức
-                    var totalSalary = (parseInt(workday) * parseFloat(dailyWage)) + parseFloat(overtimePay) + parseFloat(allowanceMoney) - parseFloat(advanceMoney);
+                    var totalSalary = (workday * dailyWage) + overtimePay + allowanceMoney - advanceMoney;
 
                     // Gán TotalSalary vào input
                     $('#TotalSalary').val(totalSalary.toFixed(2));
                 } else {
-                    // Nếu thiếu giá trị, reset TotalSalary
+                    // Nếu thiếu giá trị hoặc không hợp lệ, reset TotalSalary
                     $('#TotalSalary').val('');
                 }
+            }
+
+            // Gọi hàm tính TotalSalary khi các trường thay đổi
+            $('#IdeDropdown, #MonthInput, #YearInput, #Workday, #DailyWage, #OvertimePay, #AllowanceMoney, #AdvanceMoney').change(function () {
+                calculateTotalSalary(); // Tính lại tổng tiền
             });
+
+            // Tính lại TotalSalary khi trang tải xong, nếu dữ liệu đã được điền trước
+            calculateTotalSalary();
         });
     </script>
+
 
 }

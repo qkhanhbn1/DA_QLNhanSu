@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DA_QLNhanSu.Models;
+using X.PagedList;
 
 namespace DA_QLNhanSu.Areas.Admins.Controllers
 {
@@ -20,10 +21,27 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         }
 
         // GET: Admins/SalaryCalculations
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string name, int page = 1)
         {
-            var daQlNhanvienContext = _context.SalaryCalculations.Include(s => s.IdEmployeeallowanceNavigation).Include(s => s.IdOvertimeNavigation).Include(s => s.IdPositionNavigation).Include(s => s.IdSalaryadvanceNavigation).Include(s => s.IdTimesheetNavigation).Include(s => s.IdeNavigation);
-            return View(await daQlNhanvienContext.ToListAsync());
+            int limit = 5; // Số bản ghi trên mỗi trang
+
+            var query = _context.SalaryCalculations
+                 .Include(s => s.IdeNavigation)
+        .Include(s => s.IdPositionNavigation)
+        .Include(s => s.IdEmployeeallowanceNavigation)
+        .Include(s => s.IdOvertimeNavigation)
+        .Include(s => s.IdSalaryadvanceNavigation)
+                .OrderBy(c => c.Ide);
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(c => c.IdeNavigation.Name.Contains(name)).OrderBy(c => c.Ide);
+            }
+
+            var salaryCalculation = await query.ToPagedListAsync(page, limit);
+
+            ViewBag.keyword = name;
+            return View(salaryCalculation);
         }
 
         // GET: Admins/SalaryCalculations/Details/5
@@ -72,14 +90,12 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Lấy thông tin liên quan đến nhân viên, vị trí, tăng ca, phụ cấp, bảng công, ứng lương
+                // Tính lại TotalSalary (tránh phụ thuộc vào dữ liệu từ form)
                 var position = await _context.Positions.FindAsync(salaryCalculation.IdPosition);
                 var overtime = await _context.Overtimes.FindAsync(salaryCalculation.IdOvertime);
                 var employeeAllowance = await _context.EmployeeAllowances.FindAsync(salaryCalculation.IdEmployeeallowance);
                 var salaryAdvance = await _context.SalaryAdvances.FindAsync(salaryCalculation.IdSalaryadvance);
-                var timesheet = await _context.TimeSheets.FindAsync(salaryCalculation.IdTimesheet);
 
-                // Tính toán TotalSalary
                 decimal dailyWage = position?.DailyWage ?? 0;
                 int workdays = salaryCalculation.Workday ?? 0;
                 decimal overtimePay = overtime?.OvertimePay ?? 0;
@@ -94,16 +110,17 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            // Nếu Model không hợp lệ, giữ lại các giá trị đã chọn trong các dropdown
+            // Nếu Model không hợp lệ, giữ lại các giá trị đã chọn trong dropdown
             ViewData["IdEmployeeallowance"] = new SelectList(_context.EmployeeAllowances, "Id", "Id", salaryCalculation.IdEmployeeallowance);
             ViewData["IdOvertime"] = new SelectList(_context.Overtimes, "Ido", "Ido", salaryCalculation.IdOvertime);
-            ViewData["IdPosition"] = new SelectList(_context.Positions, "Idp", "Idp", salaryCalculation.IdPosition);
+            ViewData["IdPosition"] = new SelectList(_context.Positions, "Idp", "Name", salaryCalculation.IdPosition);
             ViewData["IdSalaryadvance"] = new SelectList(_context.SalaryAdvances, "Idsa", "Idsa", salaryCalculation.IdSalaryadvance);
             ViewData["IdTimesheet"] = new SelectList(_context.TimeSheets, "Id", "Id", salaryCalculation.IdTimesheet);
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", salaryCalculation.Ide);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", salaryCalculation.Ide);
 
             return View(salaryCalculation);
         }
+
 
         // GET: Admins/SalaryCalculations/Edit/5
         public async Task<IActionResult> Edit(int? id)
