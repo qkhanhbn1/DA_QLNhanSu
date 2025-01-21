@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DA_QLNhanSu.Models;
+using X.PagedList;
 
 namespace DA_QLNhanSu.Areas.Admins.Controllers
 {
@@ -20,9 +21,23 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         }
 
         // GET: Admins/Accounts
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string name, int page = 1)
         {
-            return View(await _context.Accounts.ToListAsync());
+            int limit = 5; // Số bản ghi trên mỗi trang
+
+            var query = _context.Accounts
+                                          // Include Qualification
+                .OrderBy(c => c.Id);
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(c => c.Email.Contains(name)).OrderBy(c => c.Id);
+            }
+
+            var accounts = await query.ToPagedListAsync(page, limit);
+
+            ViewBag.keyword = name;
+            return View(accounts);
         }
 
         // GET: Admins/Accounts/Details/5

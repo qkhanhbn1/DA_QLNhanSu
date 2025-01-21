@@ -5,30 +5,7 @@
     ViewData["Title"] = "Quản lý nhân sự";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
-@functions {
-    public string StripHtml(string input)
-    {
-        if (string.IsNullOrWhiteSpace(input))
-            return string.Empty;
 
-        // Loại bỏ tất cả các thẻ HTML
-        return Regex.Replace(input, "<.*?>", string.Empty);
-    }
-    public string DecodeHtml(string input)
-    {
-        return System.Web.HttpUtility.HtmlDecode(input);
-    }
-    public string Truncate(string input, int maxLength)
-    {
-        if (string.IsNullOrWhiteSpace(input))
-            return string.Empty;
-
-        if (input.Length <= maxLength)
-            return input;
-
-        return input.Substring(0, maxLength) + "...";
-    }
-}
 <h1 class="text-primary">Danh sách nhân viên công ty</h1>
 
 <div class="row my-4">
