@@ -20,7 +20,7 @@
             Giới tính
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gender)
+            @(Model.Gender == true ? "Nam" : "Nữ")
         </dd>
         <dt class = "col-sm-2">
             Ngày sinh
@@ -55,9 +55,10 @@
         <dt class = "col-sm-2">
             Ảnh
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Image)
+        <dd class="col-sm-10">
+            <img src="@Model.Image" alt="Image" style="width:100px; height:auto;">
         </dd>
+
         <dt class = "col-sm-2">
             Phòng ban
         </dt>
@@ -81,7 +82,7 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="Ide" />
         <input type="submit" value="Xóa" class="btn btn-danger" /> |
-        <a asp-action="Index">Quay l
+        <a asp-action="Index">Quay lai
 
         </a>
     </form>
