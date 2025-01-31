@@ -5,26 +5,26 @@
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Chi tiết nhân viên</h1>
 
 <div>
-    <h4>Employee</h4>
+    
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            Họ tên
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Gender)
+            Giới tính
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gender)
+            @(Model.Gender == true ? "Nam" : "Nữ")
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Birthday)
+            Ngày sinh
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Birthday)
@@ -36,43 +36,43 @@
             @Html.DisplayFor(model => model.Email)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Phone)
+            Số điện thoại
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Phone)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cccd)
+           Căn cước công dân
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Cccd)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
+            Địa chỉ
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Address)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
+            Ảnh
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Image)
+            <img src="@Model.Image" alt="Image" style="width:100px; height:auto;">
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IddNavigation)
+            Phòng ban
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IddNavigation.Idd)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdpNavigation)
+            Chức vụ
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IdpNavigation.Idp)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdqNavigation)
+            Trình độ
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IdqNavigation.Idq)
@@ -80,6 +80,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Ide">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Ide">Sửa</a> |
+    <a asp-action="Index">Quay lại</a>
 </div>
