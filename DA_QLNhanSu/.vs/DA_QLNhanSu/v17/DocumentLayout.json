@@ -7,8 +7,8 @@
       "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\areas\\admins\\views\\employees\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\areas\\admins\\views\\employees\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\areas\\admins\\views\\employees\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\areas\\admins\\views\\employees\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\areas\\admins\\views\\employees\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,24 +18,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Delete.cshtml",
-              "DocumentMoniker": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\Employees\\Delete.cshtml",
-              "RelativeDocumentMoniker": "DA_QLNhanSu\\Areas\\Admins\\Views\\Employees\\Delete.cshtml",
-              "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\Employees\\Delete.cshtml",
-              "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Views\\Employees\\Delete.cshtml",
-              "ViewState": "AQIAADwAAAAAAAAAAAAAADoAAABSAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-01-31T12:13:22.502Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -45,9 +32,22 @@
               "RelativeDocumentMoniker": "DA_QLNhanSu\\Areas\\Admins\\Views\\Employees\\Details.cshtml",
               "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\Employees\\Details.cshtml",
               "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Views\\Employees\\Details.cshtml",
-              "ViewState": "AQIAADMAAAAAAAAAAAAAAEUAAAANAAAA",
+              "ViewState": "AQIAADkAAAAAAAAAAAAAAFMAAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-01-31T12:12:14.029Z",
+              "WhenOpened": "2025-02-03T13:14:39.803Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\Employees\\Edit.cshtml",
+              "RelativeDocumentMoniker": "DA_QLNhanSu\\Areas\\Admins\\Views\\Employees\\Edit.cshtml",
+              "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\Employees\\Edit.cshtml",
+              "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Views\\Employees\\Edit.cshtml",
+              "ViewState": "AQIAACQAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-03T13:14:23.698Z",
               "EditorCaption": ""
             }
           ]
