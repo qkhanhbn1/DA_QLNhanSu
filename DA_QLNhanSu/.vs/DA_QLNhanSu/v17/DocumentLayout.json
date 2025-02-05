@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\areas\\admins\\views\\positions\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\areas\\admins\\views\\positions\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\areas\\admins\\views\\positions\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\areas\\admins\\views\\positions\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
@@ -23,12 +27,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\Positions\\Delete.cshtml",
+              "RelativeDocumentMoniker": "DA_QLNhanSu\\Areas\\Admins\\Views\\Positions\\Delete.cshtml",
+              "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\Positions\\Delete.cshtml",
+              "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Views\\Positions\\Delete.cshtml",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAcAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-05T13:04:24.403Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Create.cshtml",
               "DocumentMoniker": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\Positions\\Create.cshtml",
               "RelativeDocumentMoniker": "DA_QLNhanSu\\Areas\\Admins\\Views\\Positions\\Create.cshtml",
               "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\Positions\\Create.cshtml",
               "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Views\\Positions\\Create.cshtml",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAB4AAAAkAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-02-04T14:02:13.787Z",
               "EditorCaption": ""
