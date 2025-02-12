@@ -13,7 +13,9 @@ public partial class SalaryAdvance
 
     public bool? Status { get; set; }
 
-    public DateOnly? Date { get; set; }
+    public int? Month { get; set; }
+
+    public int? Year { get; set; }
 
     public virtual Employee? IdeNavigation { get; set; }
 

@@ -37,9 +37,11 @@
                 Trạng thái
             </th>
             <th>
-                Ngày ứng
+                Tháng
             </th>
-            
+            <th>
+                Năm
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -56,8 +58,11 @@
                     @(item.Status == true ? "Đã duyệt" : "Chưa duyệt")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Date)
+                @Html.DisplayFor(modelItem => item.Month)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
             
             <td>
                     <a asp-action="Edit" asp-route-id="@item.Idsa" class="btn btn-warning btn-sm">

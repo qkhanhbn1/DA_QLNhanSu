@@ -43,7 +43,10 @@
                 Số tiền tăng ca
             </th>
             <th>
-                Ngày tạo
+                Tháng
+            </th>
+            <th>
+                Năm
             </th>
             <th></th>
         </tr>
@@ -67,8 +70,11 @@
                 @Html.DisplayFor(modelItem => item.OvertimePay)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Date)
+                @Html.DisplayFor(modelItem => item.Month)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
             
             <td>
                     <a asp-action="Edit" asp-route-id="@item.Ido" class="btn btn-warning btn-sm">

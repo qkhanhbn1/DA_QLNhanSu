@@ -41,7 +41,7 @@
                 <label>Tiền lương hàng ngày</label>
                 <input type="text" id="DailyWage" class="form-control" readonly />
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display: none;">
                 <label asp-for="IdOvertime" class="control-label"></label>
                 <select asp-for="IdOvertime" class="form-control" asp-items="ViewBag.IdOvertime" id="IdOvertimeDropdown" readonly></select>
             </div>
@@ -49,7 +49,7 @@
                 <label>Tiền tăng ca</label>
                 <input type="text" id="OvertimePay" class="form-control" readonly />
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display: none;">
                 <label asp-for="IdEmployeeallowance" class="control-label"></label>
                 <select asp-for="IdEmployeeallowance" class="form-control" asp-items="ViewBag.IdEmployeeallowance" id="IdEmployeeAllowanceDropdown" readonly></select>
             </div>
@@ -57,7 +57,7 @@
                 <label>Tiền phụ cấp</label>
                 <input type="text" id="AllowanceMoney" class="form-control" readonly />
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display: none;">
                 <label asp-for="IdSalaryadvance" class="control-label"></label>
                 <select asp-for="IdSalaryadvance" class="form-control" asp-items="ViewBag.IdSalaryadvance" id="IdSalaryAdvanceDropdown" readonly></select>
             </div>
@@ -79,182 +79,79 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Quay lại</a>
 </div>
 @section Scripts {
     <script>
         $(document).ready(function () {
-            function fetchData(type, id, targetInput) {
-                if (id) {
-                    $.ajax({
-                        url: '/Admins/SalaryCalculations/GetData',
-                        type: 'GET',
-                        data: { id: id, type: type },
-                        success: function (data) {
-                            $(targetInput).val(data.value);
-                        },
-                        error: function () {
-                            alert('Error fetching data. Please try again.');
-                            $(targetInput).val('');
-                        }
-                    });
-                } else {
-                    $(targetInput).val('');
-                }
-            }
-
-            // Lấy DailyWage khi thay đổi IdPosition
-            $('#IdPositionDropdown').change(function () {
-                var selectedId = $(this).val();
-                fetchData('dailywage', selectedId, '#DailyWage');
-            });
-
-            // Lấy OvertimePay khi thay đổi IdOvertime
-            $('#IdOvertimeDropdown').change(function () {
-                var selectedId = $(this).val();
-                fetchData('overtimepay', selectedId, '#OvertimePay');
-            });
-
-            // Lấy Money khi thay đổi IdEmployeeallowance
-            $('#IdEmployeeAllowanceDropdown').change(function () {
-                var selectedId = $(this).val();
-                fetchData('allowancemoney', selectedId, '#AllowanceMoney');
-            });
-
-            // Lấy Money khi thay đổi IdSalaryadvance
-            $('#IdSalaryAdvanceDropdown').change(function () {
-                var selectedId = $(this).val();
-                fetchData('advancemoney', selectedId, '#AdvanceMoney');
-            });
-        });
-    </script>
-
-    @* tinh workday *@
-    <script>
-        $(document).ready(function () {
-            // Hàm fetch dữ liệu Workday
-            function fetchWorkday(ide, month, year) {
-                if (ide && month && year) {
-                    // Gửi AJAX đến server
-                    $.ajax({
-                        url: '/Admins/SalaryCalculations/GetWorkday',
-                        type: 'GET',
-                        data: { ide: ide, month: month, year: year },
-                        success: function (data) {
-                            // Nếu thành công, gán giá trị vào trường Workday
-                            if (data && data.workday !== undefined) {
-                                $('#Workday').val(data.workday); // Gán giá trị Workday
-                            } else {
-                                $('#Workday').val(''); // Reset nếu không có dữ liệu
-                                alert('No workday data available.');
-                            }
-                        },
-                        error: function () {
-                            alert('Error fetching workday data. Please try again.');
-                            $('#Workday').val(''); // Reset nếu lỗi xảy ra
-                        }
-                    });
-                } else {
-                    $('#Workday').val(''); // Reset nếu thiếu dữ liệu đầu vào
-                }
-            }
-
-            // Gọi hàm fetch khi các trường Ide, Month, hoặc Year thay đổi
-            $('#IdeDropdown, #Month, #Year').change(function () {
-                // Lấy giá trị từ các trường
-                var ide = $('#IdeDropdown').val();
-                var month = $('#Month').val();
-                var year = $('#Year').val();
-
-                // Gọi hàm fetchWorkday
-                fetchWorkday(ide, month, year);
-            });
-        });
-    </script>
-
-
-       @*  lay dữ liệu từ Ide nhân viên ---------------------------------------------------------*@
-    <script>
-        $(document).ready(function () {
-            // Khi thay đổi Ide
-            $('#IdeDropdown').change(function () {
-                var selectedIde = $(this).val();
-
-                if (selectedIde) {
-                    // Gọi AJAX để lấy thông tin từ các bảng: Position, Overtime, EmployeeAllowance, và SalaryAdvance
-                    $.ajax({
-                        url: '/Admins/SalaryCalculations/GetEmployeeDetails',
-                        type: 'GET',
-                        data: { ide: selectedIde },
-                        success: function (data) {
-                            // Gán IdPosition vào dropdown hoặc ẩn đi nếu cần
-                            $('#IdPositionDropdown').val(data.idPosition);
-
-                            // Gán DailyWage vào input
-                            $('#DailyWage').val(data.dailyWage);
-
-                            // Gán OvertimePay vào input
-                            $('#OvertimePay').val(data.overtimePay);
-
-                            // Gán AllowanceMoney vào input
-                            $('#AllowanceMoney').val(data.allowanceMoney);
-
-                            // Gán AdvanceMoney vào input
-                            $('#AdvanceMoney').val(data.advanceMoney);
-                        },
-                        error: function () {
-                            alert('Error fetching data. Please try again.');
-                            $('#IdPositionDropdown').val('');
-                            $('#DailyWage').val('');
-                            $('#OvertimePay').val('');
-                            $('#AllowanceMoney').val('');
-                            $('#AdvanceMoney').val('');
-                        }
-                    });
-                } else {
-                    // Nếu không có Ide, reset tất cả các trường
-                    $('#IdPositionDropdown').val('');
-                    $('#DailyWage').val('');
-                    $('#OvertimePay').val('');
-                    $('#AllowanceMoney').val('');
-                    $('#AdvanceMoney').val('');
+    function fetchEmployeeData(ide, month, year) {
+        if (ide && month && year) {
+            $.ajax({
+                url: '/Admins/SalaryCalculations/GetEmployeeDetails',
+                type: 'GET',
+                data: { ide: ide, month: month, year: year },
+                success: function (data) {
+                    $('#IdPositionDropdown').val(data.idPosition);
+                    $('#DailyWage').val(data.dailyWage);
+                    $('#OvertimePay').val(data.overtimePay);
+                    $('#AllowanceMoney').val(data.allowanceMoney);
+                    $('#AdvanceMoney').val(data.advanceMoney);
+                    calculateTotalSalary();
+                },
+                error: function () {
+                    alert('Error fetching employee data.');
+                    $('#DailyWage, #OvertimePay, #AllowanceMoney, #AdvanceMoney, #TotalSalary').val('');
                 }
             });
-        });
-    </script>
-    @* //tinh tong tien *@
-    <script>
-        $(document).ready(function () {
-            // Hàm tính tổng tiền lương
-            function calculateTotalSalary() {
-                // Lấy giá trị từ các trường
-                var workday = parseInt($('#Workday').val()) || 0; // Mặc định 0 nếu không có giá trị
-                var dailyWage = parseFloat($('#DailyWage').val()) || 0.0;
-                var overtimePay = parseFloat($('#OvertimePay').val()) || 0.0;
-                var allowanceMoney = parseFloat($('#AllowanceMoney').val()) || 0.0;
-                var advanceMoney = parseFloat($('#AdvanceMoney').val()) || 0.0;
+        } else {
+            $('#DailyWage, #OvertimePay, #AllowanceMoney, #AdvanceMoney, #TotalSalary').val('');
+        }
+    }
 
-                // Kiểm tra các giá trị đã đủ chưa
-                if (workday > 0 && dailyWage >= 0 && overtimePay >= 0 && allowanceMoney >= 0 && advanceMoney >= 0) {
-                    // Tính TotalSalary theo công thức
-                    var totalSalary = (workday * dailyWage) + overtimePay + allowanceMoney - advanceMoney;
-
-                    // Gán TotalSalary vào input
-                    $('#TotalSalary').val(totalSalary.toFixed(2));
-                } else {
-                    // Nếu thiếu giá trị hoặc không hợp lệ, reset TotalSalary
-                    $('#TotalSalary').val('');
+    function fetchWorkday(ide, month, year) {
+        if (ide && month && year) {
+            $.ajax({
+                url: '/Admins/SalaryCalculations/GetWorkday',
+                type: 'GET',
+                data: { ide: ide, month: month, year: year },
+                success: function (data) {
+                    $('#Workday').val(data.workday || '');
+                    calculateTotalSalary();
+                },
+                error: function () {
+                    alert('Error fetching workday data.');
+                    $('#Workday').val('');
                 }
-            }
-
-            // Gọi hàm tính TotalSalary khi các trường thay đổi
-            $('#IdeDropdown, #MonthInput, #YearInput, #Workday, #DailyWage, #OvertimePay, #AllowanceMoney, #AdvanceMoney').change(function () {
-                calculateTotalSalary(); // Tính lại tổng tiền
             });
+        } else {
+            $('#Workday').val('');
+        }
+    }
 
-            // Tính lại TotalSalary khi trang tải xong, nếu dữ liệu đã được điền trước
-            calculateTotalSalary();
-        });
+    function calculateTotalSalary() {
+        var workday = parseInt($('#Workday').val()) || 0;
+        var dailyWage = parseFloat($('#DailyWage').val()) || 0.0;
+        var overtimePay = parseFloat($('#OvertimePay').val()) || 0.0;
+        var allowanceMoney = parseFloat($('#AllowanceMoney').val()) || 0.0;
+        var advanceMoney = parseFloat($('#AdvanceMoney').val()) || 0.0;
+
+        var totalSalary = (workday * dailyWage) + overtimePay + allowanceMoney - advanceMoney;
+        $('#TotalSalary').val(totalSalary.toFixed(2));
+    }
+
+    $('#IdeDropdown, #Month, #Year').change(function () {
+        var ide = $('#IdeDropdown').val();
+        var month = $('#Month').val();
+        var year = $('#Year').val();
+
+        fetchEmployeeData(ide, month, year);
+        fetchWorkday(ide, month, year);
+    });
+
+    $('#Workday, #DailyWage, #OvertimePay, #AllowanceMoney, #AdvanceMoney').change(function () {
+        calculateTotalSalary();
+    });
+});
     </script>
 
 

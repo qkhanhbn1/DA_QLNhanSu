@@ -17,7 +17,9 @@ public partial class Overtime
 
     public decimal? OvertimePay { get; set; }
 
-    public DateOnly? Date { get; set; }
+    public int? Month { get; set; }
+
+    public int? Year { get; set; }
 
     public virtual Employee? IdeNavigation { get; set; }
 

@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\areas\\admins\\views\\positions\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\areas\\admins\\views\\positions\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\areas\\admins\\views\\salarycalculations\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\areas\\admins\\views\\salarycalculations\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\areas\\admins\\views\\positions\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\areas\\admins\\views\\positions\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\areas\\admins\\views\\salarycalculations\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\areas\\admins\\views\\salarycalculations\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\areas\\admins\\controllers\\salarycalculationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\areas\\admins\\controllers\\salarycalculationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,36 +22,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\SalaryCalculations\\Create.cshtml",
+              "RelativeDocumentMoniker": "DA_QLNhanSu\\Areas\\Admins\\Views\\SalaryCalculations\\Create.cshtml",
+              "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\SalaryCalculations\\Create.cshtml",
+              "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Views\\SalaryCalculations\\Create.cshtml",
+              "ViewState": "AQIAADYAAAAAAAAAAAAAAFEAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-12T08:22:04.685Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Delete.cshtml",
-              "DocumentMoniker": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\Positions\\Delete.cshtml",
-              "RelativeDocumentMoniker": "DA_QLNhanSu\\Areas\\Admins\\Views\\Positions\\Delete.cshtml",
-              "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\Positions\\Delete.cshtml",
-              "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Views\\Positions\\Delete.cshtml",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABsAAAAgAAAA",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\SalaryCalculations\\Index.cshtml",
+              "RelativeDocumentMoniker": "DA_QLNhanSu\\Areas\\Admins\\Views\\SalaryCalculations\\Index.cshtml",
+              "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\SalaryCalculations\\Index.cshtml",
+              "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Views\\SalaryCalculations\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-05T13:04:24.403Z",
+              "WhenOpened": "2025-02-12T08:21:53.275Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\Positions\\Create.cshtml",
-              "RelativeDocumentMoniker": "DA_QLNhanSu\\Areas\\Admins\\Views\\Positions\\Create.cshtml",
-              "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\Positions\\Create.cshtml",
-              "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Views\\Positions\\Create.cshtml",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAAB8AAAAsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-04T14:02:13.787Z",
+              "DocumentIndex": 2,
+              "Title": "SalaryCalculationsController.cs",
+              "DocumentMoniker": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Controllers\\SalaryCalculationsController.cs",
+              "RelativeDocumentMoniker": "DA_QLNhanSu\\Areas\\Admins\\Controllers\\SalaryCalculationsController.cs",
+              "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Controllers\\SalaryCalculationsController.cs",
+              "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Controllers\\SalaryCalculationsController.cs",
+              "ViewState": "AQIAAFIBAAAAAAAAAAAAwGIBAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-12T08:21:47.93Z",
               "EditorCaption": ""
             }
           ]

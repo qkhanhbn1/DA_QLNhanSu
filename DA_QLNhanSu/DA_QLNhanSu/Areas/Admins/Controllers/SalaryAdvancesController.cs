@@ -72,7 +72,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Idsa,Ide,Money,Status,Date")] SalaryAdvance salaryAdvance)
+        public async Task<IActionResult> Create([Bind("Idsa,Ide,Money,Status,Month,Year")] SalaryAdvance salaryAdvance)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +106,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Idsa,Ide,Money,Status,Date")] SalaryAdvance salaryAdvance)
+        public async Task<IActionResult> Edit(int id, [Bind("Idsa,Ide,Money,Status,Month,Year")] SalaryAdvance salaryAdvance)
         {
             if (id != salaryAdvance.Idsa)
             {

@@ -265,18 +265,17 @@ public partial class DaQlNhanvienContext : DbContext
             entity.ToTable("OVERTIME", tb => tb.HasTrigger("CalculateOvertimePay"));
 
             entity.Property(e => e.Ido).HasColumnName("IDO");
-            entity.Property(e => e.Date)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnName("DATE");
             entity.Property(e => e.HourlyWage)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("HOURLY_WAGE");
             entity.Property(e => e.Ide).HasColumnName("IDE");
+            entity.Property(e => e.Month).HasColumnName("month");
             entity.Property(e => e.OvertimePay)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("OVERTIME_PAY");
             entity.Property(e => e.SalaryCoeficient).HasColumnName("SALARY_COEFICIENT");
             entity.Property(e => e.WorkingHours).HasColumnName("WORKING_HOURS");
+            entity.Property(e => e.Year).HasColumnName("year");
 
             entity.HasOne(d => d.IdeNavigation).WithMany(p => p.Overtimes)
                 .HasForeignKey(d => d.Ide)
@@ -343,14 +342,13 @@ public partial class DaQlNhanvienContext : DbContext
             entity.ToTable("SALARY_ADVANCE");
 
             entity.Property(e => e.Idsa).HasColumnName("IDSA");
-            entity.Property(e => e.Date)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnName("DATE");
             entity.Property(e => e.Ide).HasColumnName("IDE");
             entity.Property(e => e.Money)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("MONEY");
+            entity.Property(e => e.Month).HasColumnName("month");
             entity.Property(e => e.Status).HasColumnName("STATUS");
+            entity.Property(e => e.Year).HasColumnName("year");
 
             entity.HasOne(d => d.IdeNavigation).WithMany(p => p.SalaryAdvances)
                 .HasForeignKey(d => d.Ide)

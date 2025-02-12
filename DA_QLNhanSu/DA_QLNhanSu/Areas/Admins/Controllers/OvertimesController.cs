@@ -63,7 +63,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/Overtimes/Create
         public IActionResult Create()
         {
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide");
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name");
             return View();
         }
 
@@ -72,7 +72,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Ido,Ide,WorkingHours,SalaryCoeficient,HourlyWage,OvertimePay,Date")] Overtime overtime)
+        public async Task<IActionResult> Create([Bind("Ido,Ide,WorkingHours,SalaryCoeficient,HourlyWage,OvertimePay,Month,Year")] Overtime overtime)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +106,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Ido,Ide,WorkingHours,SalaryCoeficient,HourlyWage,OvertimePay,Date")] Overtime overtime)
+        public async Task<IActionResult> Edit(int id, [Bind("Ido,Ide,WorkingHours,SalaryCoeficient,HourlyWage,OvertimePay,Month,Year")] Overtime overtime)
         {
             if (id != overtime.Ido)
             {
