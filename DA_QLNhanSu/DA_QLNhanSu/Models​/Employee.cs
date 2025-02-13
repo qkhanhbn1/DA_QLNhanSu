@@ -9,6 +9,8 @@ public partial class Employee
 
     public string? Name { get; set; }
 
+    public string? Code { get; set; }
+
     public bool? Gender { get; set; }
 
     public DateTime? Birthday { get; set; }

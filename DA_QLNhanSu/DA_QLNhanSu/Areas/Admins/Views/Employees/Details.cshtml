@@ -1,86 +1,174 @@
 ﻿@model DA_QLNhanSu.Models.Employee
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Chi tiết nhân viên";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Chi tiết nhân viên</h1>
 
-<div>
+<div class="row">
+    <!-- Cột trái -->
+    <div class="col-md-3 text-center position-relative col-left">
+        <div class="position-relative d-inline-block">
+            <img src="@Model.Image" class="rounded-circle profile-img" alt="Ảnh nhân viên">
+            <div class="verify-container">
+                <div class="verify-shield">
+                    <i class="fas fa-check"></i>
+                </div>
+            </div>
+        </div>
+        <h3 class="mt-2 fw-bold">@Model.Name</h3>
+        <p class="text-muted">@Model.IdpNavigation.Name</p>
+        <hr />
+        <table class="table border-0">
+            <tr>
+                <th class="text-end border-0"><i class="fas fa-heart text-danger"></i></th>
+                <td class="text-start border-0">2 năm</td>
+            </tr>
+            <tr>
+                <th class="text-end border-0"><i class="fas fa-barcode"></i></th>
+                <td class="text-start border-0">@Model.Code</td>
+            </tr>
+            <tr>
+                <th class="text-end border-0"><i class="fas fa-envelope"></i></th>
+                <td class="text-start border-0">@Model.Email</td>
+            </tr>
+            <tr>
+                <th class="text-end border-0"><i class="fas fa-phone"></i></th>
+                <td class="text-start border-0">@Model.Phone</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Cột phải -->
+    <div class="col-md-9 col-right">
+        <h1 class="text-primary">Thông tin cá nhân</h1>
+        <p class="text-muted">Các thông tin cá nhân, liên hệ, học vấn và lịch sử làm việc</p>
+        <hr />
+        <table>
+            <tbody>
+                <tr>
+                    <th>Họ và tên</th>
+                    <th>Mã nhân sự</th>
+                    <th>Ngày bắt đầu</th>
+                    <th>Ngày kết thúc</th>
+                </tr>
+                <tr class="first-row">
+                    <td>@Model.Name</td>
+                    <td>@Model.Code</td>
+                    <td>@(Model.Contracts.OrderByDescending(c => c.ReleaseDate).FirstOrDefault()?.ReleaseDate?.ToString("dd/MM/yyyy") ?? "Chưa có")</td>
+                    <td>@(Model.Contracts.OrderByDescending(c => c.ExpirationDate).FirstOrDefault()?.ExpirationDate?.ToString("dd/MM/yyyy") ?? "Chưa có")</td>
+
+                </tr>
+
+                <tr class="second-row">
+                    <th>Tình trạng việc làm</th>
+                    <th>Hợp đồng hiện tại</th>
+                    <th>Số điện thoại</th>
+                    <th>Chức vụ</th>
+                </tr>
+                <tr class="first-row">
+                    <td></td>
+                    <td>HĐ Lao Động 2 năm</td>
+                    <td>@Model.Phone</td>
+                    <td>@Model.IdpNavigation.Name</td>
+                </tr>
+
+                <tr class="second-row">
+                    <th>Ngày sinh</th>
+                    <th>Email</th>
+                    <th>Giới tính</th>
+                    <th>Tình trạng hôn nhân</th>
+                </tr>
+                <tr>
+                    <td>@(Model.Birthday?.ToString("dd/MM/yyyy"))</td>
+                    <td>@Model.Email</td>
+                    <td>@(Model.Gender == true ? "Nam" : "Nữ")</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="mt-3">
+            <a asp-action="Edit" asp-route-id="@Model?.Ide" class="btn btn-warning"><i class="fas fa-edit"></i> Sửa</a>
+            <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+        </div>
+    </div>
+</div>
+
+
+<!-- Nút chức năng -->
+
+<style>
+    .col-left {
+        border-right: 2px solid #ddd; /* Đường kẻ dọc */
+        padding-right: 20px;
+    }
+
+    .col-right {
+        padding-left: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0; 
+    }
+
+    th {
+        font-weight: normal; 
+        color: #888; 
+        padding-bottom: 0px;
+    }
+
+    td {
+        font-weight: bold;
+        color: #333; 
+        padding-top: 0px; 
+    }
+
     
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            Họ tên
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            Giới tính
-        </dt>
-        <dd class = "col-sm-10">
-            @(Model.Gender == true ? "Nam" : "Nữ")
-        </dd>
-        <dt class = "col-sm-2">
-            Ngày sinh
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Birthday)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            Số điện thoại
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-        <dt class = "col-sm-2">
-           Căn cước công dân
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cccd)
-        </dd>
-        <dt class = "col-sm-2">
-            Địa chỉ
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt class = "col-sm-2">
-            Ảnh
-        </dt>
-        <dd class = "col-sm-10">
-            <img src="@Model.Image" alt="Image" style="width:100px; height:auto;">
-        </dd>
-        <dt class = "col-sm-2">
-            Phòng ban
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IddNavigation.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            Chức vụ
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdpNavigation.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            Trình độ
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdqNavigation.Name)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Ide">Sửa</a> 
-    <br />
-    <a asp-action="Index">Quay lại</a>
-</div>
+    .first-row td {
+        padding-bottom: 30px;
+    }
+
+    .second-row td {
+        padding-top: 30px; 
+    }
+    .profile-img {
+        width: 170px;
+        height: 170px;
+        border-radius: 50%;
+    }
+    
+    .verify-container {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        width: 42px; 
+        height: 42px;
+        background-color: #EAFBEA; 
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .verify-shield {
+        width: 18px;
+        height: 22px; 
+        background-color: #4CAF50; 
+        position: relative;
+        clip-path: path("M 9 0 L 18 5 L 16 14 Q 9 22 2 14 L 0 5 Z"); 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+    }
+
+       
+        .verify-shield i {
+            color: white;
+            font-size: 7px; 
+        }
+</style>

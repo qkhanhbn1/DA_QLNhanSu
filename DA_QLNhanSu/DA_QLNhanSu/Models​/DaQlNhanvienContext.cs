@@ -164,6 +164,9 @@ public partial class DaQlNhanvienContext : DbContext
             entity.Property(e => e.Cccd)
                 .HasMaxLength(50)
                 .HasColumnName("CCCD");
+            entity.Property(e => e.Code)
+                .HasMaxLength(50)
+                .HasColumnName("CODE");
             entity.Property(e => e.Email)
                 .HasMaxLength(50)
                 .HasColumnName("EMAIL");

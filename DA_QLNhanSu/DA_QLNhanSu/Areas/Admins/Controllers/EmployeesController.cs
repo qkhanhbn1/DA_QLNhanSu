@@ -23,7 +23,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/Employees
         public async Task<IActionResult> Index(string name, int page = 1)
         {
-            int limit = 5; // Số bản ghi trên mỗi trang
+            int limit = 10; // Số bản ghi trên mỗi trang
 
             var query = _context.Employees
                 .Include(e => e.IddNavigation)  // Include Department
@@ -54,7 +54,9 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 .Include(e => e.IddNavigation)
                 .Include(e => e.IdpNavigation)
                 .Include(e => e.IdqNavigation)
+                .Include(e => e.Contracts) // Load danh sách hợp đồng
                 .FirstOrDefaultAsync(m => m.Ide == id);
+
             if (employee == null)
             {
                 return NotFound();

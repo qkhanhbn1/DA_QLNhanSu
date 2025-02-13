@@ -6,11 +6,11 @@
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1 class="text-primary">Danh sách nhân viên công ty</h1>
+<h1 class="text-primary">DANH SÁCH NHÂN VIÊN CÔNG TY</h1>
 
 <div class="row my-4">
     <form action="" method="post" class="form-inline col-md-8">
-        <div class="input-group w-100">
+        <div class="input-group ">
             <input class="form-control" name="name" id="keyword" placeholder="Nhập tên cần tìm..." />
             <button type="submit" class="btn btn-primary">
                 <i class="fas fa-search"></i> Tìm kiếm
@@ -28,70 +28,41 @@
     <thead class="table-primary text-center">
         <tr>
             <th>
-                Tên nhân viên
+                NHÂN SỰ
             </th>
             <th>
-                Giới tính
+                MÃ NHÂN SỰ
             </th>
             <th>
-                Ngày sinh
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Số điện thoại
-            </th>
-            <th>
-                Căn cước công dân
-            </th>
-            <th>
-                Địa chỉ
-            </th>
-            <th>
-                Ảnh
-            </th>
-            <th>
-                Phòng ban
+                PHÒNG BAN
             </th>
 
             <th>
-                Chức vụ
+                CHỨC VỤ
             </th>
             <th>
-                Trình độ
+                TRÌNH ĐỘ
             </th>
 
+            <th>
+                NGÀY SINH
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                    @(item.Gender == true ? "Nam" : "Nữ")
-            </td>
                 <td>
-                    @(item.Birthday?.ToString("dd/MM/yyyy"))
+                    <img src="@item.Image" alt="@item.Name" class="rounded-circle" style="width:30px; height:30px;" />
+                    &ensp;
+                    <a asp-action="Details" asp-route-id="@item.Ide" class="text-dark fw-bold text-decoration-none">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </a>
                 </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cccd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
                 <td>
-                    <img src="@item.Image" alt="@item.Name" style="width:100px; height:auto;" />
+                    <strong>@Html.DisplayFor(modelItem => item.Code)</strong>
                 </td>
                 <td>
                     @item.IddNavigation?.Name
@@ -102,12 +73,14 @@
                 <td>
                     @item.IdqNavigation?.Name
                 </td>
+            
+                <td>
+                    @(item.Birthday?.ToString("dd/MM/yyyy"))
+                </td>
+            
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Ide" class="btn btn-warning btn-sm">
                         <i class="bi bi-pencil-square"></i> Sửa
-                    </a>
-                    <a asp-action="Details" asp-route-id="@item.Ide" class="btn btn-info btn-sm">
-                        <i class="bi bi-eye"></i> Chi tiết
                     </a>
                     <a asp-action="Delete" asp-route-id="@item.Ide" class="btn btn-danger btn-sm">
                         <i class="bi bi-trash"></i> Xóa
