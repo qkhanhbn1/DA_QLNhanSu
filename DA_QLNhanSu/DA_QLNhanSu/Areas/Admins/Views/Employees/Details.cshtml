@@ -23,7 +23,24 @@
         <table class="table border-0">
             <tr>
                 <th class="text-end border-0"><i class="fas fa-heart text-danger"></i></th>
-                <td class="text-start border-0">2 năm</td>
+                <td class="text-start border-0">
+                    @{
+                        var startDate = Model.Contracts.OrderByDescending(c => c.ReleaseDate).FirstOrDefault()?.ReleaseDate;
+                        if (startDate != null)
+                        {
+                            var now = DateTime.Now;
+                            var difference = now - startDate.Value;
+                            var years = (int)(difference.TotalDays / 365);
+                            var days = (int)(difference.TotalDays % 365);
+                            @($"{years} năm {days} ngày")
+                        }
+                        else
+                        {
+                            @("Chưa có")
+                        }
+                    }
+                </td>
+
             </tr>
             <tr>
                 <th class="text-end border-0"><i class="fas fa-barcode"></i></th>
@@ -68,7 +85,7 @@
                     <th>Chức vụ</th>
                 </tr>
                 <tr class="first-row">
-                    <td></td>
+                    <td class="mt-2 fw-bold" style="color: green;">Active</td>
                     <td>HĐ Lao Động 2 năm</td>
                     <td>@Model.Phone</td>
                     <td>@Model.IdpNavigation.Name</td>
