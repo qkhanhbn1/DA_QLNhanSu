@@ -15,5 +15,7 @@ public partial class Insurance
 
     public DateTime? ExpirationDate { get; set; }
 
+    public bool? Status { get; set; }
+
     public virtual Employee? IdeNavigation { get; set; }
 }

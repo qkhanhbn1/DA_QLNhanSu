@@ -31,6 +31,8 @@ public partial class Employee
 
     public int? Idq { get; set; }
 
+    public bool? Marry { get; set; }
+
     public virtual ICollection<Contract> Contracts { get; set; } = new List<Contract>();
 
     public virtual ICollection<Discipline> Disciplines { get; set; } = new List<Discipline>();

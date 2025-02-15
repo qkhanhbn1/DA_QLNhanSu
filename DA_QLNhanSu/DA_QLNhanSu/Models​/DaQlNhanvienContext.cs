@@ -177,6 +177,7 @@ public partial class DaQlNhanvienContext : DbContext
             entity.Property(e => e.Image)
                 .HasMaxLength(250)
                 .HasColumnName("IMAGE");
+            entity.Property(e => e.Marry).HasColumnName("MARRY");
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .HasColumnName("NAME");
@@ -232,6 +233,7 @@ public partial class DaQlNhanvienContext : DbContext
             entity.Property(e => e.ReleaseDate)
                 .HasColumnType("datetime")
                 .HasColumnName("RELEASE_DATE");
+            entity.Property(e => e.Status).HasColumnName("STATUS");
 
             entity.HasOne(d => d.IdeNavigation).WithMany(p => p.Insurances)
                 .HasForeignKey(d => d.Ide)

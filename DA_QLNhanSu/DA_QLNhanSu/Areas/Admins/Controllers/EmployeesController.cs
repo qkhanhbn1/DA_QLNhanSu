@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DA_QLNhanSu.Models;
 using X.PagedList;
+using ClosedXML.Excel;
+using System.IO;
 
 namespace DA_QLNhanSu.Areas.Admins.Controllers
 {
@@ -79,7 +81,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Ide,Name,Gender,Birthday,Email,Phone,Cccd,Address,Image,Idd,Idp,Idq")] Employee employee)
+        public async Task<IActionResult> Create([Bind("Ide,Name,Code,Gender,Birthday,Email,Phone,Cccd,Address,Image,Idd,Idp,Idq,Marry")] Employee employee)
         {
             try
             {
@@ -133,7 +135,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Ide,Name,Gender,Birthday,Email,Phone,Cccd,Address,Image,Idd,Idp,Idq")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("Ide,Name,Code,Gender,Birthday,Email,Phone,Cccd,Address,Image,Idd,Idp,Idq,Marry")] Employee employee)
         {
             if (id != employee.Ide)
             {
@@ -233,6 +235,53 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         private bool EmployeeExists(int id)
         {
             return _context.Employees.Any(e => e.Ide == id);
+        }
+        public IActionResult ExportToExcel()
+        {
+            var employees = _context.Employees
+                .Include(e => e.IddNavigation)
+                .Include(e => e.IdpNavigation)
+                .Include(e => e.IdqNavigation)
+                .ToList();
+
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Employees");
+                int currentRow = 1;
+
+                // Tạo tiêu đề cột
+                worksheet.Cell(currentRow, 1).Value = "Mã nhân sự";
+                worksheet.Cell(currentRow, 2).Value = "Họ và tên";
+                worksheet.Cell(currentRow, 3).Value = "Phòng ban";
+                worksheet.Cell(currentRow, 4).Value = "Chức vụ";
+                worksheet.Cell(currentRow, 5).Value = "Trình độ";
+                worksheet.Cell(currentRow, 6).Value = "Ngày sinh";
+
+                // Định dạng tiêu đề
+                var headerRange = worksheet.Range(currentRow, 1, currentRow, 6);
+                headerRange.Style.Font.Bold = true;
+                headerRange.Style.Fill.BackgroundColor = XLColor.LightGray;
+
+                // Điền dữ liệu
+                foreach (var emp in employees)
+                {
+                    currentRow++;
+                    worksheet.Cell(currentRow, 1).Value = emp.Code;
+                    worksheet.Cell(currentRow, 2).Value = emp.Name;
+                    worksheet.Cell(currentRow, 3).Value = emp.IddNavigation?.Name;
+                    worksheet.Cell(currentRow, 4).Value = emp.IdpNavigation?.Name;
+                    worksheet.Cell(currentRow, 5).Value = emp.IdqNavigation?.Name;
+                    worksheet.Cell(currentRow, 6).Value = emp.Birthday?.ToString("dd/MM/yyyy");
+                }
+
+                // Xuất file
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var content = stream.ToArray();
+                    return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DanhSachNhanVien.xlsx");
+                }
+            }
         }
     }
 }

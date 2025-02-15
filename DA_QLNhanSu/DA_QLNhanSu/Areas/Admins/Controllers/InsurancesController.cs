@@ -72,7 +72,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Ide,Number,ReleaseDate,ExpirationDate")] Insurance insurance)
+        public async Task<IActionResult> Create([Bind("Id,Ide,Number,ReleaseDate,ExpirationDate,Status")] Insurance insurance)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +106,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Ide,Number,ReleaseDate,ExpirationDate")] Insurance insurance)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Ide,Number,ReleaseDate,ExpirationDate,Status")] Insurance insurance)
         {
             if (id != insurance.Id)
             {

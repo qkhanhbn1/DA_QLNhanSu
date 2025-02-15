@@ -59,7 +59,7 @@
 
     <!-- Cột phải -->
     <div class="col-md-9 col-right">
-        <h1 class="text-primary">Thông tin cá nhân</h1>
+        <h2 class="text-primary">Thông tin cá nhân</h2>
         <p class="text-muted">Các thông tin cá nhân, liên hệ, học vấn và lịch sử làm việc</p>
         <hr />
         <table>
@@ -79,35 +79,69 @@
                 </tr>
 
                 <tr class="second-row">
-                    <th>Tình trạng việc làm</th>
+                    <th>Tình trạng làm việc</th>
                     <th>Hợp đồng hiện tại</th>
-                    <th>Số điện thoại</th>
-                    <th>Chức vụ</th>
+                    <th>Nơi sinh</th>
+                    <th>Quốc tịch</th>
                 </tr>
                 <tr class="first-row">
-                    <td class="mt-2 fw-bold" style="color: green;">Active</td>
-                    <td>HĐ Lao Động 2 năm</td>
-                    <td>@Model.Phone</td>
-                    <td>@Model.IdpNavigation.Name</td>
+                    <td class="mt-2 fw-bold" style="color: #00FF00;">Active</td>
+                    <td>@(Model.Contracts.OrderByDescending(c => c.Content).FirstOrDefault()?.Content)</td>
+                    <td>@Model.Address</td>
+                    <td>Việt Nam</td>
                 </tr>
-
+                <tr class="second-row">
+                    <th>Phòng ban</th>
+                    <th>Chức vụ</th>
+                    <th>Trình độ</th>
+                    <th>Số điện thoại</th>
+                </tr>
+                <tr class="first-row">
+                    <td>@Model.IddNavigation.Name</td>
+                    <td>@Model.IdpNavigation.Name</td>
+                    <td>@Model.IdqNavigation.Name</td>
+                    <td>@Model.Phone</td>
+                </tr>
                 <tr class="second-row">
                     <th>Ngày sinh</th>
                     <th>Email</th>
                     <th>Giới tính</th>
                     <th>Tình trạng hôn nhân</th>
                 </tr>
-                <tr>
+                <tr class="first-row">
                     <td>@(Model.Birthday?.ToString("dd/MM/yyyy"))</td>
                     <td>@Model.Email</td>
                     <td>@(Model.Gender == true ? "Nam" : "Nữ")</td>
-                    <td></td>
+                    <td>@(Model.Marry == true ? "Đã kết hôn" : "Chưa kết hôn")</td>
                 </tr>
+                <tr class="second-row">
+                    <th>CMT/CCCD</th>
+                    <th>Ngày cấp</th>
+                    <th>Nơi cấp</th>
+                </tr>
+                <tr class="first-row">
+                    <td>@Model.Cccd</td>
+                    <td>26/08/2003</td>
+                    <td>Hà Nội</td>
+                </tr>
+
             </tbody>
         </table>
+        <br />
+        <hr style="height: 4px; background-color: black; border: none;">
+        <h2 class="text-primary">Thông tin công việc</h2>
+        <p class="text-muted">Thông tin về  công việc hiên tại</p>
+        <hr />
+        <table>
+            <tbody>
+                
+            </tbody>
+        </table>
+        <br />
+        <hr style="height: 4px; background-color: black; border: none;">
 
         <div class="mt-3">
-            <a asp-action="Edit" asp-route-id="@Model?.Ide" class="btn btn-warning"><i class="fas fa-edit"></i> Sửa</a>
+            <a asp-action="Edit" asp-route-id="@Model?.Ide" class="btn btn-warning"><i class="fas fa-edit"></i>Sửa thông tin cơ bản</a>
             <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
         </div>
     </div>

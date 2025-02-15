@@ -28,34 +28,30 @@
     <thead class="table-primary text-center">
         <tr>
             <th>
+                Tên nhân viên
+            </th>
+            <th>
                 Số bảo hiểm
             </th>
             <th>
-                Ngày áp dụng
+                Trạng thái
             </th>
-            <th>
-                Ngày kết thúc
-            </th>
-            <th>
-                Nhân viên
-            </th>
+            
+            
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+                <td>
+                    @item.IdeNavigation?.Name
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Number)
             </td>
             <td>
-                    @(item.ReleaseDate?.ToString("dd/MM/yyyy"))
-            </td>
-            <td>
-                    @(item.ExpirationDate?.ToString("dd/MM/yyyy"))
-            </td>
-            <td>
-                    @item.IdeNavigation?.Name
+                    @(item.Status == true ? "Đã đóng" : "Chưa đóng")
             </td>
             <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">
