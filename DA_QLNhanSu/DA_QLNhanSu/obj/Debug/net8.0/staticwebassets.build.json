@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "6bnQX11gW7H2/176EL2d/zda/B9hJQ5q+tdixazBMl8=",
+  "Hash": "c3Wfj+Ht828u7/LNgXHJ7M6a5HgRS3hjIzWADczgpmU=",
   "Source": "DA_QLNhanSu",
   "BasePath": "_content/DA_QLNhanSu",
   "Mode": "Default",
@@ -2599,6 +2599,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\admin.webp",
+      "SourceId": "DA_QLNhanSu",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
+      "BasePath": "_content/DA_QLNhanSu",
+      "RelativePath": "Images/admin.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\admin.webp"
     },
     {
       "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\1.jpg",

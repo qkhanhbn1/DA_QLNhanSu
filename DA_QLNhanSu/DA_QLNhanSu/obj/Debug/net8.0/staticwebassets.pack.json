@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\DA_QLNhanSu.bundle.scp.css"
     },
     {
+      "Id": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\admin.webp",
+      "PackagePath": "staticwebassets\\Images\\admin.webp"
+    },
+    {
       "Id": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\employee\\1.jpg",
       "PackagePath": "staticwebassets\\Images\\employee\\1.jpg"
     },
