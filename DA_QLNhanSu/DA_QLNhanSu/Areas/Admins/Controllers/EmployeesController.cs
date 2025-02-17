@@ -57,7 +57,8 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 .Include(e => e.IdpNavigation)
                 .Include(e => e.IdqNavigation)
                 .Include(e => e.Contracts)
-                .Include(e => e.Insurances)// Load danh sách hợp đồng
+                .Include(e => e.Insurances)
+                .Include(e => e.OnLeaves)// Load danh sách hợp đồng
                 .FirstOrDefaultAsync(m => m.Ide == id);
 
             if (employee == null)

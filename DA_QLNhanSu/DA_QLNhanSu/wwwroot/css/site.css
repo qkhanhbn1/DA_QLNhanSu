@@ -20,74 +20,35 @@ html {
 body {
   margin-bottom: 60px;
 }
-.col-left {
-    border-right: 2px solid #ddd; /* Đường kẻ dọc */
-    padding-right: 20px;
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Ngăn cuộn toàn bộ trang */
 }
 
-.col-right {
-    padding-left: 20px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-th {
-    font-weight: normal;
-    color: #888;
-    padding-bottom: 0px;
-}
-
-td {
-    font-weight: bold;
-    color: #333;
-    padding-top: 0px;
-}
-
-
-.first-row td {
-    padding-bottom: 30px;
-}
-
-.second-row td {
-    padding-top: 30px;
-}
-
-.profile-img {
-    width: 170px;
-    height: 170px;
-    border-radius: 50%;
-}
-
-.verify-container {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 42px;
-    height: 42px;
-    background-color: #EAFBEA;
-    border-radius: 50%;
+.wrapper {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 100vh; /* Chiều cao toàn màn hình */
 }
 
-.verify-shield {
-    width: 18px;
-    height: 22px;
-    background-color: #4CAF50;
-    position: relative;
-    clip-path: path("M 9 0 L 18 5 L 16 14 Q 9 22 2 14 L 0 5 Z");
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.main-sidebar {
+    width: 250px; /* Độ rộng sidebar */
+    height: 100vh; /* Chiều cao toàn màn hình */
+    position: fixed; /* Cố định vị trí */
+    top: 0;
+    left: 0;
+    overflow-y: auto; /* Cuộn riêng sidebar nếu nội dung dài */
+    background-color: #fff; /* Đảm bảo màu nền */
+    border-right: 1px solid #ddd;
+    z-index: 1000; /* Đảm bảo hiển thị trên cùng */
 }
 
-
-    .verify-shield i {
-        color: white;
-        font-size: 7px;
-    }
+.content-wrapper {
+    flex-grow: 1;
+    margin-left: 250px; /* Đẩy nội dung sang bên phải sidebar */
+    height: 100vh;
+    overflow-y: auto; /* Cuộn nội dung chính */
+    padding: 20px;
+    background-color: #f4f6f9; /* Màu nền đồng bộ */
+}
