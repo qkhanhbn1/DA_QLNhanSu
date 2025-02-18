@@ -6,7 +6,7 @@
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1 class="text-primary">Danh sách hợp đồng nhân sự</h1>
+<h1 class="text-primary">Danh sách hợp đồng lao động</h1>
 
 <div class="row my-4">
     <form action="" method="post" class="form-inline col-md-8">
@@ -27,26 +27,20 @@
     <thead class="table-primary text-center">
         <tr>
             <th>
-                Ngày tạo
-            </th>
-            <th>
-                Ngày bắt đầu
-            </th>
-            <th>
-                Ngày kết thúc
-            </th>
-            <th>
-                Mô tả
-            </th>
-            <th>
-                Thời hạn
+                TÊN NHÂN SỰ
             </th>
             
             <th>
-                Tên nhân viên
+                NGÀY BẮT ĐẦU
             </th>
             <th>
-                Chức vụ
+                NGÀY KẾT THÚC
+            </th>
+            <th>
+                MÔ TẢ
+            </th>
+            <th>    
+                TRẠNG THÁI
             </th>
             <th></th>
         </tr>
@@ -54,9 +48,11 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                    @(item.SigningDate?.ToString("dd/MM/yyyy"))
-            </td>
+                <td>
+                    <img src="@item.Image" alt="@item.Nameemployee" class="rounded-circle" style="width:30px; height:30px;" />
+                    &ensp;
+                    <strong>@Html.DisplayFor(modelItem => item.Nameemployee)</strong>
+                </td>
             <td>
                     @(item.ReleaseDate?.ToString("dd/MM/yyyy"))
             </td>
@@ -64,24 +60,22 @@
                     @(item.ExpirationDate?.ToString("dd/MM/yyyy"))
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Content)
+                    <strong>@Html.DisplayFor(modelItem => item.Content)</strong>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContractDuration)
-            </td>
-            
-            <td>
-                    @item.IdeNavigation?.Name
-            </td>
-            <td>
-                    @item.IdpNavigation?.Name
-            </td>
+                <td class="text-center">
+                    <button class="btn btn-status @(item.Status == true ? "btn-success text-white" : "btn-expired")"
+                            data-id="@item.Id"
+                            data-status="@(item.Status == true ? "true" : "false")"
+                            style="width: 80px;">
+                        @(item.Status == true ? "Đã ký" : "Hết hạn")
+                    </button>
+                </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">
                         <i class="bi bi-pencil-square"></i> Sửa
                     </a>
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">
-                        <i class="bi bi-eye"></i> Chi tiết
+                        <i class="bi bi-eye"></i>Xem hợp đồng
                     </a>
                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">
                         <i class="bi bi-trash"></i> Xóa
@@ -98,3 +92,46 @@
     PageClasses = new string[] { "page-link" }
 })
 </div>
+<style>
+    .btn-expired {
+        background-color: #ffe6e6 !important; /* Nền hồng nhạt hơn */
+        color: #cc0000 !important; /* Chữ đỏ đậm hơn */
+        border: none !important; /* Xóa viền */
+        font-weight: bold !important; /* Chữ đậm hơn */
+    }
+
+</style>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".btn-status").click(function () {
+                var button = $(this);
+                var contractId = button.data("id");
+                var currentStatus = button.data("status");
+
+                $.ajax({
+                    url: '/Admins/Contracts/UpdateStatus',
+                    type: 'POST',
+                    data: { id: contractId },
+                    success: function (newStatus) {
+                        if (newStatus) {
+                            button.text("Đã ký")
+                                .removeClass("btn-expired")
+                                .addClass("btn-success text-white");
+                        } else {
+                            button.text("Hết hạn")
+                                .removeClass("btn-success text-white")
+                                .addClass("btn-expired");
+                        }
+                        button.data("status", newStatus);
+                    },
+                    error: function () {
+                        alert("Có lỗi xảy ra, vui lòng thử lại!");
+                    }
+                });
+            });
+        });
+
+    </script>
+}

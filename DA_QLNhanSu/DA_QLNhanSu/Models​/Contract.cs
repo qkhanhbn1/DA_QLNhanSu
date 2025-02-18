@@ -7,6 +7,10 @@ public partial class Contract
 {
     public int Id { get; set; }
 
+    public string? Nameemployee { get; set; }
+
+    public string? Image { get; set; }
+
     public int? Ide { get; set; }
 
     public DateTime? SigningDate { get; set; }
@@ -20,6 +24,8 @@ public partial class Contract
     public string? ContractDuration { get; set; }
 
     public int? Idp { get; set; }
+
+    public bool? Status { get; set; }
 
     public virtual Employee? IdeNavigation { get; set; }
 

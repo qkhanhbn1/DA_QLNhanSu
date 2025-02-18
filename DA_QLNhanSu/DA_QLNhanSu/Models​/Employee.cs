@@ -33,6 +33,8 @@ public partial class Employee
 
     public bool? Marry { get; set; }
 
+    public virtual ICollection<CareerDevelopment> CareerDevelopments { get; set; } = new List<CareerDevelopment>();
+
     public virtual ICollection<Contract> Contracts { get; set; } = new List<Contract>();
 
     public virtual ICollection<Discipline> Disciplines { get; set; } = new List<Discipline>();

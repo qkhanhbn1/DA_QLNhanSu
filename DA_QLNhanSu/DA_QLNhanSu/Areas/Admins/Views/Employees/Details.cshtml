@@ -309,7 +309,20 @@
 
 
 <!-- Nút chức năng -->
+<script>
+    function showSection(sectionId) {
+        let sections = ['personal-info', 'job-info', 'awards', 'violations', 'leave-schedule'];
+        sections.forEach(id => {
+            document.getElementById(id).style.display = 'none';
+        });
 
+        document.getElementById(sectionId).style.display = 'block';
+
+        document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
+
+        document.querySelector(`[onclick="showSection('${sectionId}')"]`).classList.add('active');
+    }
+</script>
 <style>
     .menu-item {
         text-decoration: none;
@@ -420,19 +433,6 @@
 
 </style>
 
-<script>
-    function showSection(sectionId) {
-        let sections = ['personal-info', 'job-info', 'awards', 'violations', 'leave-schedule'];
-        sections.forEach(id => {
-            document.getElementById(id).style.display = 'none';
-        });
 
-        document.getElementById(sectionId).style.display = 'block';
-
-        document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
-
-        document.querySelector(`[onclick="showSection('${sectionId}')"]`).classList.add('active');
-    }
-</script>
 
 

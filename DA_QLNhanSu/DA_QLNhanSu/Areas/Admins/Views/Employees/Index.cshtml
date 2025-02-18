@@ -7,9 +7,9 @@
 }
 
 <h1 class="text-primary">DANH SÁCH NHÂN VIÊN CÔNG TY</h1>
-<div class="text-md-right mt-2 mt-md-0">
-    <a asp-action="ExportToExcel" class="btn btn-success">
-        <i class="bi bi-file-earmark-excel"></i> Xuất Excel
+<div class="text-md-left mt-2 mt-md-0">
+    <a asp-action="Create" class="btn btn-warning">
+        <i class="bi bi-plus-circle"></i> Tạo mới
     </a>
 </div>
 <div class="row my-4">
@@ -22,8 +22,8 @@
         </div>
     </form>
     <div class="col-md-4 text-md-right mt-2 mt-md-0">
-        <a asp-action="Create" class="btn btn-success">
-            <i class="bi bi-plus-circle"></i> Tạo mới
+        <a asp-action="ExportToExcel" class="btn btn-success">
+            <i class="bi bi-file-earmark-excel"></i> Xuất Excel
         </a>
     </div>
 </div>

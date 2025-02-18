@@ -1,62 +1,54 @@
 ﻿@model DA_QLNhanSu.Models.Contract
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Hợp Đồng Lao Động";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Details</h1>
+<h1 class="text-center">HỢP ĐỒNG LAO ĐỘNG</h1>
+<h2 class="text-center">Số: HDLD-@Model.Id</h2>
+
+<div class="contract-section">
+    <p><strong>BÊN A (Người sử dụng lao động):</strong></p>
+    <p>Công ty: <strong>CÔNG TY TNHH XYZ</strong></p>
+    <p>Địa chỉ: 123 Đường ABC, Quận 1, TP. HCM</p>
+    <p>Đại diện: Ông Nguyễn Văn A - Giám đốc</p>
+</div>
+
+<div class="contract-section">
+    <p><strong>BÊN B (Người lao động):</strong></p>
+    <p>Họ và tên: <strong>@Model.Nameemployee</strong></p>
+    <p>Vị trí: <strong>@Model.IdpNavigation.Idp</strong></p>
+    <p>Ngày ký hợp đồng: <strong>@Model.SigningDate?.ToString("dd/MM/yyyy")</strong></p>
+</div>
+
+<div class="contract-section">
+    <h3>Điều 1: Nội dung công việc</h3>
+    <p>@Model.Content</p>
+</div>
+
+<div class="contract-section">
+    <h3>Điều 2: Thời hạn hợp đồng</h3>
+    <p>Hợp đồng có thời hạn từ ngày <strong>@Model.ReleaseDate?.ToString("dd/MM/yyyy")</strong> đến ngày <strong>@Model.ExpirationDate?.ToString("dd/MM/yyyy")</strong>.</p>
+</div>
+
+<div class="contract-section">
+    <h3>Điều 3: Mức lương và chế độ đãi ngộ</h3>
+    <p>- Thời hạn hợp đồng: <strong>@Model.ContractDuration tháng</strong>.</p>
+</div>
+
+<div class="signature">
+    <div>
+        <p><strong>BÊN A</strong></p>
+        <p>(Ký, ghi rõ họ tên)</p>
+    </div>
+    <div>
+        <p><strong>BÊN B</strong></p>
+        <p>(Ký, ghi rõ họ tên)</p>
+    </div>
+</div>
 
 <div>
-    <h4>Contract</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SigningDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SigningDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ReleaseDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ReleaseDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ExpirationDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ExpirationDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ContractDuration)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ContractDuration)
-        </dd>
-     
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdeNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdeNavigation.Ide)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdpNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdpNavigation.Idp)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Chỉnh sửa</a>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
 </div>

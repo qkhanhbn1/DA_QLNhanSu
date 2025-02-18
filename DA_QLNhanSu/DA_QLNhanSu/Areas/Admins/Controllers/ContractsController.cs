@@ -23,17 +23,16 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/Contracts
         public async Task<IActionResult> Index(string name, int page = 1)
         {
-            int limit = 8; // Số bản ghi trên mỗi trang
+            int limit = 15; // Số bản ghi trên mỗi trang
 
             var query = _context.Contracts
-                  // Include Department
-                .Include(e => e.IdeNavigation)          // Include Position
-                .Include(e => e.IdpNavigation) // Include Qualification
-                .OrderBy(c => c.Ide);
+                .Include(e => e.IdeNavigation)
+                .Include(e => e.IdpNavigation)
+                .OrderBy(c => c.Id); // Sắp xếp theo Id để đảm bảo thứ tự trong DB
 
             if (!string.IsNullOrEmpty(name))
             {
-                query = query.Where(c => c.IdeNavigation.Name.Contains(name)).OrderBy(c => c.Ide);
+                query = query.Where(c => c.IdeNavigation.Name.Contains(name)).OrderBy(c => c.Id);
             }
 
             var contracts = await query.ToPagedListAsync(page, limit);
@@ -41,6 +40,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
             ViewBag.keyword = name;
             return View(contracts);
         }
+
 
         // GET: Admins/Contracts/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -75,7 +75,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Ide,SigningDate,ReleaseDate,ExpirationDate,Content,ContractDuration,Idp,DailyWage")] Contract contract)
+        public async Task<IActionResult> Create([Bind("Id,Nameemployee,Image,Ide,SigningDate,ReleaseDate,ExpirationDate,Content,ContractDuration,Idp,DailyWage,Status")] Contract contract)
         {
             if (ModelState.IsValid)
             {
@@ -111,7 +111,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Ide,SigningDate,ReleaseDate,ExpirationDate,Content,ContractDuration,Idp,DailyWage")] Contract contract)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nameemployee,Image,Ide,SigningDate,ReleaseDate,ExpirationDate,Content,ContractDuration,Idp,DailyWage,Status")] Contract contract)
         {
             if (id != contract.Id)
             {
@@ -182,5 +182,22 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         {
             return _context.Contracts.Any(e => e.Id == id);
         }
+
+        //update stautus
+        [HttpPost]
+        public IActionResult UpdateStatus(int id)
+        {
+            var contract = _context.Contracts.Find(id);
+            if (contract == null)
+            {
+                return NotFound();
+            }
+
+            contract.Status = !(contract.Status ?? false); // Nếu null, mặc định là false rồi đảo trạng thái
+            _context.SaveChanges();
+
+            return Json(contract.Status);
+        }
+
     }
 }
