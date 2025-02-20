@@ -70,10 +70,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXENvbnRyYWN0c1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Contracts/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXENvbnRyYWN0c1xEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Contracts/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXENvbnRyYWN0c1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -134,10 +130,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXEVtcGxveWVlc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Employees/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXEVtcGxveWVlc1xEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Employees/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXEVtcGxveWVlc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -172,10 +164,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/LeaveJobs/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXExlYXZlSm9ic1xDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/LeaveJobs/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXExlYXZlSm9ic1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/LeaveJobs/Details.cshtml]

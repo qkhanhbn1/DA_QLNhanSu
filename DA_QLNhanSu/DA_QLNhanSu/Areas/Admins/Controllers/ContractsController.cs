@@ -27,7 +27,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
 
             var query = _context.Contracts
                 .Include(e => e.IdeNavigation)
-                .Include(e => e.IdpNavigation)
+                .ThenInclude(e => e.IdpNavigation)
                 .OrderBy(c => c.Id); // Sắp xếp theo Id để đảm bảo thứ tự trong DB
 
             if (!string.IsNullOrEmpty(name))
@@ -52,7 +52,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
 
             var contract = await _context.Contracts
                 .Include(c => c.IdeNavigation)
-                .Include(c => c.IdpNavigation)
+                .ThenInclude(e => e.IdpNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (contract == null)
             {
@@ -75,7 +75,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nameemployee,Image,Ide,SigningDate,ReleaseDate,ExpirationDate,Content,ContractDuration,Idp,DailyWage,Status")] Contract contract)
+        public async Task<IActionResult> Create([Bind("Id,Codecontract,Ide,SigningDate,ReleaseDate,ExpirationDate,Content,Status")] Contract contract)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +84,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", contract.Ide);
-            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Name", contract.Idp);
+            
             return View(contract);
         }
 
@@ -96,22 +96,27 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 return NotFound();
             }
 
-            var contract = await _context.Contracts.FindAsync(id);
+            var contract = await _context.Contracts
+                .Include(c => c.IdeNavigation) // Load dữ liệu từ bảng Employees
+                .FirstOrDefaultAsync(c => c.Id == id); // Tránh dùng FindAsync, vì nó không hỗ trợ Include
+
             if (contract == null)
             {
                 return NotFound();
             }
+
             ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", contract.Ide);
-            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Name", contract.Idp);
+
             return View(contract);
         }
+
 
         // POST: Admins/Contracts/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nameemployee,Image,Ide,SigningDate,ReleaseDate,ExpirationDate,Content,ContractDuration,Idp,DailyWage,Status")] Contract contract)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Codecontract,Ide,SigningDate,ReleaseDate,ExpirationDate,Content,Status")] Contract contract)
         {
             if (id != contract.Id)
             {
@@ -139,7 +144,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", contract.Ide);
-            ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Name", contract.Idp);
+            
             return View(contract);
         }
 
@@ -153,7 +158,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
 
             var contract = await _context.Contracts
                 .Include(c => c.IdeNavigation)
-                .Include(c => c.IdpNavigation)
+                .ThenInclude(e => e.IdpNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (contract == null)
             {
@@ -198,6 +203,25 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
 
             return Json(contract.Status);
         }
+        [HttpPost]
+        public async Task<IActionResult> DeleteAjax(int id)
+        {
+            var contract = await _context.Contracts.FindAsync(id);
+            if (contract == null)
+            {
+                return NotFound(); // Trả về 404 nếu không tìm thấy
+            }
 
+            try
+            {
+                _context.Contracts.Remove(contract);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true, message = "Xóa thành công!" }); // Trả về JSON
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = "Lỗi khi xóa: " + ex.Message });
+            }
+        }
     }
 }

@@ -1,55 +1,65 @@
 ﻿@model DA_QLNhanSu.Models.LeaveJob
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo mới đơn nghỉ việc";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Create</h1>
+<h1 class="text-center my-4 text-primary">Thêm mới đơn nghỉ việc</h1>
 
-<h4>LeaveJob</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nameemployee" class="control-label"></label>
-                <input asp-for="Nameemployee" class="form-control" />
-                <span asp-validation-for="Nameemployee" class="text-danger"></span>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <form asp-action="Create" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Ide" class="form-label">Nhân viên</label>
+                        <select asp-for="Ide" class="form-select" asp-items="ViewBag.Ide">
+                            <option value="">-- Chọn nhân viên --</option>
+                        </select>
+                        <span asp-validation-for="Ide" class="text-danger"></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Date" class="form-label">Ngày xin nghỉ</label>
+                            <input asp-for="Date" type="date" class="form-control" />
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="TypeTermination" class="form-label">Hình thức nghỉ</label>
+                            <input asp-for="TypeTermination" class="form-control" placeholder="Nhập hình thức nghỉ..." />
+                            <span asp-validation-for="TypeTermination" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ReasonLeave" class="form-label">Lý do nghỉ</label>
+                        <textarea asp-for="ReasonLeave" class="form-control" rows="3" placeholder="Nhập lý do nghỉ..."></textarea>
+                        <span asp-validation-for="ReasonLeave" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Status" class="form-label">Trạng thái</label>
+                        <select asp-for="Status" class="form-select">
+                            <option value="">-- Chọn trạng thái --</option>
+                            <option value="true">Đã duyệt</option>
+                            <option value="false">Chờ duyệt</option>
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary w-30">Tạo</button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="Idp" class="control-label"></label>
-                <select asp-for="Idp" class ="form-control" asp-items="ViewBag.Idp"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Type" class="control-label"></label>
-                <input asp-for="Type" class="form-control" />
-                <span asp-validation-for="Type" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+
+        <div class="text-center mt-3">
+            <a asp-action="Index" class="btn btn-outline-secondary">Quay lại</a>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

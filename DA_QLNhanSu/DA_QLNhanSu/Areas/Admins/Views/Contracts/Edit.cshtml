@@ -1,63 +1,90 @@
 ﻿@model DA_QLNhanSu.Models.Contract
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Chỉnh sửa hợp đồng";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Edit</h1>
+<h1 class="text-center text-primary mt-4">Sửa thông tin cơ bản hợp đồng</h1>
 
-<h4>Contract</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Ide" class="control-label"></label>
-                <select asp-for="Ide" class="form-control" asp-items="ViewBag.Ide"></select>
-                <span asp-validation-for="Ide" class="text-danger"></span>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <form asp-action="Edit" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+
+                        <!-- Ảnh Hợp Đồng (Nếu có) -->
+                        <!-- Thông tin cơ bản -->
+                        @if (!string.IsNullOrEmpty(Model.IdeNavigation?.Image))
+                        {
+                            <div class="text-center mb-3">
+                                <img src="@Model.IdeNavigation.Image" alt="Ảnh hợp đồng" width="120" height="120" class="rounded-circle border border-2" />
+                            </div>
+                        }
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Ide" class="form-label">Tên nhân sự</label>
+                            <select asp-for="Ide" class="form-select" asp-items="ViewBag.Ide"></select>
+                            <span asp-validation-for="Ide" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Codecontract" class="form-label">Mã hợp đồng</label>
+                            <input asp-for="Codecontract" class="form-control" placeholder="Nhập mã hợp đồng..." />
+                            <span asp-validation-for="Codecontract" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="ReleaseDate" class="form-label">Ngày bắt đầu</label>
+                                <input asp-for="ReleaseDate" type="date" class="form-control" />
+                                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="ExpirationDate" class="form-label">Ngày kết thúc</label>
+                                <input asp-for="ExpirationDate" type="date" class="form-control" />
+                                <span asp-validation-for="ExpirationDate" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="SigningDate" class="form-label">Ngày ký</label>
+                            <input asp-for="SigningDate" type="date" class="form-control" />
+                            <span asp-validation-for="SigningDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Content" class="form-label">Loại hợp đồng</label>
+                            <textarea asp-for="Content" class="form-control" ></textarea>
+                            <span asp-validation-for="Content" class="text-danger"></span>
+                        </div>
+
+                        <!-- Chức vụ - Trạng thái -->
+                        <div class="row">
+                            
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Status" class="form-label">Trạng thái</label>
+                                <select asp-for="Status" class="form-select">
+                                    <option value="true">Đã ký</option>
+                                    <option value="false">Hết hạn</option>
+                                </select>
+                                <span asp-validation-for="Status" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Nút Lưu -->
+                        <div class="text-center">
+                            <input type="submit" value="Lưu" class="btn btn-primary px-4 py-2 shadow" />
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="SigningDate" class="control-label"></label>
-                <input asp-for="SigningDate" class="form-control" />
-                <span asp-validation-for="SigningDate" class="text-danger"></span>
+
+            <div class="text-center mt-3">
+                <a asp-action="Index" class="btn btn-outline-secondary">Quay lại</a>
             </div>
-            <div class="form-group">
-                <label asp-for="ReleaseDate" class="control-label"></label>
-                <input asp-for="ReleaseDate" class="form-control" />
-                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ExpirationDate" class="control-label"></label>
-                <input asp-for="ExpirationDate" class="form-control" />
-                <span asp-validation-for="ExpirationDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
-                <span asp-validation-for="Content" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ContractDuration" class="control-label"></label>
-                <input asp-for="ContractDuration" class="form-control" />
-                <span asp-validation-for="ContractDuration" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Idp" class="control-label"></label>
-                <select asp-for="Idp" class="form-control" asp-items="ViewBag.Idp"></select>
-                <span asp-validation-for="Idp" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

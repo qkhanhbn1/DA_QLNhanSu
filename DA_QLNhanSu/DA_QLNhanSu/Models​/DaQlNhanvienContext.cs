@@ -117,23 +117,16 @@ public partial class DaQlNhanvienContext : DbContext
             entity.ToTable("CONTRACT");
 
             entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Codecontract)
+                .HasMaxLength(50)
+                .HasColumnName("CODECONTRACT");
             entity.Property(e => e.Content)
                 .HasMaxLength(250)
                 .HasColumnName("CONTENT");
-            entity.Property(e => e.ContractDuration)
-                .HasMaxLength(250)
-                .HasColumnName("CONTRACT_DURATION");
             entity.Property(e => e.ExpirationDate)
                 .HasColumnType("datetime")
                 .HasColumnName("EXPIRATION_DATE");
             entity.Property(e => e.Ide).HasColumnName("IDE");
-            entity.Property(e => e.Idp).HasColumnName("IDP");
-            entity.Property(e => e.Image)
-                .HasMaxLength(250)
-                .HasColumnName("IMAGE");
-            entity.Property(e => e.Nameemployee)
-                .HasMaxLength(50)
-                .HasColumnName("NAMEEMPLOYEE");
             entity.Property(e => e.ReleaseDate)
                 .HasColumnType("datetime")
                 .HasColumnName("RELEASE_DATE");
@@ -145,10 +138,6 @@ public partial class DaQlNhanvienContext : DbContext
             entity.HasOne(d => d.IdeNavigation).WithMany(p => p.Contracts)
                 .HasForeignKey(d => d.Ide)
                 .HasConstraintName("FK_CONTRACT_EMPLOYEE");
-
-            entity.HasOne(d => d.IdpNavigation).WithMany(p => p.Contracts)
-                .HasForeignKey(d => d.Idp)
-                .HasConstraintName("FK_CONTRACT_POSITION");
         });
 
         modelBuilder.Entity<Department>(entity =>
@@ -222,6 +211,7 @@ public partial class DaQlNhanvienContext : DbContext
             entity.Property(e => e.Phone)
                 .HasMaxLength(50)
                 .HasColumnName("PHONE");
+            entity.Property(e => e.Status).HasColumnName("STATUS");
 
             entity.HasOne(d => d.IddNavigation).WithMany(p => p.Employees)
                 .HasForeignKey(d => d.Idd)
@@ -284,22 +274,20 @@ public partial class DaQlNhanvienContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Date)
-                .HasMaxLength(10)
-                .IsFixedLength()
+                .HasColumnType("datetime")
                 .HasColumnName("DATE");
-            entity.Property(e => e.Idp).HasColumnName("IDP");
-            entity.Property(e => e.Image)
+            entity.Property(e => e.Ide).HasColumnName("IDE");
+            entity.Property(e => e.ReasonLeave)
                 .HasMaxLength(250)
-                .HasColumnName("IMAGE");
-            entity.Property(e => e.Nameemployee)
-                .HasMaxLength(50)
-                .HasColumnName("NAMEEMPLOYEE");
+                .HasColumnName("REASON_LEAVE");
             entity.Property(e => e.Status).HasColumnName("STATUS");
-            entity.Property(e => e.Type).HasColumnName("TYPE");
+            entity.Property(e => e.TypeTermination)
+                .HasMaxLength(50)
+                .HasColumnName("TYPE_TERMINATION");
 
-            entity.HasOne(d => d.IdpNavigation).WithMany(p => p.LeaveJobs)
-                .HasForeignKey(d => d.Idp)
-                .HasConstraintName("FK_LEAVE_JOB_POSITION");
+            entity.HasOne(d => d.IdeNavigation).WithMany(p => p.LeaveJobs)
+                .HasForeignKey(d => d.Ide)
+                .HasConstraintName("FK_LEAVE_JOB_EMPLOYEE");
         });
 
         modelBuilder.Entity<OnLeave>(entity =>

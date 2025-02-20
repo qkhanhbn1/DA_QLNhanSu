@@ -25,7 +25,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/Employees
         public async Task<IActionResult> Index(string name, int page = 1)
         {
-            int limit = 10; // Số bản ghi trên mỗi trang
+            int limit = 12; // Số bản ghi trên mỗi trang
 
             var query = _context.Employees
                 .Include(e => e.IddNavigation)  // Include Department
@@ -83,7 +83,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Ide,Name,Code,Gender,Birthday,Email,Phone,Cccd,Address,Image,Idd,Idp,Idq,Marry")] Employee employee)
+        public async Task<IActionResult> Create([Bind("Ide,Name,Code,Gender,Birthday,Email,Phone,Cccd,Address,Image,Idd,Idp,Idq,Marry,Status")] Employee employee)
         {
             try
             {
@@ -137,7 +137,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Ide,Name,Code,Gender,Birthday,Email,Phone,Cccd,Address,Image,Idd,Idp,Idq,Marry")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("Ide,Name,Code,Gender,Birthday,Email,Phone,Cccd,Address,Image,Idd,Idp,Idq,Marry,Status")] Employee employee)
         {
             if (id != employee.Ide)
             {
@@ -221,18 +221,18 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
 
         // POST: Admins/Employees/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var employee = await _context.Employees.FindAsync(id);
             if (employee != null)
             {
                 _context.Employees.Remove(employee);
+                await _context.SaveChangesAsync();
             }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Json(new { success = true, message = "Xóa thành công!" }); // Trả về JSON
         }
+
 
         private bool EmployeeExists(int id)
         {
@@ -285,5 +285,26 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 }
             }
         }
+        [HttpPost]
+        public async Task<IActionResult> DeleteAjax(int id)
+        {
+            var employee = await _context.Employees.FindAsync(id);
+            if (employee == null)
+            {
+                return NotFound(); // Trả về 404 nếu không tìm thấy
+            }
+
+            try
+            {
+                _context.Employees.Remove(employee);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true, message = "Xóa thành công!" }); // Trả về JSON
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = "Lỗi khi xóa: " + ex.Message });
+            }
+        }
+
     }
 }
