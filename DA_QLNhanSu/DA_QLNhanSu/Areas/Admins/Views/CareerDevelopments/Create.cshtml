@@ -1,55 +1,72 @@
 ﻿@model DA_QLNhanSu.Models.CareerDevelopment
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo đơn phát triển sự nghiệp";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Create</h1>
+<h1 class="text-center my-4 text-primary">Thêm mới đơn phát triển sự nghiệp</h1>
 
-<h4>CareerDevelopment</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Ide" class="control-label"></label>
-                <select asp-for="Ide" class ="form-control" asp-items="ViewBag.Ide"></select>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Ide" class="form-label">Nhân viên</label>
+                        <select asp-for="Ide" class="form-select" asp-items="ViewBag.Ide">
+                            <option value="">-- Chọn nhân viên --</option>
+                        </select>
+                        <span asp-validation-for="Ide" class="text-danger"></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Type" class="form-label">Hình thức phát triển</label>
+                            <input asp-for="Type" class="form-control" placeholder="Nhập hình thức phát triển..." />
+                            <span asp-validation-for="Type" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Date" class="form-label">Ngày thực hiện</label>
+                            <input asp-for="Date" type="date" class="form-control" />
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Fromrole" class="form-label">Chức vụ cũ</label>
+                            <input asp-for="Fromrole" class="form-control" placeholder="Nhập chức vụ cũ..." />
+                            <span asp-validation-for="Fromrole" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Torole" class="form-label">Chức vụ mới</label>
+                            <input asp-for="Torole" class="form-control" placeholder="Nhập chức vụ mới..." />
+                            <span asp-validation-for="Torole" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Status" class="form-label">Trạng thái</label>
+                        <select asp-for="Status" class="form-select">
+                            <option value="">-- Chọn trạng thái --</option>
+                            <option value="true">Đã duyệt</option>
+                            <option value="false">Chờ duyệt</option>
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary w-30">Tạo</button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="Type" class="control-label"></label>
-                <input asp-for="Type" class="form-control" />
-                <span asp-validation-for="Type" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Fromrole" class="control-label"></label>
-                <input asp-for="Fromrole" class="form-control" />
-                <span asp-validation-for="Fromrole" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Torole" class="control-label"></label>
-                <input asp-for="Torole" class="form-control" />
-                <span asp-validation-for="Torole" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+
+        <div class="text-center mt-3">
+            <a asp-action="Index" class="btn btn-outline-secondary">Quay lại</a>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

@@ -53,6 +53,8 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 .ThenInclude(e => e.IdpNavigation)
                 .Include(c => c.IdeNavigation)
                 .ThenInclude(e => e.IddNavigation)
+                .Include(c => c.IdeNavigation)
+                .ThenInclude(e => e.IdqNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (leaveJob == null)
             {
