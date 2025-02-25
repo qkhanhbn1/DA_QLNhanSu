@@ -58,7 +58,10 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 .Include(e => e.IdqNavigation)
                 .Include(e => e.Contracts)
                 .Include(e => e.Insurances)
-                .Include(e => e.OnLeaves)// Load danh sách hợp đồng
+                .Include(e => e.OnLeaves)
+                .Include(e => e.Disciplines)
+                .Include(e => e.Rewards)
+                .Include(e => e.LeaveJobs)
                 .FirstOrDefaultAsync(m => m.Ide == id);
 
             if (employee == null)
@@ -197,42 +200,6 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
             ViewData["Idq"] = new SelectList(_context.Qualifications, "Idq", "Name", employee.Idq);
             return View(employee);
         }
-
-        // GET: Admins/Employees/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var employee = await _context.Employees
-                .Include(e => e.IddNavigation)
-                .Include(e => e.IdpNavigation)
-                .Include(e => e.IdqNavigation)
-                .FirstOrDefaultAsync(m => m.Ide == id);
-            if (employee == null)
-            {
-                return NotFound();
-            }
-
-            return View(employee);
-        }
-
-        // POST: Admins/Employees/Delete/5
-        [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var employee = await _context.Employees.FindAsync(id);
-            if (employee != null)
-            {
-                _context.Employees.Remove(employee);
-                await _context.SaveChangesAsync();
-            }
-
-            return Json(new { success = true, message = "Xóa thành công!" }); // Trả về JSON
-        }
-
 
         private bool EmployeeExists(int id)
         {

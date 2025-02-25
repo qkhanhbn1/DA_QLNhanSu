@@ -30,10 +30,6 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXEFjY291bnRzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Accounts/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXEFjY291bnRzXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Accounts/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXEFjY291bnRzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -86,10 +82,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXERpc2NpcGxpbmVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Disciplines/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXERpc2NpcGxpbmVzXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Disciplines/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXERpc2NpcGxpbmVzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -104,14 +96,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/EmployeeAllowances/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXEVtcGxveWVlQWxsb3dhbmNlc1xDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/EmployeeAllowances/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXEVtcGxveWVlQWxsb3dhbmNlc1xEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/EmployeeAllowances/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXEVtcGxveWVlQWxsb3dhbmNlc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/EmployeeAllowances/Edit.cshtml]
@@ -182,10 +166,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXE9uTGVhdmVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/OnLeaves/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXE9uTGVhdmVzXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/OnLeaves/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXE9uTGVhdmVzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -200,10 +180,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Overtimes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXE92ZXJ0aW1lc1xDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Overtimes/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXE92ZXJ0aW1lc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Overtimes/Details.cshtml]
@@ -222,10 +198,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXFJld2FyZHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Rewards/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXFJld2FyZHNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Rewards/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXFJld2FyZHNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -242,14 +214,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXFNhbGFyeUFkdmFuY2VzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/SalaryAdvances/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXFNhbGFyeUFkdmFuY2VzXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/SalaryAdvances/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXFNhbGFyeUFkdmFuY2VzXERldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/SalaryAdvances/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXFNhbGFyeUFkdmFuY2VzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -260,10 +224,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/SalaryCalculations/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXFNhbGFyeUNhbGN1bGF0aW9uc1xDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/SalaryCalculations/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXFNhbGFyeUNhbGN1bGF0aW9uc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/SalaryCalculations/Details.cshtml]
@@ -296,14 +256,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/TimeSheets/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXFRpbWVTaGVldHNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/TimeSheets/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXFRpbWVTaGVldHNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/TimeSheets/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXFRpbWVTaGVldHNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/TimeSheets/Edit.cshtml]

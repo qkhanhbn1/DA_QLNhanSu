@@ -1,62 +1,85 @@
 ﻿@model DA_QLNhanSu.Models.Overtime
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Chỉnh sửa tăng ca";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Edit</h1>
+<h1 class="text-center text-primary mt-4">Sửa thông tin tăng ca</h1>
 
-<h4>Overtime</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Ido" />
-            <div class="form-group">
-                <label asp-for="Ide" class="control-label"></label>
-                <select asp-for="Ide" class="form-control" asp-items="ViewBag.Ide"></select>
-                <span asp-validation-for="Ide" class="text-danger"></span>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <form asp-action="Edit" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Ido" />
+
+                        <!-- Ảnh nhân sự -->
+                        @if (!string.IsNullOrEmpty(Model.IdeNavigation?.Image))
+                        {
+                            <div class="text-center mb-3">
+                                <img src="@Model.IdeNavigation.Image" alt="Ảnh nhân sự" width="120" height="120" class="rounded-circle border border-2 shadow-sm" />
+                            </div>
+                        }
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Ide" class="form-label">Tên nhân sự</label>
+                            <select asp-for="Ide" class="form-select" asp-items="ViewBag.Ide"></select>
+                            <span asp-validation-for="Ide" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="WorkingHours" class="form-label">Số giờ tăng ca</label>
+                                <input asp-for="WorkingHours" class="form-control" />
+                                <span asp-validation-for="WorkingHours" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="SalaryCoeficient" class="form-label">Hệ số lương</label>
+                                <input asp-for="SalaryCoeficient" class="form-control" />
+                                <span asp-validation-for="SalaryCoeficient" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="HourlyWage" class="form-label">Lương theo giờ</label>
+                                <input asp-for="HourlyWage" class="form-control" />
+                                <span asp-validation-for="HourlyWage" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="OvertimePay" class="form-label">Số tiền tăng ca</label>
+                                <input asp-for="OvertimePay" class="form-control" />
+                                <span asp-validation-for="OvertimePay" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Month" class="form-label">Tháng</label>
+                                <input asp-for="Month" class="form-control" />
+                                <span asp-validation-for="Month" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Year" class="form-label">Năm</label>
+                                <input asp-for="Year" class="form-control" />
+                                <span asp-validation-for="Year" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Nút Lưu -->
+                        <div class="text-center">
+                            <input type="submit" value="Lưu" class="btn btn-primary px-4 py-2 shadow" />
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="WorkingHours" class="control-label"></label>
-                <input asp-for="WorkingHours" class="form-control" />
-                <span asp-validation-for="WorkingHours" class="text-danger"></span>
+
+            <div class="text-center mt-3">
+                <a asp-action="Index" class="btn btn-outline-secondary">Quay lại</a>
             </div>
-            <div class="form-group">
-                <label asp-for="SalaryCoeficient" class="control-label"></label>
-                <input asp-for="SalaryCoeficient" class="form-control" />
-                <span asp-validation-for="SalaryCoeficient" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HourlyWage" class="control-label"></label>
-                <input asp-for="HourlyWage" class="form-control" />
-                <span asp-validation-for="HourlyWage" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OvertimePay" class="control-label"></label>
-                <input asp-for="OvertimePay" class="form-control" />
-                <span asp-validation-for="OvertimePay" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Month" class="control-label"></label>
-                <input asp-for="Month" class="form-control" />
-                <span asp-validation-for="Month" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Year" class="control-label"></label>
-                <input asp-for="Year" class="form-control" />
-                <span asp-validation-for="Year" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

@@ -23,7 +23,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/Rewards
         public async Task<IActionResult> Index(string name, int page = 1)
         {
-            int limit = 5; // Số bản ghi trên mỗi trang
+            int limit = 10; // Số bản ghi trên mỗi trang
 
             var query = _context.Rewards
                 .Include(e => e.IdeNavigation)  // Include Department
@@ -63,7 +63,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/Rewards/Create
         public IActionResult Create()
         {
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide");
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name");
             return View();
         }
 
@@ -72,7 +72,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Ide,NumberRewards,Content,RewardGift,Status")] Reward reward)
+        public async Task<IActionResult> Create([Bind("Id,Ide,RewardDate,Content,RewardGift,Status")] Reward reward)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +80,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", reward.Ide);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", reward.Ide);
             return View(reward);
         }
 
@@ -92,12 +92,14 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 return NotFound();
             }
 
-            var reward = await _context.Rewards.FindAsync(id);
+            var reward = await _context.Rewards
+                .Include(r => r.IdeNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (reward == null)
             {
                 return NotFound();
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", reward.Ide);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", reward.Ide);
             return View(reward);
         }
 
@@ -106,7 +108,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Ide,NumberRewards,Content,RewardGift,Status")] Reward reward)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Ide,RewardDate,Content,RewardGift,Status")] Reward reward)
         {
             if (id != reward.Id)
             {
@@ -133,44 +135,45 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", reward.Ide);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", reward.Ide);
             return View(reward);
         }
 
         // GET: Admins/Rewards/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        [HttpPost]
+        public async Task<IActionResult> DeleteAjax(int id)
         {
-            if (id == null)
+            var reward = await _context.Rewards.FindAsync(id);
+            if (reward == null)
             {
-                return NotFound();
+                return NotFound(); // Trả về 404 nếu không tìm thấy
             }
 
-            var reward = await _context.Rewards
-                .Include(r => r.IdeNavigation)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            try
+            {
+                _context.Rewards.Remove(reward);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true, message = "Xóa thành công!" }); // Trả về JSON
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = "Lỗi khi xóa: " + ex.Message });
+            }
+        }
+        [HttpPost]
+        public IActionResult UpdateStatus(int id)
+        {
+            var reward = _context.Rewards.Find(id);
             if (reward == null)
             {
                 return NotFound();
             }
 
-            return View(reward);
+            reward.Status = !(reward.Status ?? false); // Nếu null, mặc định là false rồi đảo trạng thái
+            _context.SaveChanges();
+
+            return Json(reward.Status);
         }
-
-        // POST: Admins/Rewards/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var reward = await _context.Rewards.FindAsync(id);
-            if (reward != null)
-            {
-                _context.Rewards.Remove(reward);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
         private bool RewardExists(int id)
         {
             return _context.Rewards.Any(e => e.Id == id);

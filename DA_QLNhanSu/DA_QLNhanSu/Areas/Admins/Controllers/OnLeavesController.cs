@@ -23,7 +23,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/OnLeaves
         public async Task<IActionResult> Index(string name, int page = 1)
         {
-            int limit = 5; // Số bản ghi trên mỗi trang
+            int limit = 10; // Số bản ghi trên mỗi trang
 
             var query = _context.OnLeaves
                 .Include(e => e.IdeNavigation)  // Include Department
@@ -51,6 +51,11 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
 
             var onLeave = await _context.OnLeaves
                 .Include(o => o.IdeNavigation)
+                .ThenInclude(e => e.IddNavigation)
+                .Include(o => o.IdeNavigation)
+                .ThenInclude(e => e.IdpNavigation)
+                .Include(o => o.IdeNavigation)
+                .ThenInclude(e => e.IdqNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (onLeave == null)
             {
@@ -63,7 +68,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/OnLeaves/Create
         public IActionResult Create()
         {
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide");
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name");
             return View();
         }
 
@@ -72,7 +77,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Ide,ReleaseDate,ExpirationDate,Content")] OnLeave onLeave)
+        public async Task<IActionResult> Create([Bind("Id,Ide,RequestDate,ReleaseDate,ExpirationDate,Content,Status")] OnLeave onLeave)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +85,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", onLeave.Ide);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", onLeave.Ide);
             return View(onLeave);
         }
 
@@ -92,12 +97,15 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 return NotFound();
             }
 
-            var onLeave = await _context.OnLeaves.FindAsync(id);
+            var onLeave = await _context.OnLeaves
+                .Include(l => l.IdeNavigation)
+                .ThenInclude(e => e.IdpNavigation) 
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (onLeave == null)
             {
                 return NotFound();
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", onLeave.Ide);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", onLeave.Ide);
             return View(onLeave);
         }
 
@@ -106,7 +114,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Ide,ReleaseDate,ExpirationDate,Content")] OnLeave onLeave)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Ide,RequestDate,ReleaseDate,ExpirationDate,Content,Status")] OnLeave onLeave)
         {
             if (id != onLeave.Id)
             {
@@ -133,47 +141,48 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", onLeave.Ide);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", onLeave.Ide);
             return View(onLeave);
         }
 
-        // GET: Admins/OnLeaves/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var onLeave = await _context.OnLeaves
-                .Include(o => o.IdeNavigation)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (onLeave == null)
-            {
-                return NotFound();
-            }
-
-            return View(onLeave);
-        }
-
-        // POST: Admins/OnLeaves/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var onLeave = await _context.OnLeaves.FindAsync(id);
-            if (onLeave != null)
-            {
-                _context.OnLeaves.Remove(onLeave);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
+      
         private bool OnLeaveExists(int id)
         {
             return _context.OnLeaves.Any(e => e.Id == id);
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteAjax(int id)
+        {
+            var onleave = await _context.OnLeaves.FindAsync(id);
+            if (onleave == null)
+            {
+                return NotFound(); // Trả về 404 nếu không tìm thấy
+            }
+
+            try
+            {
+                _context.OnLeaves.Remove(onleave);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true, message = "Xóa thành công!" }); // Trả về JSON
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = "Lỗi khi xóa: " + ex.Message });
+            }
+        }
+        [HttpPost]
+        public IActionResult UpdateStatus(int id)
+        {
+            var onleave = _context.OnLeaves.Find(id);
+            if (onleave == null)
+            {
+                return NotFound();
+            }
+
+            onleave.Status = !(onleave.Status ?? false); // Nếu null, mặc định là false rồi đảo trạng thái
+            _context.SaveChanges();
+
+            return Json(onleave.Status);
         }
     }
 }

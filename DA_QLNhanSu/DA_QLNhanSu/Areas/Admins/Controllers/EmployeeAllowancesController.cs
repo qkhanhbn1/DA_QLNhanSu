@@ -23,7 +23,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/EmployeeAllowances
         public async Task<IActionResult> Index(string name, int page = 1)
         {
-            int limit = 5; // Số bản ghi trên mỗi trang
+            int limit = 10; // Số bản ghi trên mỗi trang
 
             var query = _context.EmployeeAllowances
                 .Include(e => e.IdeNavigation)  // Include Department
@@ -65,8 +65,8 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/EmployeeAllowances/Create
         public IActionResult Create()
         {
-            ViewData["IdAllowances"] = new SelectList(_context.Allowances, "Ida", "Ida");
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide");
+            ViewData["IdAllowances"] = new SelectList(_context.Allowances, "Ida", "Name");
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name");
             return View();
         }
 
@@ -83,8 +83,8 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdAllowances"] = new SelectList(_context.Allowances, "Ida", "Ida", employeeAllowance.IdAllowances);
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", employeeAllowance.Ide);
+            ViewData["IdAllowances"] = new SelectList(_context.Allowances, "Ida", "Name", employeeAllowance.IdAllowances);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", employeeAllowance.Ide);
             return View(employeeAllowance);
         }
 
@@ -96,13 +96,16 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 return NotFound();
             }
 
-            var employeeAllowance = await _context.EmployeeAllowances.FindAsync(id);
+            var employeeAllowance = await _context.EmployeeAllowances
+                .Include(e => e.IdAllowancesNavigation)
+                .Include(e => e.IdeNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (employeeAllowance == null)
             {
                 return NotFound();
             }
-            ViewData["IdAllowances"] = new SelectList(_context.Allowances, "Ida", "Ida", employeeAllowance.IdAllowances);
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", employeeAllowance.Ide);
+            ViewData["IdAllowances"] = new SelectList(_context.Allowances, "Ida", "Name", employeeAllowance.IdAllowances);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", employeeAllowance.Ide);
             return View(employeeAllowance);
         }
 
@@ -138,49 +141,36 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdAllowances"] = new SelectList(_context.Allowances, "Ida", "Ida", employeeAllowance.IdAllowances);
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", employeeAllowance.Ide);
+            ViewData["IdAllowances"] = new SelectList(_context.Allowances, "Ida", "Name", employeeAllowance.IdAllowances);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", employeeAllowance.Ide);
             return View(employeeAllowance);
         }
 
         // GET: Admins/EmployeeAllowances/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var employeeAllowance = await _context.EmployeeAllowances
-                .Include(e => e.IdAllowancesNavigation)
-                .Include(e => e.IdeNavigation)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (employeeAllowance == null)
-            {
-                return NotFound();
-            }
-
-            return View(employeeAllowance);
-        }
-
-        // POST: Admins/EmployeeAllowances/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var employeeAllowance = await _context.EmployeeAllowances.FindAsync(id);
-            if (employeeAllowance != null)
-            {
-                _context.EmployeeAllowances.Remove(employeeAllowance);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
+        
         private bool EmployeeAllowanceExists(int id)
         {
             return _context.EmployeeAllowances.Any(e => e.Id == id);
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteAjax(int id)
+        {
+            var employeeAllowance = await _context.EmployeeAllowances.FindAsync(id);
+            if (employeeAllowance == null)
+            {
+                return NotFound(); // Trả về 404 nếu không tìm thấy
+            }
+
+            try
+            {
+                _context.EmployeeAllowances.Remove(employeeAllowance);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true, message = "Xóa thành công!" }); // Trả về JSON
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = "Lỗi khi xóa: " + ex.Message });
+            }
         }
     }
 }

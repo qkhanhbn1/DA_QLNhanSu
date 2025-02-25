@@ -5,10 +5,10 @@
     ViewData["Title"] = "Quản lí lương";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
-<h1 class="text-primary">Quản lý lương nhân viên</h1>
+<h1 class="text-primary">BẢNG LƯƠNG ĐỊNH KỲ</h1>
 <div class="row my-4">
     <form action="" method="post" class="form-inline col-md-8">
-        <div class="input-group w-100">
+        <div class="input-group w-50">
             <input class="form-control" name="name" id="keyword" placeholder="Nhập tên cần tìm..." />
             <button type="submit" class="btn btn-primary">
                 <i class="fas fa-search"></i> Tìm kiếm
@@ -26,38 +26,32 @@
     <thead class="table-primary text-center">
         <tr>
             <th>
-                Tên nhân viên
+                NHÂN SỰ
             </th>
             <th>
-                Tháng
+                THÁNG
             </th>
             <th>
-                Năm
+                NĂM
             </th>
             <th>
-                Số ngày làm
+                SỐ NGÀY LÀM
+            </th>
+            
+            <th>
+                PHỤ CẤP
             </th>
             <th>
-                Số tiền hằng ngày
+                TĂNG CA
+            </th>
+            
+            <th>
+                ỨNG LƯƠNG
             </th>
             <th>
-                Phụ cấp
+                TỔNG TIỀN   
             </th>
-            <th>
-                Tăng ca
-            </th>
-            <th>
-                Chức vụ
-            </th>
-            <th>
-                Ứng lương
-            </th>
-            <th>
-                Tổng lương
-            </th>
-            <th>
-                Ngày tạo
-            </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -66,38 +60,39 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdeNavigation.Name)  @* Hiển thị tên nhân viên *@
+                    <img src="@item.IdeNavigation?.Image" alt="@item.IdeNavigation.Name" class="rounded-circle" style="width:30px; height:30px;" />
+                    &ensp;
+                    <a asp-controller="Employees" asp-action="Details" asp-route-id="@item.IdeNavigation.Ide" class="text-dark fw-bold text-decoration-none">
+                        @Html.DisplayFor(modelItem => item.IdeNavigation.Name)
+                    </a>
+
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Month)  @* Hiển thị tháng *@
+                    @Html.DisplayFor(modelItem => item.Month)  
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Year)  @* Hiển thị năm *@
+                    @Html.DisplayFor(modelItem => item.Year)  
+
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.Workday)  
+                </td>
+                
+                <td>
+                    @item.IdEmployeeallowanceNavigation?.Money VNĐ 
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Workday)  @* Hiển thị số ngày làm *@
+                    @item.IdOvertimeNavigation?.OvertimePay  VNĐ
+                </td>
+                
+                <td>
+                    @item.IdSalaryadvanceNavigation?.Money   VNĐ
                 </td>
                 <td>
-                    @item.IdPositionNavigation?.DailyWage  @* Hiển thị tiền lương hằng ngày *@
+                    @Html.DisplayFor(modelItem => item.TotalSalary)   VNĐ
                 </td>
-                <td>
-                    @item.IdEmployeeallowanceNavigation?.Money  @* Hiển thị phụ cấp *@
-                </td>
-                <td>
-                    @item.IdOvertimeNavigation?.OvertimePay  @* Hiển thị tiền tăng ca *@
-                </td>
-                <td>
-                    @item.IdPositionNavigation?.Name  @* Hiển thị chức vụ *@
-                </td>
-                <td>
-                    @item.IdSalaryadvanceNavigation?.Money  @* Hiển thị tiền ứng lương *@
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalSalary)  @* Hiển thị tổng lương *@
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)  @* Hiển thị ngày tạo *@
-                </td>
+                
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Ids" class="btn btn-warning btn-sm">
                         <i class="bi bi-pencil-square"></i> Sửa
@@ -105,9 +100,9 @@
                     <a asp-action="Details" asp-route-id="@item.Ids" class="btn btn-info btn-sm">
                         <i class="bi bi-eye"></i> Chi tiết
                     </a>
-                    <a asp-action="Delete" asp-route-id="@item.Ids" class="btn btn-danger btn-sm">
+                    <button class="btn btn-danger btn-sm" onclick="confirmDelete('@Url.Action("DeleteAjax", new { id = item.Ids })')">
                         <i class="bi bi-trash"></i> Xóa
-                    </a>
+                    </button>
                 </td>
             </tr>
         }
@@ -120,3 +115,44 @@
     PageClasses = new string[] { "page-link" }
 })
 </div>
+<style>
+    .btn-expired {
+        background-color: #ffe6e6 !important; /* Nền hồng nhạt hơn */
+        color: #cc0000 !important; /* Chữ đỏ đậm hơn */
+        border: none !important; /* Xóa viền */
+        font-weight: bold !important; /* Chữ đậm hơn */
+    }
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDelete(url) {
+        Swal.fire({
+            title: "Xóa dữ liệu này?",
+            text: "Dữ liệu xóa sẽ không thể khôi phục!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#6c757d",
+            confirmButtonText: "OK",
+            cancelButtonText: "Cancel"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(url, { method: 'POST' }) // Gửi yêu cầu xóa
+                    .then(response => response.json()) // Chuyển về JSON
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire("Đã xóa!", data.message, "success")
+                                .then(() => location.reload());
+                        } else {
+                            Swal.fire("Lỗi!", data.message, "error");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Lỗi:", error);
+                        Swal.fire("Lỗi!", "Đã xảy ra lỗi trong quá trình xóa.", "error");
+                    });
+            }
+        });
+    }
+</script>

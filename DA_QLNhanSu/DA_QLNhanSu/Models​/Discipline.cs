@@ -9,11 +9,11 @@ public partial class Discipline
 
     public int? Ide { get; set; }
 
-    public int? NumberDiscipline { get; set; }
+    public DateTime? DisciplineDate { get; set; }
 
     public string? Content { get; set; }
 
-    public decimal? Punishment { get; set; }
+    public string? Punishment { get; set; }
 
     public bool? Status { get; set; }
 

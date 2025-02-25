@@ -1,80 +1,85 @@
-﻿    @model DA_QLNhanSu.Models.SalaryCalculation
+﻿@model DA_QLNhanSu.Models.SalaryCalculation
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo bảng lương";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Create</h1>
+<h1 class="text-center my-4 text-primary">Thêm mới bảng lương</h1>
 
-<h4>Tính lương</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Ide" class="control-label">Tên nhân viên</label>
-                <select asp-for="Ide" class="form-control" asp-items="ViewBag.Ide" id="IdeDropdown"></select>
-            </div>
+                    <div class="mb-3">
+                        <label asp-for="Ide" class="form-label">Nhân viên</label>
+                        <select asp-for="Ide" class="form-select" asp-items="ViewBag.Ide" id="IdeDropdown"></select>
+                    </div>
 
-            <div class="form-group">
-                    <label asp-for="Month">Tháng</label>
-                    <input asp-for="Month" class="form-control" type="number" min="1" max="12" />
-                    <span asp-validation-for="Month" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                    <label asp-for="Year">Năm</label>
-                    <input asp-for="Year" class="form-control" type="number" />
-                    <span asp-validation-for="Year" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Workday">Số ngày làm trong tháng</label>
-                <input asp-for="Workday" class="form-control" readonly />
-                <span asp-validation-for="Workday" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Month" class="form-label">Tháng</label>
+                            <input asp-for="Month" class="form-control" type="number" min="1" max="12" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Year" class="form-label">Năm</label>
+                            <input asp-for="Year" class="form-control" type="number" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Workday" class="form-label">Số ngày làm</label>
+                        <input asp-for="Workday" class="form-control" readonly />
+                    </div>
+                    <div class="mb-3">
                 <label asp-for="IdPosition" class="control-label">Chức vụ</label>
                 <select asp-for="IdPosition" class="form-control" asp-items="ViewBag.IdPosition" id="IdPositionDropdown" readonly></select>
             </div>
-            <div class="form-group">
+                    <div class="mb-3">
                 <label>Tiền lương hàng ngày</label>
                 <input type="text" id="DailyWage" class="form-control" readonly />
             </div>
-            <div class="form-group" style="display: none;">
+                    <div class="mb-3" style="display: none;">
                 <label asp-for="IdOvertime" class="control-label"></label>
                 <select asp-for="IdOvertime" class="form-control" asp-items="ViewBag.IdOvertime" id="IdOvertimeDropdown" readonly></select>
             </div>
-            <div class="form-group">
+                    <div class="mb-3">
                 <label>Tiền tăng ca</label>
                 <input type="text" id="OvertimePay" class="form-control" readonly />
             </div>
-            <div class="form-group" style="display: none;">
+                    <div class="mb-3" style="display: none;">
                 <label asp-for="IdEmployeeallowance" class="control-label"></label>
                 <select asp-for="IdEmployeeallowance" class="form-control" asp-items="ViewBag.IdEmployeeallowance" id="IdEmployeeAllowanceDropdown" readonly></select>
             </div>
-            <div class="form-group">
+                    <div class="mb-3">
                 <label>Tiền phụ cấp</label>
                 <input type="text" id="AllowanceMoney" class="form-control" readonly />
             </div>
-            <div class="form-group" style="display: none;">
+                    <div class="mb-3" style="display: none;">
                 <label asp-for="IdSalaryadvance" class="control-label"></label>
                 <select asp-for="IdSalaryadvance" class="form-control" asp-items="ViewBag.IdSalaryadvance" id="IdSalaryAdvanceDropdown" readonly></select>
             </div>
-            <div class="form-group">
+                    <div class="mb-3">
                 <label>Tiền ứng lương</label>
                 <input type="text" id="AdvanceMoney" class="form-control" readonly />
             </div>
-            <div class="form-group">
+                    <div class="mb-3">
                 <label asp-for="TotalSalary" class="control-label">Tổng tiền</label>
                 <input asp-for="TotalSalary" class="form-control" readonly />
                 <span asp-validation-for="TotalSalary" class="text-danger"></span>
             </div>
             
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary w-30">Tạo</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
+
+        <div class="text-center mt-3">
+            <a asp-action="Index" class="btn btn-outline-secondary">Quay lại</a>
+        </div>
     </div>
 </div>
 

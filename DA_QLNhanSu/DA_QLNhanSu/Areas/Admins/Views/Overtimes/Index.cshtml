@@ -6,11 +6,11 @@
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1 class="text-primary">Nhân viên tăng ca</h1>
+<h1 class="text-primary">NHÂN VIÊN TĂNG CA</h1>
 
 <div class="row my-4">
     <form action="" method="post" class="form-inline col-md-8">
-        <div class="input-group w-100">
+        <div class="input-group w-50">
             <input class="form-control" name="name" id="keyword" placeholder="Nhập tên cần tìm..." />
             <button type="submit" class="btn btn-primary">
                 <i class="fas fa-search"></i> Tìm kiếm
@@ -28,25 +28,25 @@
     <thead class="table-primary text-center">
         <tr>
             <th>
-                Tên nhân viên
+                TÊN NHÂN VIÊN
             </th>
             <th>
-                Số giờ tăng ca
+                SỐ GIỜ TĂNG CA
             </th>
             <th>
-                Hệ số lương
+                HỆ SỐ LƯƠNG
             </th>
             <th>
-                Lương theo giờ
+                LƯƠNG THEO GIỜ
             </th>
             <th>
-                Số tiền tăng ca
+                SỐ TIỀN TĂNG CA
             </th>
             <th>
-                Tháng
+                THÁNG
             </th>
             <th>
-                Năm
+                NĂM
             </th>
             <th></th>
         </tr>
@@ -55,7 +55,12 @@
 @foreach (var item in Model) {
         <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdeNavigation.Name)
+                    <img src="@item.IdeNavigation?.Image" alt="@item.IdeNavigation.Name" class="rounded-circle" style="width:30px; height:30px;" />
+                    &ensp;
+                    <a asp-controller="Employees" asp-action="Details" asp-route-id="@item.IdeNavigation.Ide" class="text-dark fw-bold text-decoration-none">
+                        @Html.DisplayFor(modelItem => item.IdeNavigation.Name)
+                    </a>
+
                 </td>
             <td>
                 @Html.DisplayFor(modelItem => item.WorkingHours)
@@ -64,10 +69,10 @@
                 @Html.DisplayFor(modelItem => item.SalaryCoeficient)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.HourlyWage)
+                @Html.DisplayFor(modelItem => item.HourlyWage) VNĐ
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OvertimePay)
+                @Html.DisplayFor(modelItem => item.OvertimePay) VNĐ
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Month)
@@ -83,9 +88,9 @@
                     <a asp-action="Details" asp-route-id="@item.Ido" class="btn btn-info btn-sm">
                         <i class="bi bi-eye"></i> Chi tiết
                     </a>
-                    <a asp-action="Delete" asp-route-id="@item.Ido" class="btn btn-danger btn-sm">
+                    <button class="btn btn-danger btn-sm" onclick="confirmDelete('@Url.Action("DeleteAjax", new { id = item.Ido })')">
                         <i class="bi bi-trash"></i> Xóa
-                    </a>
+                    </button>
             </td>
         </tr>
 }
@@ -98,3 +103,44 @@
     PageClasses = new string[] { "page-link" }
 })
 </div>
+<style>
+    .btn-expired {
+        background-color: #ffe6e6 !important; /* Nền hồng nhạt hơn */
+        color: #cc0000 !important; /* Chữ đỏ đậm hơn */
+        border: none !important; /* Xóa viền */
+        font-weight: bold !important; /* Chữ đậm hơn */
+    }
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDelete(url) {
+        Swal.fire({
+            title: "Xóa dữ liệu này?",
+            text: "Dữ liệu xóa sẽ không thể khôi phục!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#6c757d",
+            confirmButtonText: "OK",
+            cancelButtonText: "Cancel"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(url, { method: 'POST' }) // Gửi yêu cầu xóa
+                    .then(response => response.json()) // Chuyển về JSON
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire("Đã xóa!", data.message, "success")
+                                .then(() => location.reload());
+                        } else {
+                            Swal.fire("Lỗi!", data.message, "error");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Lỗi:", error);
+                        Swal.fire("Lỗi!", "Đã xảy ra lỗi trong quá trình xóa.", "error");
+                    });
+            }
+        });
+    }
+</script>

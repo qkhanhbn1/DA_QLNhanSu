@@ -270,11 +270,12 @@
                         <th>Ngày</th>
                     </tr>
                     <tr class="first-row">
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>1</td>
+                        <td>@(Model.Disciplines.FirstOrDefault()?.Content ?? "N/A")</td>
+                        <td>@(Model.Disciplines.FirstOrDefault()?.Punishment ?? "N/A")</td>
                         <td></td>
                     </tr>
+
                 </tbody>
             </table>
         </div>

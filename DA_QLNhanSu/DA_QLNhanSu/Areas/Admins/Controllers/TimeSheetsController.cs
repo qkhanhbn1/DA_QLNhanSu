@@ -23,7 +23,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/TimeSheets
         public async Task<IActionResult> Index(string name, int page = 1)
         {
-            int limit = 5; // Số bản ghi trên mỗi trang
+            int limit = 10; // Số bản ghi trên mỗi trang
 
             var query = _context.TimeSheets
                 .Include(e => e.IdeNavigation)  // Include Department
@@ -63,7 +63,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/TimeSheets/Create
         public IActionResult Create()
         {
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide");
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name");
             return View();
         }
 
@@ -80,7 +80,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", timeSheet.Ide);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", timeSheet.Ide);
             return View(timeSheet);
         }
 
@@ -92,12 +92,14 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 return NotFound();
             }
 
-            var timeSheet = await _context.TimeSheets.FindAsync(id);
+            var timeSheet = await _context.TimeSheets
+                .Include(t => t.IdeNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (timeSheet == null)
             {
                 return NotFound();
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", timeSheet.Ide);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", timeSheet.Ide);
             return View(timeSheet);
         }
 
@@ -133,42 +135,30 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", timeSheet.Ide);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", timeSheet.Ide);
             return View(timeSheet);
         }
 
         // GET: Admins/TimeSheets/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        [HttpPost]
+        public async Task<IActionResult> DeleteAjax(int id)
         {
-            if (id == null)
+            var timesheet = await _context.TimeSheets.FindAsync(id);
+            if (timesheet == null)
             {
-                return NotFound();
+                return NotFound(); // Trả về 404 nếu không tìm thấy
             }
 
-            var timeSheet = await _context.TimeSheets
-                .Include(t => t.IdeNavigation)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (timeSheet == null)
+            try
             {
-                return NotFound();
+                _context.TimeSheets.Remove(timesheet);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true, message = "Xóa thành công!" }); // Trả về JSON
             }
-
-            return View(timeSheet);
-        }
-
-        // POST: Admins/TimeSheets/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var timeSheet = await _context.TimeSheets.FindAsync(id);
-            if (timeSheet != null)
+            catch (Exception ex)
             {
-                _context.TimeSheets.Remove(timeSheet);
+                return StatusCode(500, new { success = false, message = "Lỗi khi xóa: " + ex.Message });
             }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool TimeSheetExists(int id)

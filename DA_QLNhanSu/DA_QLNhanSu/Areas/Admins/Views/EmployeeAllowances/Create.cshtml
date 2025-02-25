@@ -1,44 +1,50 @@
 ﻿@model DA_QLNhanSu.Models.EmployeeAllowance
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo mới phụ cấp nhân sự";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Create</h1>
+<h1 class="text-center my-4 text-primary">Thêm mới phụ cấp nhân sự</h1>
 
-<h4>EmployeeAllowance</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Ide" class="form-label">Nhân viên</label>
+                        <select asp-for="Ide" class="form-select" asp-items="ViewBag.Ide">
+                            <option value="">-- Chọn nhân viên --</option>
+                        </select>
+                        <span asp-validation-for="Ide" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="IdAllowances" class="form-label">Loại phụ cấp</label>
+                        <select asp-for="IdAllowances" class="form-select" asp-items="ViewBag.IdAllowances">
+                            <option value="">-- Chọn loại phụ cấp --</option>
+                        </select>
+                        <span asp-validation-for="IdAllowances" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Money" class="form-label">Số tiền</label>
+                        <input asp-for="Money" type="number" class="form-control" placeholder="Nhập số tiền phụ cấp..." />
+                        <span asp-validation-for="Money" class="text-danger"></span>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary w-30">Tạo</button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="Ide" class="control-label"></label>
-                <select asp-for="Ide" class ="form-control" asp-items="ViewBag.Ide"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdAllowances" class="control-label"></label>
-                <select asp-for="IdAllowances" class ="form-control" asp-items="ViewBag.IdAllowances"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Money" class="control-label"></label>
-                <input asp-for="Money" class="form-control" />
-                <span asp-validation-for="Money" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+
+        <div class="text-center mt-3">
+            <a asp-action="Index" class="btn btn-outline-secondary">Quay lại</a>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

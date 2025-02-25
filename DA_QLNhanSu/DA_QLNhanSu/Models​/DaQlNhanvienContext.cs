@@ -78,7 +78,7 @@ public partial class DaQlNhanvienContext : DbContext
 
             entity.Property(e => e.Ida).HasColumnName("IDA");
             entity.Property(e => e.Money)
-                .HasColumnType("decimal(10, 2)")
+                .HasColumnType("decimal(10, 0)")
                 .HasColumnName("MONEY");
             entity.Property(e => e.Name)
                 .HasMaxLength(250)
@@ -163,10 +163,12 @@ public partial class DaQlNhanvienContext : DbContext
             entity.Property(e => e.Content)
                 .HasMaxLength(250)
                 .HasColumnName("CONTENT");
+            entity.Property(e => e.DisciplineDate)
+                .HasColumnType("datetime")
+                .HasColumnName("DISCIPLINE_DATE");
             entity.Property(e => e.Ide).HasColumnName("IDE");
-            entity.Property(e => e.NumberDiscipline).HasColumnName("NUMBER_DISCIPLINE");
             entity.Property(e => e.Punishment)
-                .HasColumnType("decimal(10, 2)")
+                .HasMaxLength(50)
                 .HasColumnName("PUNISHMENT");
             entity.Property(e => e.Status).HasColumnName("STATUS");
 
@@ -234,7 +236,7 @@ public partial class DaQlNhanvienContext : DbContext
             entity.Property(e => e.IdAllowances).HasColumnName("ID_ALLOWANCES");
             entity.Property(e => e.Ide).HasColumnName("IDE");
             entity.Property(e => e.Money)
-                .HasColumnType("decimal(10, 2)")
+                .HasColumnType("decimal(10, 0)")
                 .HasColumnName("MONEY");
 
             entity.HasOne(d => d.IdAllowancesNavigation).WithMany(p => p.EmployeeAllowances)
@@ -307,6 +309,10 @@ public partial class DaQlNhanvienContext : DbContext
             entity.Property(e => e.ReleaseDate)
                 .HasColumnType("datetime")
                 .HasColumnName("RELEASE_DATE");
+            entity.Property(e => e.RequestDate)
+                .HasColumnType("datetime")
+                .HasColumnName("REQUEST_DATE");
+            entity.Property(e => e.Status).HasColumnName("STATUS");
 
             entity.HasOne(d => d.IdeNavigation).WithMany(p => p.OnLeaves)
                 .HasForeignKey(d => d.Ide)
@@ -321,12 +327,12 @@ public partial class DaQlNhanvienContext : DbContext
 
             entity.Property(e => e.Ido).HasColumnName("IDO");
             entity.Property(e => e.HourlyWage)
-                .HasColumnType("decimal(10, 2)")
+                .HasColumnType("decimal(10, 0)")
                 .HasColumnName("HOURLY_WAGE");
             entity.Property(e => e.Ide).HasColumnName("IDE");
             entity.Property(e => e.Month).HasColumnName("month");
             entity.Property(e => e.OvertimePay)
-                .HasColumnType("decimal(10, 2)")
+                .HasColumnType("decimal(10, 0)")
                 .HasColumnName("OVERTIME_PAY");
             entity.Property(e => e.SalaryCoeficient).HasColumnName("SALARY_COEFICIENT");
             entity.Property(e => e.WorkingHours).HasColumnName("WORKING_HOURS");
@@ -345,7 +351,7 @@ public partial class DaQlNhanvienContext : DbContext
 
             entity.Property(e => e.Idp).HasColumnName("IDP");
             entity.Property(e => e.DailyWage)
-                .HasColumnType("decimal(10, 2)")
+                .HasColumnType("decimal(10, 0)")
                 .HasColumnName("DAILY_WAGE");
             entity.Property(e => e.Description)
                 .HasMaxLength(250)
@@ -379,7 +385,9 @@ public partial class DaQlNhanvienContext : DbContext
                 .HasMaxLength(250)
                 .HasColumnName("CONTENT");
             entity.Property(e => e.Ide).HasColumnName("IDE");
-            entity.Property(e => e.NumberRewards).HasColumnName("NUMBER_REWARDS");
+            entity.Property(e => e.RewardDate)
+                .HasColumnType("datetime")
+                .HasColumnName("REWARD_DATE");
             entity.Property(e => e.RewardGift)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("REWARD_GIFT");
@@ -399,7 +407,7 @@ public partial class DaQlNhanvienContext : DbContext
             entity.Property(e => e.Idsa).HasColumnName("IDSA");
             entity.Property(e => e.Ide).HasColumnName("IDE");
             entity.Property(e => e.Money)
-                .HasColumnType("decimal(10, 2)")
+                .HasColumnType("decimal(10, 0)")
                 .HasColumnName("MONEY");
             entity.Property(e => e.Month).HasColumnName("month");
             entity.Property(e => e.Status).HasColumnName("STATUS");
@@ -428,7 +436,7 @@ public partial class DaQlNhanvienContext : DbContext
             entity.Property(e => e.Ide).HasColumnName("IDE");
             entity.Property(e => e.Month).HasColumnName("MONTH");
             entity.Property(e => e.TotalSalary)
-                .HasColumnType("decimal(10, 2)")
+                .HasColumnType("decimal(10, 0)")
                 .HasColumnName("TOTAL_SALARY");
             entity.Property(e => e.Workday).HasColumnName("WORKDAY");
             entity.Property(e => e.Year).HasColumnName("YEAR");

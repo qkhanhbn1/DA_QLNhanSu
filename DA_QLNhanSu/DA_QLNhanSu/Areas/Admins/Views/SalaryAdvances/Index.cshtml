@@ -6,11 +6,11 @@
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1 class="text-primary">Danh sách ứng lương</h1>
+<h1 class="text-primary">DANH SÁCH NHÂN SỰ ỨNG LƯƠNG</h1>
 
 <div class="row my-4">
     <form action="" method="post" class="form-inline col-md-8">
-        <div class="input-group w-100">
+        <div class="input-group w-50">
             <input class="form-control" name="name" id="keyword" placeholder="Nhập tên cần tìm..." />
             <button type="submit" class="btn btn-primary">
                 <i class="fas fa-search"></i> Tìm kiếm
@@ -28,19 +28,20 @@
     <thead class="table-primary text-center">
         <tr>
             <th>
-                Tên nhân viên
+                NHÂN SỰ
             </th>
             <th>
-                Số tiền
+                SỐ TIỀN
+            </th>
+            
+            <th>
+                THÁNG
             </th>
             <th>
-                Trạng thái
+                NĂM
             </th>
             <th>
-                Tháng
-            </th>
-            <th>
-                Năm
+                TRẠNG THÁI
             </th>
             <th></th>
         </tr>
@@ -49,31 +50,39 @@
 @foreach (var item in Model) {
         <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdeNavigation.Name)
+                    <img src="@item.IdeNavigation?.Image" alt="@item.IdeNavigation.Name" class="rounded-circle" style="width:30px; height:30px;" />
+                    &ensp;
+                    <a asp-controller="Employees" asp-action="Details" asp-route-id="@item.IdeNavigation.Ide" class="text-dark fw-bold text-decoration-none">
+                        @Html.DisplayFor(modelItem => item.IdeNavigation.Name)
+                    </a>
+
                 </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Money)
             </td>
-            <td>
-                    @(item.Status == true ? "Đã duyệt" : "Chưa duyệt")
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Month)
             </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Year)
                 </td>
-            
+                <td class="text-center">
+                    <button class="btn btn-status @(item.Status == true ? "btn-success text-white" : "btn-expired")"
+                            data-id="@item.Idsa"
+                            data-status="@(item.Status == true ? "true" : "false")"
+                            style="width: 100px;">
+                        @(item.Status == true ? "Đã duyệt" : "Chờ duyệt")
+                    </button>
+                </td>
             <td>
                     <a asp-action="Edit" asp-route-id="@item.Idsa" class="btn btn-warning btn-sm">
                         <i class="bi bi-pencil-square"></i> Sửa
                     </a>
-                    <a asp-action="Details" asp-route-id="@item.Idsa" class="btn btn-info btn-sm">
-                        <i class="bi bi-eye"></i> Chi tiết
-                    </a>
-                    <a asp-action="Delete" asp-route-id="@item.Idsa" class="btn btn-danger btn-sm">
+                    
+                    <button class="btn btn-danger btn-sm" onclick="confirmDelete('@Url.Action("DeleteAjax", new { id = item.Idsa })')">
                         <i class="bi bi-trash"></i> Xóa
-                    </a>
+                    </button>
             </td>
         </tr>
 }
@@ -86,3 +95,77 @@
     PageClasses = new string[] { "page-link" }
 })
 </div>
+<style>
+    .btn-expired {
+        background-color: #ffe6e6 !important; /* Nền hồng nhạt hơn */
+        color: #cc0000 !important; /* Chữ đỏ đậm hơn */
+        border: none !important; /* Xóa viền */
+        font-weight: bold !important; /* Chữ đậm hơn */
+    }
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDelete(url) {
+        Swal.fire({
+            title: "Xóa dữ liệu này?",
+            text: "Dữ liệu xóa sẽ không thể khôi phục!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#6c757d",
+            confirmButtonText: "OK",
+            cancelButtonText: "Cancel"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(url, { method: 'POST' }) // Gửi yêu cầu xóa
+                    .then(response => response.json()) // Chuyển về JSON
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire("Đã xóa!", data.message, "success")
+                                .then(() => location.reload());
+                        } else {
+                            Swal.fire("Lỗi!", data.message, "error");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Lỗi:", error);
+                        Swal.fire("Lỗi!", "Đã xảy ra lỗi trong quá trình xóa.", "error");
+                    });
+            }
+        });
+    }
+</script>
+@* //status *@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".btn-status").click(function () {
+            var button = $(this);
+            var salaryadvanceId = button.data("id");
+            var currentStatus = button.data("status");
+
+            $.ajax({
+                url: '/Admins/SalaryAdvances/UpdateStatus',
+                type: 'POST',
+                data: { id: salaryadvanceId },
+                success: function (newStatus) {
+                    if (newStatus) {
+                        button.text("Đã duyệt")
+                            .removeClass("btn-expired")
+                            .addClass("btn-success text-white");
+                    } else {
+                        button.text("Chờ duyệt")
+                            .removeClass("btn-success text-white")
+                            .addClass("btn-expired");
+                    }
+                    button.data("status", newStatus);
+                },
+                error: function () {
+                    alert("Có lỗi xảy ra, vui lòng thử lại!");
+                }
+            });
+        });
+    });
+
+</script>

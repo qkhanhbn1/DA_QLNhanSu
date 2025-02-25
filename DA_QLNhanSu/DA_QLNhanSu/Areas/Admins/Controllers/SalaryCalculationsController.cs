@@ -23,7 +23,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/SalaryCalculations
         public async Task<IActionResult> Index(string name, int page = 1)
         {
-            int limit = 5; // Số bản ghi trên mỗi trang
+            int limit = 10; // Số bản ghi trên mỗi trang
 
             var query = _context.SalaryCalculations
                  .Include(s => s.IdeNavigation)
@@ -71,11 +71,11 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/SalaryCalculations/Create
         public IActionResult Create()
         {
-            ViewData["IdEmployeeallowance"] = new SelectList(_context.EmployeeAllowances, "Id", "Id");
-            ViewData["IdOvertime"] = new SelectList(_context.Overtimes, "Ido", "Ido");
+            ViewData["IdEmployeeallowance"] = new SelectList(_context.EmployeeAllowances, "Id", "Money");
+            ViewData["IdOvertime"] = new SelectList(_context.Overtimes, "Ido", "OvertimePay");
             ViewData["IdPosition"] = new SelectList(_context.Positions, "Idp", "Name");
-            ViewData["IdSalaryadvance"] = new SelectList(_context.SalaryAdvances, "Idsa", "Idsa");
-            ViewData["IdTimesheet"] = new SelectList(_context.TimeSheets, "Id", "Id");
+            ViewData["IdSalaryadvance"] = new SelectList(_context.SalaryAdvances, "Idsa", "Money");
+            ViewData["IdTimesheet"] = new SelectList(_context.TimeSheets, "Id", "Workday");
             ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name");
 
             return View();
@@ -111,11 +111,11 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
             }
 
             // Nếu Model không hợp lệ, giữ lại các giá trị đã chọn trong dropdown
-            ViewData["IdEmployeeallowance"] = new SelectList(_context.EmployeeAllowances, "Id", "Id", salaryCalculation.IdEmployeeallowance);
-            ViewData["IdOvertime"] = new SelectList(_context.Overtimes, "Ido", "Ido", salaryCalculation.IdOvertime);
+            ViewData["IdEmployeeallowance"] = new SelectList(_context.EmployeeAllowances, "Id", "Money", salaryCalculation.IdEmployeeallowance);
+            ViewData["IdOvertime"] = new SelectList(_context.Overtimes, "Ido", "OvertimePay", salaryCalculation.IdOvertime);
             ViewData["IdPosition"] = new SelectList(_context.Positions, "Idp", "Name", salaryCalculation.IdPosition);
-            ViewData["IdSalaryadvance"] = new SelectList(_context.SalaryAdvances, "Idsa", "Idsa", salaryCalculation.IdSalaryadvance);
-            ViewData["IdTimesheet"] = new SelectList(_context.TimeSheets, "Id", "Id", salaryCalculation.IdTimesheet);
+            ViewData["IdSalaryadvance"] = new SelectList(_context.SalaryAdvances, "Idsa", "Money", salaryCalculation.IdSalaryadvance);
+            ViewData["IdTimesheet"] = new SelectList(_context.TimeSheets, "Id", "Workday", salaryCalculation.IdTimesheet);
             ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", salaryCalculation.Ide);
 
             return View(salaryCalculation);
@@ -130,17 +130,24 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 return NotFound();
             }
 
-            var salaryCalculation = await _context.SalaryCalculations.FindAsync(id);
+            var salaryCalculation = await _context.SalaryCalculations
+                .Include(s => s.IdEmployeeallowanceNavigation)
+                .Include(s => s.IdOvertimeNavigation)
+                .Include(s => s.IdPositionNavigation)
+                .Include(s => s.IdSalaryadvanceNavigation)
+                .Include(s => s.IdTimesheetNavigation)
+                .Include(s => s.IdeNavigation)
+                .FirstOrDefaultAsync(m => m.Ids == id);
             if (salaryCalculation == null)
             {
                 return NotFound();
             }
-            ViewData["IdEmployeeallowance"] = new SelectList(_context.EmployeeAllowances, "Id", "Id", salaryCalculation.IdEmployeeallowance);
-            ViewData["IdOvertime"] = new SelectList(_context.Overtimes, "Ido", "Ido", salaryCalculation.IdOvertime);
-            ViewData["IdPosition"] = new SelectList(_context.Positions, "Idp", "Idp", salaryCalculation.IdPosition);
-            ViewData["IdSalaryadvance"] = new SelectList(_context.SalaryAdvances, "Idsa", "Idsa", salaryCalculation.IdSalaryadvance);
-            ViewData["IdTimesheet"] = new SelectList(_context.TimeSheets, "Id", "Id", salaryCalculation.IdTimesheet);
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", salaryCalculation.Ide);
+            ViewData["IdEmployeeallowance"] = new SelectList(_context.EmployeeAllowances, "Id", "Money", salaryCalculation.IdEmployeeallowance);
+            ViewData["IdOvertime"] = new SelectList(_context.Overtimes, "Ido", "OvertimePay", salaryCalculation.IdOvertime);
+            ViewData["IdPosition"] = new SelectList(_context.Positions, "Idp", "Name", salaryCalculation.IdPosition);
+            ViewData["IdSalaryadvance"] = new SelectList(_context.SalaryAdvances, "Idsa", "Money", salaryCalculation.IdSalaryadvance);
+            ViewData["IdTimesheet"] = new SelectList(_context.TimeSheets, "Id", "Workday", salaryCalculation.IdTimesheet);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", salaryCalculation.Ide);
             return View(salaryCalculation);
         }
 
@@ -176,11 +183,11 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdEmployeeallowance"] = new SelectList(_context.EmployeeAllowances, "Id", "Id", salaryCalculation.IdEmployeeallowance);
-            ViewData["IdOvertime"] = new SelectList(_context.Overtimes, "Ido", "Ido", salaryCalculation.IdOvertime);
-            ViewData["IdPosition"] = new SelectList(_context.Positions, "Idp", "Idp", salaryCalculation.IdPosition);
-            ViewData["IdSalaryadvance"] = new SelectList(_context.SalaryAdvances, "Idsa", "Idsa", salaryCalculation.IdSalaryadvance);
-            ViewData["IdTimesheet"] = new SelectList(_context.TimeSheets, "Id", "Id", salaryCalculation.IdTimesheet);
+            ViewData["IdEmployeeallowance"] = new SelectList(_context.EmployeeAllowances, "Id", "Money", salaryCalculation.IdEmployeeallowance);
+            ViewData["IdOvertime"] = new SelectList(_context.Overtimes, "Ido", "OvertimePay", salaryCalculation.IdOvertime);
+            ViewData["IdPosition"] = new SelectList(_context.Positions, "Idp", "Name", salaryCalculation.IdPosition);
+            ViewData["IdSalaryadvance"] = new SelectList(_context.SalaryAdvances, "Idsa", "Money", salaryCalculation.IdSalaryadvance);
+            ViewData["IdTimesheet"] = new SelectList(_context.TimeSheets, "Id", "Workday", salaryCalculation.IdTimesheet);
             ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", salaryCalculation.Ide);
             return View(salaryCalculation);
         }
@@ -351,6 +358,26 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 allowanceMoney,
                 advanceMoney
             });
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteAjax(int id)
+        {
+            var salaryCalculation = await _context.SalaryCalculations.FindAsync(id);
+            if (salaryCalculation == null)
+            {
+                return NotFound(); // Trả về 404 nếu không tìm thấy
+            }
+
+            try
+            {
+                _context.SalaryCalculations.Remove(salaryCalculation);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true, message = "Xóa thành công!" }); // Trả về JSON
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = "Lỗi khi xóa: " + ex.Message });
+            }
         }
 
 

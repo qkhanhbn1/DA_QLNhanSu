@@ -1,43 +1,60 @@
 ﻿@model DA_QLNhanSu.Models.OnLeave
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Chi tiết nghỉ phép";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Details</h1>
+<h1 class="text-center text-primary mb-4">Chi tiết nghỉ phép</h1>
 
-<div>
-    <h4>OnLeave</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ReleaseDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ReleaseDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ExpirationDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ExpirationDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdeNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdeNavigation.Ide)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="card shadow-lg">
+    <div class="card-header bg-info text-white">
+        <h4>@Model.IdeNavigation.Name</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <!-- Cột trái hiển thị ảnh -->
+            <div class="col-md-4 text-center">
+                <img src="@Model.IdeNavigation.Image" alt="@Model.IdeNavigation.Name" class="img-fluid rounded border shadow-sm" style="width:200px;height:200px">
+            </div>
+
+            <!-- Cột phải hiển thị thông tin -->
+            <div class="col-md-8">
+                <dl class="row">
+                    <dt class="col-sm-4">Tên nhân sự</dt>
+                    <dd class="col-sm-8 fw-bold">@Html.DisplayFor(model => model.IdeNavigation.Name)</dd>
+                    <dt class="col-sm-4">Phòng ban</dt>
+                    <dd class="col-sm-8">@Model.IdeNavigation?.IddNavigation?.Name</dd>
+                    <dt class="col-sm-4">Chức vụ</dt>
+                    <dd class="col-sm-8">@Model.IdeNavigation?.IdpNavigation?.Name</dd>
+                    <dt class="col-sm-4">Trình độ</dt>
+                    <dd class="col-sm-8">@Model.IdeNavigation?.IdqNavigation?.Name</dd>
+                    <dt class="col-sm-4">Mã nhân viên</dt>
+                    <dd class="col-sm-8">@Model.IdeNavigation?.Code</dd>
+                    <dt class="col-sm-4">Ngày xin nghỉ</dt>
+                    <dd class="col-sm-8">@(Model.ReleaseDate?.ToString("dd/MM/yyyy"))</dd>
+                    <dt class="col-sm-4">Ngày bắt đầu</dt>
+                    <dd class="col-sm-8">@(Model.ReleaseDate?.ToString("dd/MM/yyyy"))</dd>
+                    <dt class="col-sm-4">Ngày trở lại</dt>
+                    <dd class="col-sm-8">@(Model.ExpirationDate?.ToString("dd/MM/yyyy"))</dd>
+                    <dt class="col-sm-4">Lý do nghỉ</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Content)</dd>
+                    <dt class="col-sm-4">Trạng thái</dt>
+                    <dd class="col-sm-8">
+                        <span class="badge @(Model.Status == true ? "bg-success" : "bg-secondary")">
+                            @(Model.Status == true ? "Đã duyệt" : "Chờ duyệt")
+                        </span>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-center">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary me-2">
+            <i class="bi bi-pencil-square"></i> Chỉnh sửa
+        </a>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Quay lại danh sách
+        </a>
+    </div>
 </div>

@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\areas\\admins\\views\\careerdevelopments\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\areas\\admins\\views\\careerdevelopments\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\areas\\admins\\views\\accounts\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\areas\\admins\\views\\accounts\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\areas\\admins\\controllers\\careerdevelopmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\areas\\admins\\controllers\\careerdevelopmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\areas\\admins\\views\\onleaves\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\areas\\admins\\views\\onleaves\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\areas\\admins\\views\\leavejobs\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\areas\\admins\\views\\leavejobs\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\areas\\admins\\controllers\\onleavescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\areas\\admins\\controllers\\onleavescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,40 +30,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Create.cshtml",
-              "DocumentMoniker": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\LeaveJobs\\Create.cshtml",
-              "RelativeDocumentMoniker": "DA_QLNhanSu\\Areas\\Admins\\Views\\LeaveJobs\\Create.cshtml",
-              "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\LeaveJobs\\Create.cshtml",
-              "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Views\\LeaveJobs\\Create.cshtml",
-              "ViewState": "AQIAACIAAAAAAAAAAAAiwEEAAAAAAAAA",
+              "DocumentMoniker": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\OnLeaves\\Create.cshtml",
+              "RelativeDocumentMoniker": "DA_QLNhanSu\\Areas\\Admins\\Views\\OnLeaves\\Create.cshtml",
+              "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\OnLeaves\\Create.cshtml",
+              "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Views\\OnLeaves\\Create.cshtml",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAACUAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-22T01:47:26.542Z"
+              "WhenOpened": "2025-02-25T09:47:02.993Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Create.cshtml",
-              "DocumentMoniker": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\CareerDevelopments\\Create.cshtml",
-              "RelativeDocumentMoniker": "DA_QLNhanSu\\Areas\\Admins\\Views\\CareerDevelopments\\Create.cshtml",
-              "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\CareerDevelopments\\Create.cshtml",
-              "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Views\\CareerDevelopments\\Create.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAcAAAA",
+              "DocumentMoniker": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\Accounts\\Create.cshtml",
+              "RelativeDocumentMoniker": "DA_QLNhanSu\\Areas\\Admins\\Views\\Accounts\\Create.cshtml",
+              "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\Accounts\\Create.cshtml",
+              "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Views\\Accounts\\Create.cshtml",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA4AAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-22T01:47:16.772Z",
+              "WhenOpened": "2025-02-25T09:47:01.097Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CareerDevelopmentsController.cs",
-              "DocumentMoniker": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Controllers\\CareerDevelopmentsController.cs",
-              "RelativeDocumentMoniker": "DA_QLNhanSu\\Areas\\Admins\\Controllers\\CareerDevelopmentsController.cs",
-              "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Controllers\\CareerDevelopmentsController.cs",
-              "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Controllers\\CareerDevelopmentsController.cs",
-              "ViewState": "AQIAADgAAAAAAAAAAAAgwG0AAAAAAAAA",
+              "DocumentIndex": 2,
+              "Title": "OnLeavesController.cs",
+              "DocumentMoniker": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Controllers\\OnLeavesController.cs",
+              "RelativeDocumentMoniker": "DA_QLNhanSu\\Areas\\Admins\\Controllers\\OnLeavesController.cs",
+              "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Controllers\\OnLeavesController.cs",
+              "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Controllers\\OnLeavesController.cs",
+              "ViewState": "AQIAAJQAAAAAAAAAAAA6wKsAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-22T00:35:17.452Z",
+              "WhenOpened": "2025-02-25T03:40:32.532Z",
               "EditorCaption": ""
             }
           ]

@@ -5,11 +5,11 @@
     ViewData["Title"] = "Tài khoản";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
-<h1 class="text-primary">Quản lý tài khoản</h1>
+<h1 class="text-primary">TÀI KHOẢN QUẢN TRỊ</h1>
 
 <div class="row my-4">
     <form action="" method="post" class="form-inline col-md-8">
-        <div class="input-group w-100">
+        <div class="input-group w-50">
             <input class="form-control" name="name" id="keyword" placeholder="Nhập tên cần tìm..." />
             <button type="submit" class="btn btn-primary">
                 <i class="fas fa-search"></i> Tìm kiếm
@@ -27,10 +27,10 @@
     <thead class="table-primary text-center">
         <tr>
             <th>
-                Email
+                EMAIL
             </th>
             <th>
-                Mật khẩu
+                MẬT KHẨU
             </th>
             <th></th>
         </tr>
@@ -48,12 +48,9 @@
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">
                         <i class="bi bi-pencil-square"></i> Sửa
                     </a>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">
-                        <i class="bi bi-eye"></i> Chi tiết
-                    </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">
+                    <button class="btn btn-danger btn-sm" onclick="confirmDelete('@Url.Action("DeleteAjax", new { id = item.Id })')">
                         <i class="bi bi-trash"></i> Xóa
-                    </a>
+                    </button>
                 </td>
             </tr>
         }
@@ -66,3 +63,44 @@
     PageClasses = new string[] { "page-link" }
 })
 </div>
+<style>
+    .btn-expired {
+        background-color: #ffe6e6 !important; /* Nền hồng nhạt hơn */
+        color: #cc0000 !important; /* Chữ đỏ đậm hơn */
+        border: none !important; /* Xóa viền */
+        font-weight: bold !important; /* Chữ đậm hơn */
+    }
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDelete(url) {
+        Swal.fire({
+            title: "Xóa dữ liệu này?",
+            text: "Dữ liệu xóa sẽ không thể khôi phục!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#6c757d",
+            confirmButtonText: "OK",
+            cancelButtonText: "Cancel"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(url, { method: 'POST' }) // Gửi yêu cầu xóa
+                    .then(response => response.json()) // Chuyển về JSON
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire("Đã xóa!", data.message, "success")
+                                .then(() => location.reload());
+                        } else {
+                            Swal.fire("Lỗi!", data.message, "error");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Lỗi:", error);
+                        Swal.fire("Lỗi!", "Đã xảy ra lỗi trong quá trình xóa.", "error");
+                    });
+            }
+        });
+    }
+</script>

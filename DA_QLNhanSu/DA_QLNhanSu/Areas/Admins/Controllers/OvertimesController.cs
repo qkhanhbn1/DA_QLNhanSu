@@ -23,7 +23,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/Overtimes
         public async Task<IActionResult> Index(string name, int page = 1)
         {
-            int limit = 5; // Số bản ghi trên mỗi trang
+            int limit = 10; // Số bản ghi trên mỗi trang
 
             var query = _context.Overtimes
                 .Include(e => e.IdeNavigation)
@@ -80,7 +80,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", overtime.Ide);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", overtime.Ide);
             return View(overtime);
         }
 
@@ -92,12 +92,14 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 return NotFound();
             }
 
-            var overtime = await _context.Overtimes.FindAsync(id);
+            var overtime = await _context.Overtimes
+                .Include(l => l.IdeNavigation)
+                .FirstOrDefaultAsync(m => m.Ido == id);
             if (overtime == null)
             {
                 return NotFound();
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", overtime.Ide);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", overtime.Ide);
             return View(overtime);
         }
 
@@ -133,7 +135,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", overtime.Ide);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", overtime.Ide);
             return View(overtime);
         }
 
@@ -174,6 +176,26 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         private bool OvertimeExists(int id)
         {
             return _context.Overtimes.Any(e => e.Ido == id);
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteAjax(int id)
+        {
+            var overtime = await _context.Overtimes.FindAsync(id);
+            if (overtime == null)
+            {
+                return NotFound(); // Trả về 404 nếu không tìm thấy
+            }
+
+            try
+            {
+                _context.Overtimes.Remove(overtime);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true, message = "Xóa thành công!" }); // Trả về JSON
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = "Lỗi khi xóa: " + ex.Message });
+            }
         }
     }
 }

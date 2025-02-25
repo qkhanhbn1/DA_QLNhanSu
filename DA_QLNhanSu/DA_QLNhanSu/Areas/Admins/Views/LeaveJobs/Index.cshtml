@@ -54,7 +54,7 @@
                 <td>
                     <img src="@item.IdeNavigation.Image" alt="@item.IdeNavigation.Name" class="rounded-circle" style="width:30px; height:30px;" />
                     &ensp;
-                    <a asp-action="Details" asp-route-id="@item.Id" class="text-dark fw-bold text-decoration-none">
+                    <a asp-controller="Employees" asp-action="Details" asp-route-id="@item.IdeNavigation.Ide" class="text-dark fw-bold text-decoration-none">
                         @Html.DisplayFor(modelItem => item.IdeNavigation.Name)
                     </a>
                 </td>

@@ -23,7 +23,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/Disciplines
         public async Task<IActionResult> Index(string name, int page = 1)
         {
-            int limit = 5; // Số bản ghi trên mỗi trang
+            int limit = 10; // Số bản ghi trên mỗi trang
 
             var query = _context.Disciplines
                 .Include(e => e.IdeNavigation)  // Include Department
@@ -63,7 +63,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/Disciplines/Create
         public IActionResult Create()
         {
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide");
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name");
             return View();
         }
 
@@ -72,7 +72,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Ide,NumberDiscipline,Content,Punishment,Status")] Discipline discipline)
+        public async Task<IActionResult> Create([Bind("Id,Ide,DisciplineDate,Content,Punishment,Status")] Discipline discipline)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +80,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", discipline.Ide);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", discipline.Ide);
             return View(discipline);
         }
 
@@ -92,12 +92,14 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 return NotFound();
             }
 
-            var discipline = await _context.Disciplines.FindAsync(id);
+            var discipline = await _context.Disciplines
+                .Include(d => d.IdeNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (discipline == null)
             {
                 return NotFound();
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", discipline.Ide);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", discipline.Ide);
             return View(discipline);
         }
 
@@ -106,7 +108,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Ide,NumberDiscipline,Content,Punishment,Status")] Discipline discipline)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Ide,DisciplineDate,Content,Punishment,Status")] Discipline discipline)
         {
             if (id != discipline.Id)
             {
@@ -133,42 +135,44 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", discipline.Ide);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", discipline.Ide);
             return View(discipline);
         }
 
         // GET: Admins/Disciplines/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        [HttpPost]
+        public async Task<IActionResult> DeleteAjax(int id)
         {
-            if (id == null)
+            var discipline = await _context.Disciplines.FindAsync(id);
+            if (discipline == null)
             {
-                return NotFound();
+                return NotFound(); // Trả về 404 nếu không tìm thấy
             }
 
-            var discipline = await _context.Disciplines
-                .Include(d => d.IdeNavigation)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            try
+            {
+                _context.Disciplines.Remove(discipline);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true, message = "Xóa thành công!" }); // Trả về JSON
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = "Lỗi khi xóa: " + ex.Message });
+            }
+        }
+        [HttpPost]
+        public IActionResult UpdateStatus(int id)
+        {
+            var discipline = _context.Disciplines.Find(id);
             if (discipline == null)
             {
                 return NotFound();
             }
 
-            return View(discipline);
-        }
+            discipline.Status = !(discipline.Status ?? false); // Nếu null, mặc định là false rồi đảo trạng thái
+            _context.SaveChanges();
 
-        // POST: Admins/Disciplines/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var discipline = await _context.Disciplines.FindAsync(id);
-            if (discipline != null)
-            {
-                _context.Disciplines.Remove(discipline);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Json(discipline.Status);
         }
 
         private bool DisciplineExists(int id)

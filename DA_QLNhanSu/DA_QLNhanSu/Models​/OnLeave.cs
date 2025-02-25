@@ -9,11 +9,15 @@ public partial class OnLeave
 
     public int? Ide { get; set; }
 
+    public DateTime? RequestDate { get; set; }
+
     public DateTime? ReleaseDate { get; set; }
 
     public DateTime? ExpirationDate { get; set; }
 
     public string? Content { get; set; }
+
+    public bool? Status { get; set; }
 
     public virtual Employee? IdeNavigation { get; set; }
 }

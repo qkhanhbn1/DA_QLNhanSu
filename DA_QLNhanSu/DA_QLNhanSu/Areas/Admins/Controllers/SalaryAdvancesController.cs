@@ -23,7 +23,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/SalaryAdvances
         public async Task<IActionResult> Index(string name, int page = 1)
         {
-            int limit = 5; // Số bản ghi trên mỗi trang
+            int limit = 10; // Số bản ghi trên mỗi trang
 
             var query = _context.SalaryAdvances
                 .Include(e => e.IdeNavigation)  // Include Department
@@ -63,7 +63,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/SalaryAdvances/Create
         public IActionResult Create()
         {
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide");
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name");
             return View();
         }
 
@@ -80,7 +80,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", salaryAdvance.Ide);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", salaryAdvance.Ide);
             return View(salaryAdvance);
         }
 
@@ -92,12 +92,14 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 return NotFound();
             }
 
-            var salaryAdvance = await _context.SalaryAdvances.FindAsync(id);
+            var salaryAdvance = await _context.SalaryAdvances
+                .Include(s => s.IdeNavigation)
+                .FirstOrDefaultAsync(m => m.Idsa == id);
             if (salaryAdvance == null)
             {
                 return NotFound();
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", salaryAdvance.Ide);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", salaryAdvance.Ide);
             return View(salaryAdvance);
         }
 
@@ -133,42 +135,44 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Ide", salaryAdvance.Ide);
+            ViewData["Ide"] = new SelectList(_context.Employees, "Ide", "Name", salaryAdvance.Ide);
             return View(salaryAdvance);
         }
 
         // GET: Admins/SalaryAdvances/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        [HttpPost]
+        public async Task<IActionResult> DeleteAjax(int id)
         {
-            if (id == null)
+            var salaryadvance = await _context.SalaryAdvances.FindAsync(id);
+            if (salaryadvance == null)
             {
-                return NotFound();
+                return NotFound(); // Trả về 404 nếu không tìm thấy
             }
 
-            var salaryAdvance = await _context.SalaryAdvances
-                .Include(s => s.IdeNavigation)
-                .FirstOrDefaultAsync(m => m.Idsa == id);
-            if (salaryAdvance == null)
+            try
             {
-                return NotFound();
+                _context.SalaryAdvances.Remove(salaryadvance);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true, message = "Xóa thành công!" }); // Trả về JSON
             }
-
-            return View(salaryAdvance);
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = "Lỗi khi xóa: " + ex.Message });
+            }
         }
-
-        // POST: Admins/SalaryAdvances/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost]
+        public IActionResult UpdateStatus(int id)
         {
-            var salaryAdvance = await _context.SalaryAdvances.FindAsync(id);
-            if (salaryAdvance != null)
+            var salaryadvance = _context.SalaryAdvances.Find(id);
+            if (salaryadvance == null)
             {
-                _context.SalaryAdvances.Remove(salaryAdvance);
+                return NotFound();
             }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            salaryadvance.Status = !(salaryadvance.Status ?? false); // Nếu null, mặc định là false rồi đảo trạng thái
+            _context.SaveChanges();
+
+            return Json(salaryadvance.Status);
         }
 
         private bool SalaryAdvanceExists(int id)

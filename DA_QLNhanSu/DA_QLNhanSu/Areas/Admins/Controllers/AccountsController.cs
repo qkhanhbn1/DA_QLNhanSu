@@ -132,36 +132,25 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         }
 
         // GET: Admins/Accounts/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var account = await _context.Accounts
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (account == null)
-            {
-                return NotFound();
-            }
-
-            return View(account);
-        }
-
-        // POST: Admins/Accounts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost]
+        public async Task<IActionResult> DeleteAjax(int id)
         {
             var account = await _context.Accounts.FindAsync(id);
-            if (account != null)
+            if (account == null)
             {
-                _context.Accounts.Remove(account);
+                return NotFound(); // Trả về 404 nếu không tìm thấy
             }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                _context.Accounts.Remove(account);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true, message = "Xóa thành công!" }); // Trả về JSON
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = "Lỗi khi xóa: " + ex.Message });
+            }
         }
 
         private bool AccountExists(int id)
