@@ -117,6 +117,10 @@
       "PackagePath": "staticwebassets\\Images\\employee\\nu\\9.jpg"
     },
     {
+      "Id": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\logo\\1.jpg",
+      "PackagePath": "staticwebassets\\Images\\logo\\1.jpg"
+    },
+    {
       "Id": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

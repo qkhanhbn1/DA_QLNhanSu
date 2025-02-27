@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ihDp+LF9JQoTVY13QfFR7uPVAAHPdHjf9Z4efH0rJT4=",
+  "Hash": "h+JIf5lCtQNudTkxK36/LGbfO1ioqpZfzdixbDz70S4=",
   "Source": "DA_QLNhanSu",
   "BasePath": "_content/DA_QLNhanSu",
   "Mode": "Default",
@@ -3131,6 +3131,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\employee\\nu\\9.jpg"
+    },
+    {
+      "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\Images\\logo\\1.jpg",
+      "SourceId": "DA_QLNhanSu",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\",
+      "BasePath": "_content/DA_QLNhanSu",
+      "RelativePath": "Images/logo/1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\logo\\1.jpg"
     },
     {
       "Identity": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\wwwroot\\js\\site.js",

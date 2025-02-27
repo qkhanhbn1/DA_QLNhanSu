@@ -1,143 +1,102 @@
 ﻿﻿@using Microsoft.AspNetCore.Http;
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
-<aside class="main-sidebar bg-white border-end">
-    <!-- Logo thương hiệu -->
-    <div class="brand-section d-flex align-items-center p-3 border-bottom">
+<aside class="main-sidebar" style="background: linear-gradient(to bottom, #a8c0ff, #3f2b96); min-height: 100vh;">
+    <div class="brand-section d-flex align-items-center p-3 border-bottom text-white">
         <img src="~/dist/img/AdminLTELogo.png" alt="Logo" class="rounded-circle me-3" style="width: 40px; height: 40px;">
-        <span class="font-weight-light text-primary">Quản trị hệ thống</span>
+        <span class="fw-bold">Quản trị hệ thống</span>
     </div>
 
-    <!-- Sidebar -->
     <div class="sidebar p-3">
-        <!-- Thông tin người dùng -->
-        <div class="user-panel d-flex align-items-center mb-4">
+        <div class="user-panel d-flex align-items-center mb-4 text-white">
             <img src="~/Images/admin.webp" class="rounded-circle me-3 shadow-sm" alt="Ảnh người dùng" style="width: 50px; height: 50px;">
             <div>
                 @{
                     if (HttpContextAccessor.HttpContext.Session.GetString("AdminLogin") != null)
                     {
-                        <a href="#" class="text-primary text-decoration-none fw-bold">@HttpContextAccessor.HttpContext.Session.GetString("AdminLogin")</a>
+                        <a href="#" class=" fw-bold">@HttpContextAccessor.HttpContext.Session.GetString("AdminLogin")</a>
                         <br />
-                        <a asp-action="Logout" asp-controller="Login" class="text-danger text-decoration-none">Đăng xuất</a>
+                        <a asp-action="Logout" asp-controller="Login" class="text-red">Đăng xuất</a>
                     }
                     else
                     {
-                        <span class="text-muted">Admins</span>
+                        <span class="text-blue">Admin</span>
+                        <a asp-action="Logout" asp-controller="Login" class="text-red">Đăng xuất</a>
                     }
                 }
             </div>
         </div>
 
-        <!-- Menu Sidebar -->
         <nav>
             <ul class="list-unstyled">
                 <li class="nav-item">
-                    <a href="~/admins" class="nav-link d-flex align-items-center py-2">
+                    <a href="~/admins" class="nav-link d-flex align-items-center py-2 text-white">
                         <i class="fas fa-th me-3"></i> Bảng điều khiển
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/admins/employees" class="nav-link d-flex align-items-center py-2">
+                    <a href="/admins/employees" class="nav-link d-flex align-items-center py-2 text-white">
                         <i class="fas fa-user me-3"></i> Danh sách nhân sự
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/admins/Contracts" class="nav-link d-flex align-items-center py-2">
-                        <i class="fas fa-user me-3"></i>Hợp đồng lao động
+                    <a href="/admins/Contracts" class="nav-link d-flex align-items-center py-2 text-white">
+                        <i class="fas fa-file-contract me-3"></i>Hợp đồng lao động
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/admins/Leavejobs" class="nav-link d-flex align-items-center py-2">
-                        <i class="fas fa-user me-3"></i>Nhân sự nghỉ việc
+                    <a href="/admins/Leavejobs" class="nav-link d-flex align-items-center py-2 text-white">
+                        <i class="fas fa-user-times me-3"></i>Nhân sự nghỉ việc
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/admins/careerdevelopments" class="nav-link d-flex align-items-center py-2">
-                        <i class="fas fa-user me-3"></i>Phát triển sự nghiệp
+                    <a href="/admins/careerdevelopments" class="nav-link d-flex align-items-center py-2 text-white">
+                        <i class="fas fa-chart-line me-3"></i>Phát triển sự nghiệp
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/admins/onleaves" class="nav-link d-flex align-items-center py-2">
-                        <i class="fas fa-user me-3"></i>Nhân sự nghỉ phép
-                    </a>
-                </li>
-                @* <li class="nav-item dropdown">
-                    <a href="#" class="nav-link d-flex align-items-center py-2 dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#employeeMenu" aria-expanded="true">
-                        <i class="fas fa-user-astronaut me-3"></i> Bảng lương định kỳ
-                    </a>
-                    <ul id="employeeMenu" class="collapse list-unstyled ps-4 show">
-                        <li>
-                            <a href="/admins/employees" class="nav-link py-2 ">
-                                <i class="fas fa-plus me-2"></i> Bảng tính lương
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/admins/Contracts" class="nav-link py-2 ">
-                                <i class="fas fa-list me-2"></i> Hợp đồng nhân sự
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/admins/positions" class="nav-link py-2 ">
-                                <i class="fas fa-list me-2"></i>Danh sách chức vụ
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/admins/departments" class="nav-link py-2 ">
-                                <i class="fas fa-list me-2"></i>Phòng ban
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/admins/qualifications" class="nav-link py-2 ">
-                                <i class="fas fa-list me-2"></i>Danh sách trình độ
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/admins/insurances" class="nav-link py-2 ">
-                                <i class="fas fa-list me-2"></i>Quản lý bảo hiểm
-                            </a>
-                        </li>
-                    </ul>
-                </li>
- *@
-                <li class="nav-item">
-                    <a href="/admins/overtimes" class="nav-link d-flex align-items-center py-2">
-                        <i class="fas fa-user me-3"></i> Nhân viên tăng ca
+                    <a href="/admins/onleaves" class="nav-link d-flex align-items-center py-2 text-white">
+                        <i class="fas fa-calendar-alt me-3"></i>Nhân sự nghỉ phép
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/admins/timesheets" class="nav-link d-flex align-items-center py-2">
-                        <i class="fas fa-list me-3"></i> Quản lý chấm công
+                    <a href="/admins/overtimes" class="nav-link d-flex align-items-center py-2 text-white">
+                        <i class="fas fa-user-clock me-3"></i> Nhân viên tăng ca
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/admins/salaryadvances" class="nav-link d-flex align-items-center py-2">
-                        <i class="fas fa-image me-3"></i> Ứng lương
+                    <a href="/admins/timesheets" class="nav-link d-flex align-items-center py-2 text-white">
+                        <i class="fas fa-clock me-3"></i> Quản lý chấm công
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/admins/employeeallowances" class="nav-link d-flex align-items-center py-2">
-                        <i class="fas fa-newspaper me-3"></i> Phụ cấp
+                    <a href="/admins/salaryadvances" class="nav-link d-flex align-items-center py-2 text-white">
+                        <i class="fas fa-money-bill-wave me-3"></i> Ứng lương
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/admins/salarycalculations" class="nav-link d-flex align-items-center py-2">
-                        <i class="fas fa-handshake me-3"></i> Bảng lương định kỳ
-                    </a>
-                </li>
-                
-                <li class="nav-item">
-                    <a href="/admins/rewards" class="nav-link d-flex align-items-center py-2">
-                        <i class="fas fa-shopping-cart me-3"></i>Danh sách thưởng
+                    <a href="/admins/employeeallowances" class="nav-link d-flex align-items-center py-2 text-white">
+                        <i class="fas fa-hand-holding-usd me-3"></i> Phụ cấp
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/admins/disciplines" class="nav-link d-flex align-items-center py-2">
-                        <i class="fas fa-box-open me-3"></i>Danh sách kỷ luật
+                    <a href="/admins/salarycalculations" class="nav-link d-flex align-items-center py-2 text-white">
+                        <i class="fas fa-calculator me-3"></i> Bảng lương định kỳ
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/admins/rewards" class="nav-link d-flex align-items-center py-2 text-white">
+                        <i class="fas fa-gift me-3"></i>Danh sách thưởng
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/admins/accounts" class="nav-link d-flex align-items-center py-2">
-                        <i class="fas fa-box-open me-3"></i>Tài khoản quản trị
+                    <a href="/admins/disciplines" class="nav-link d-flex align-items-center py-2 text-white">
+                        <i class="fas fa-exclamation-triangle me-3"></i>Danh sách kỷ luật
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admins/accounts" class="nav-link d-flex align-items-center py-2 text-white">
+                        <i class="fas fa-user-shield me-3"></i>Tài khoản quản trị
                     </a>
                 </li>
             </ul>
@@ -146,84 +105,27 @@
 </aside>
 
 <style>
-    /* Định dạng menu con */
-    #employeeMenu .nav-link {
-        font-size: 0.9rem;
-        color: #003366;
-        padding-left: 1.5rem;
-    }
-
-        /* Hiệu ứng hover cho menu con */
-        #employeeMenu .nav-link:hover {
-            background-color: #e0f7ff;
-            color: #003366;
-        }
-
-        /* Hiệu ứng active cho menu con */
-        #employeeMenu .nav-link.active {
-            background-color: #e0f7ff;
-            border-right: 3px solid #003366;
-            color: #003366;
-        }
-
-    /* Không áp dụng active cho mục chính */
-    .nav-item .dropdown-toggle {
-        color: #003366;
-    }
-
-        .nav-item .dropdown-toggle:hover {
-            background-color: #f8f9fa; /* Hiệu ứng hover */
-        }
-
-
-
-    /* Cài đặt mặc định cho menu */
     .nav-link {
-        font-weight: bolder; /* Chữ đậm */
-        color: #003366; /* Màu chữ xanh dương đậm */
-        transition: background-color 0.3s ease, border-right 0.3s ease;
-        position: relative;
+        font-weight: bold;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        border-radius: 5px;
     }
 
-        /* Hiệu ứng hover */
-        .nav-link:hover {
-            background-color: #e0f7ff; /* Nền xanh dương nhạt */
-            color: #003366; /* Giữ màu xanh dương đậm */
-        }
-
-        /* Hiệu ứng active */
-        .nav-link.active {
-            background-color: #e0f7ff; /* Nền xanh dương nhạt */
-            border-right: 3px solid #003366; /* Thanh cột dọc xanh dương đậm */
-            color: #003366; /* Giữ màu chữ đậm */
+        .nav-link:hover, .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: #fff !important;
         }
 </style>
 
 <script>
-    // Thêm lớp "active" dựa trên URL hiện tại
     document.addEventListener("DOMContentLoaded", function () {
         const navLinks = document.querySelectorAll(".nav-link");
-        const currentUrl = window.location.pathname; // Lấy URL hiện tại
+        const currentUrl = window.location.pathname;
 
         navLinks.forEach(link => {
             if (link.getAttribute("href") === currentUrl) {
                 link.classList.add("active");
             }
-
-            // Hiệu ứng hover
-            link.addEventListener("mouseover", () => {
-                if (!link.classList.contains("active")) {
-                    link.style.backgroundColor = "#e0f7ff";
-                }
-            });
-            link.addEventListener("mouseout", () => {
-                if (!link.classList.contains("active")) {
-                    link.style.backgroundColor = "transparent";
-                }
-            });
         });
     });
 </script>
-
-
-

@@ -2,81 +2,212 @@
 
 @{
     ViewData["Title"] = "Hợp Đồng Lao Động";
-    Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = null;
 }
+<!DOCTYPE html>
+<html>
 
-<div class="container mt-4">
-    <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white text-center">
-            <h3 class="mb-0">@Model.IdeNavigation?.Name - @Model.Content</h3>
+<head>
+    <title>Hợp Đồng Lao Động</title>
+
+    <style>
+        @@media print {
+            .btn-print, .btn-sign {
+                display: none !important;
+            }
+        }
+
+        body {
+            font-family: "Times New Roman", serif;
+        }
+
+        .contract-container {
+            width: 700px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #000;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .sub-header {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .info, .terms, .signature {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 8px;
+        }
+
+        .btn-print {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .bold {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .clinic-info {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+            .clinic-info img {
+                height: 60px;
+            }
+
+            .clinic-info p {
+                margin: 2px 0;
+                margin-left: 1rem;
+                margin-top: 0.5rem;
+            }
+
+        .clinic-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .signature-container {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .signature-box {
+            width: 45%;
+        }
+
+            .signature-box p {
+                margin: 3px 0;
+                line-height: 1.2;
+            }
+
+        .sign-line {
+            width: 200px;
+            border-bottom: 1px solid black;
+            margin: 5px auto;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="contract-container">
+        <div class="clinic-info">
+            <img style="width:120px; height:120px;" src="~/images/logo/1.jpg" alt="Logo Công Ty">
+            <div>
+                <p class="clinic-name">CÔNG TY TNHH K2HAN</p>
+                <p>Địa chỉ: Số 399,đường Quang Trung, Huyện Hà Đông, Thành Phố Hà Nội .</p>
+                <p>Điện thoại: 0865529315</p>
+            </div>
         </div>
-        <div class="card-body">
-            <div class="d-flex align-items-center mb-3">
-                <img src="@Model.IdeNavigation?.Image" alt="@Model.IdeNavigation?.Name" class="rounded-circle me-3" style="width:150px; height:150px;">
-                <div>
-                    <h6 class="mb-0">@Model.IdeNavigation?.Name</h6>
-                    <small class="text-muted">Mã nhân sự: @Model.IdeNavigation?.Code - Chức vụ: @Model.IdeNavigation?.IdpNavigation?.Name</small>
+
+        <div class="header">HỢP ĐỒNG LAO ĐỘNG</div>
+
+        <div class="info">
+            <p><span class="bold">Thông tin nhân viên:</span></p>
+            <img src="@Model.IdeNavigation.Image" alt="Ảnh hợp đồng" width="120" height="120" class="rounded-circle border border-2" />
+            <p><span class="bold">Mã nhân viên:</span> @Model.IdeNavigation.Code</p>
+            <p><span class="bold">Họ và tên:</span> @Model.IdeNavigation.Name</p>
+            <p><span class="bold">Chức vụ:</span> @Model.IdeNavigation?.IdpNavigation?.Name</p>
+            <p><span class="bold">Ngày bắt đầu:</span> @(Model.ReleaseDate?.ToString("dd/MM/yyyy"))</p>
+            <p><span class="bold">Ngày kết thúc:</span> @(Model.ExpirationDate?.ToString("dd/MM/yyyy"))</p>
+        </div>
+
+        <div class="terms">
+            <p><span class="bold">Điều khoản hợp đồng:</span></p>
+            <p>
+                - Điều 1: Chế độ làm việc
+                Thời gian làm việc: Từ thứ Hai đến thứ Sáu, 08h00 – 17h30 (nghỉ trưa từ 12h00 – 13h30).
+                Nghỉ lễ, nghỉ phép: Theo quy định của Bộ luật Lao động và nội quy công ty.<br />
+                - Điều 2: Tiền lương và chế độ đãi ngộ
+                Mức lương chính: 10.000.000 VNĐ/tháng (Mười triệu đồng chẵn).
+                Phụ cấp:
+                Phụ cấp ăn trưa: 500.000 VNĐ/tháng.
+                Phụ cấp xăng xe, điện thoại: 1.000.000 VNĐ/tháng.
+                Thưởng doanh số: Theo chính sách của công ty.
+                Phương thức thanh toán: Chuyển khoản vào ngày 05 hàng tháng.<br />
+                - Điều 3: Chế độ bảo hiểm và phúc lợi
+                Bên A cam kết đóng đầy đủ các khoản bảo hiểm xã hội, bảo hiểm y tế và bảo hiểm thất nghiệp theo quy định.
+                Bên B được hưởng chế độ nghỉ ốm, thai sản, tai nạn lao động theo Luật Lao động.<br />
+                - Điều 4: Quyền và nghĩa vụ của các bên
+                1. Quyền và nghĩa vụ của Bên A:
+
+                Bố trí công việc phù hợp với chức danh đã ký kết.
+                Thanh toán lương đầy đủ và đúng hạn.
+                Cung cấp trang thiết bị cần thiết cho công việc.
+                2. Quyền và nghĩa vụ của Bên B:
+
+                Thực hiện công việc theo hợp đồng và tuân thủ nội quy công ty.
+                Giữ gìn bí mật kinh doanh, không làm việc cho đối thủ cạnh tranh trong thời gian hợp đồng có hiệu lực.<br />
+                - Điều 5: Chấm dứt hợp đồng
+                Hợp đồng có thể chấm dứt theo quy định của pháp luật khi:
+                Hết hạn hợp đồng.
+                Hai bên thỏa thuận chấm dứt.
+                Một trong hai bên đơn phương chấm dứt hợp đồng theo quy định của pháp luật.
+            </p>
+        </div>
+
+        <div class="signature">
+            <p class="text-right">
+                <i>@DateTime.Now.ToString("HH:mm, 'Ngày' dd 'Tháng' MM 'Năm' yyyy")</i>
+            </p>
+            <div class="signature-container">
+                <div class="signature-box">
+                    <p><strong>Chữ ký nhân sự</strong></p>
+                    <br />
+                    <br />
+                    <br />
+                </div>
+                <div class="signature-box">
+                    <p><strong>Đại diện công ty</strong></p>
+                    <br />
+                    <br />
+                    <br />
                 </div>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Mã hợp đồng: </strong>@Model.Codecontract</li>
-                <li class="list-group-item"><strong>Loại hợp đồng: </strong>@Model.Content</li>
-                <li class="list-group-item">
-                    <strong>Nội dung hợp đồng: </strong><br />
-                    - Điều 1: Chế độ làm việc
-                    Thời gian làm việc: Từ thứ Hai đến thứ Sáu, 08h00 – 17h30 (nghỉ trưa từ 12h00 – 13h30).
-                    Nghỉ lễ, nghỉ phép: Theo quy định của Bộ luật Lao động và nội quy công ty.<br />
-                    - Điều 2: Tiền lương và chế độ đãi ngộ
-                    Mức lương chính: 10.000.000 VNĐ/tháng (Mười triệu đồng chẵn).
-                    Phụ cấp:
-                    Phụ cấp ăn trưa: 500.000 VNĐ/tháng.
-                    Phụ cấp xăng xe, điện thoại: 1.000.000 VNĐ/tháng.
-                    Thưởng doanh số: Theo chính sách của công ty.
-                    Phương thức thanh toán: Chuyển khoản vào ngày 05 hàng tháng.<br />
-                    - Điều 3: Chế độ bảo hiểm và phúc lợi
-                    Bên A cam kết đóng đầy đủ các khoản bảo hiểm xã hội, bảo hiểm y tế và bảo hiểm thất nghiệp theo quy định.
-                    Bên B được hưởng chế độ nghỉ ốm, thai sản, tai nạn lao động theo Luật Lao động.<br />
-                    - Điều 4: Quyền và nghĩa vụ của các bên
-                    1. Quyền và nghĩa vụ của Bên A:
+        </div>
 
-                    Bố trí công việc phù hợp với chức danh đã ký kết.
-                    Thanh toán lương đầy đủ và đúng hạn.
-                    Cung cấp trang thiết bị cần thiết cho công việc.
-                    2. Quyền và nghĩa vụ của Bên B:
-
-                    Thực hiện công việc theo hợp đồng và tuân thủ nội quy công ty.
-                    Giữ gìn bí mật kinh doanh, không làm việc cho đối thủ cạnh tranh trong thời gian hợp đồng có hiệu lực.<br />
-                    - Điều 5: Chấm dứt hợp đồng
-                    Hợp đồng có thể chấm dứt theo quy định của pháp luật khi:
-                    Hết hạn hợp đồng.
-                    Hai bên thỏa thuận chấm dứt.
-                    Một trong hai bên đơn phương chấm dứt hợp đồng theo quy định của pháp luật.
-                </li>
-                <li class="list-group-item">
-                    <strong>Tình trạng hợp đồng: </strong>
-                    <span class="badge @(Model.Status == true ? "bg-success" : "bg-danger")">
-                        @(Model.Status == true ? "Đã ký" : "Hết hạn")
-                    </span>
-                </li>
-                <li class="list-group-item"><strong>Thời gian:</strong> @Model.ReleaseDate?.ToString("dd/MM/yyyy") - @Model.ExpirationDate?.ToString("dd/MM/yyyy")</li>
-                <li class="list-group-item"><strong>Ngày ký:</strong> @Model.SigningDate?.ToString("dd/MM/yyyy")</li>
-                <li class="list-group-item"><strong>Mức lương theo hợp đồng: </strong> @((int?)(Model.IdeNavigation?.IdpNavigation?.DailyWage) ?? 0) /ngày</li>
-                <li class="list-group-item"><strong>Người tạo hợp đồng: </strong> Giám đốc công ty</li>
-            </ul>
+        <div class="button-container">
+            <button class="btn-print" onclick="window.print()">In Hợp Đồng</button>
         </div>
     </div>
-    <div class="card mt-3 shadow-sm">
-        <div class="card-header bg-light">
-            <h6 class="mb-0">Đính kèm</h6>
-        </div>
-        <div class="card-body">
-            <p>Không có tài liệu đính kèm.</p>
-        </div>
-    </div>
+</body>
+</html>
 
-    <div class="d-flex mt-3 gap-2">
-        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Chỉnh sửa</a>
-        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
-    </div>
 
+@* <div class="d-flex mt-3 gap-2">
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Chỉnh sửa</a>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
 </div>
+
+</div> *@

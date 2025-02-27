@@ -49,7 +49,8 @@ namespace DA_QLNhanSu
 
             app.MapControllerRoute(
                 name: "areas",
-                pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
+                pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}",
+                defaults: new { area = "Admins" });
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
