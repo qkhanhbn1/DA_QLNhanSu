@@ -1,0 +1,40 @@
+﻿@model DA_QLNhanSu.Models.Department
+
+@{
+    ViewData["Title"] = "Tạo phòng ban mới";
+    Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1 class="text-center my-4 text-primary">Thêm mới phòng ban</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label">Tên phòng ban</label>
+                        <input asp-for="Name" class="form-control" placeholder="Nhập tên phòng ban..." />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Content" class="form-label">Mô tả</label>
+                        <textarea asp-for="Content" class="form-control" rows="3" placeholder="Nhập mô tả về phòng ban..."></textarea>
+                        <span asp-validation-for="Content" class="text-danger"></span>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary w-30">Tạo</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="text-center mt-3">
+            <a asp-action="Index" class="btn btn-outline-secondary">Quay lại</a>
+        </div>
+    </div>
+</div>

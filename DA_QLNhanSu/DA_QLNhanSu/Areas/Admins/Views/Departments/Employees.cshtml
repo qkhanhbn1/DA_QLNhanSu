@@ -1,0 +1,44 @@
+﻿@model List<DA_QLNhanSu.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employees";
+    Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-info">Danh sách nhân viên - <span class="fw-bold">@ViewBag.DepartmentName</span></h2>
+        
+    </div>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-primary text-dark">
+            <tr>
+                <th>NHÂN SỰ</th>
+                <th>CHỨC VỤ</th>
+                <th>EMAIL</th>
+                <th>SỐ ĐIỆN THOẠI</th>
+            </tr>
+        </thead>
+        <tbody class="table-light">
+            @foreach (var employee in Model)
+            {
+                <tr>
+                    <td>
+                    <img src="@employee.Image" alt="@employee.Name" class="rounded-circle" style="width:30px; height:30px;" />
+                    &ensp;
+                    <a asp-controller="Employees" asp-action="Details" asp-route-id="@employee.Ide" class="text-dark fw-bold text-decoration-none">
+                        @Html.DisplayFor(modelItem => employee.Name)
+                    </a>
+                    </td>
+                    <td>@(employee.IdpNavigation?.Name ?? "Chưa có chức vụ")</td>
+                    <td>@employee.Email</td>
+                    <td>@employee.Phone</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-action="Index" class="btn btn-info text-white">
+        ⬅ Quay lại danh sách phòng ban
+    </a>
+</div>

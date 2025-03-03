@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace DA_QLNhanSu.Models​;
 
@@ -13,9 +12,9 @@ public partial class Overtime
     public int? WorkingHours { get; set; }
 
     public double? SalaryCoeficient { get; set; }
-    [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = false)]
+
     public decimal? HourlyWage { get; set; }
-    [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = false)]
+
     public decimal? OvertimePay { get; set; }
 
     public int? Month { get; set; }

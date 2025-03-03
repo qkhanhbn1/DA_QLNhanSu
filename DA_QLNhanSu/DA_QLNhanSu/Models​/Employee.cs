@@ -49,8 +49,6 @@ public partial class Employee
 
     public virtual Qualification? IdqNavigation { get; set; }
 
-    public virtual ICollection<Insurance> Insurances { get; set; } = new List<Insurance>();
-
     public virtual ICollection<LeaveJob> LeaveJobs { get; set; } = new List<LeaveJob>();
 
     public virtual ICollection<OnLeave> OnLeaves { get; set; } = new List<OnLeave>();

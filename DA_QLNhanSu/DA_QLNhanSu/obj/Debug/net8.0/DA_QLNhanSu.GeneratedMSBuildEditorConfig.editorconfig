@@ -78,6 +78,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXERhc2hib2FyZFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Departments/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXERlcGFydG1lbnRzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Departments/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXERlcGFydG1lbnRzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Departments/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXERlcGFydG1lbnRzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Departments/Employees.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXERlcGFydG1lbnRzXEVtcGxveWVlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Departments/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXERlcGFydG1lbnRzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Disciplines/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXERpc2NpcGxpbmVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -120,26 +140,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Employees/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXEVtcGxveWVlc1xJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Insurances/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXEluc3VyYW5jZXNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Insurances/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXEluc3VyYW5jZXNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Insurances/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXEluc3VyYW5jZXNcRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Insurances/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXEluc3VyYW5jZXNcRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Insurances/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXEluc3VyYW5jZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/LeaveJobs/Create.cshtml]

@@ -31,8 +31,6 @@ public partial class DaQlNhanvienContext : DbContext
 
     public virtual DbSet<EmployeeAllowance> EmployeeAllowances { get; set; }
 
-    public virtual DbSet<Insurance> Insurances { get; set; }
-
     public virtual DbSet<LeaveJob> LeaveJobs { get; set; }
 
     public virtual DbSet<OnLeave> OnLeaves { get; set; }
@@ -246,28 +244,6 @@ public partial class DaQlNhanvienContext : DbContext
             entity.HasOne(d => d.IdeNavigation).WithMany(p => p.EmployeeAllowances)
                 .HasForeignKey(d => d.Ide)
                 .HasConstraintName("FK_EMPLOYEE_ALLOWANCE_EMPLOYEE");
-        });
-
-        modelBuilder.Entity<Insurance>(entity =>
-        {
-            entity.ToTable("INSURANCE");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.ExpirationDate)
-                .HasColumnType("datetime")
-                .HasColumnName("EXPIRATION_DATE");
-            entity.Property(e => e.Ide).HasColumnName("IDE");
-            entity.Property(e => e.Number)
-                .HasMaxLength(50)
-                .HasColumnName("NUMBER");
-            entity.Property(e => e.ReleaseDate)
-                .HasColumnType("datetime")
-                .HasColumnName("RELEASE_DATE");
-            entity.Property(e => e.Status).HasColumnName("STATUS");
-
-            entity.HasOne(d => d.IdeNavigation).WithMany(p => p.Insurances)
-                .HasForeignKey(d => d.Ide)
-                .HasConstraintName("FK_INSURANCE_EMPLOYEE");
         });
 
         modelBuilder.Entity<LeaveJob>(entity =>

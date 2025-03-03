@@ -57,7 +57,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 .Include(e => e.IdpNavigation)
                 .Include(e => e.IdqNavigation)
                 .Include(e => e.Contracts)
-                .Include(e => e.Insurances)
+                
                 .Include(e => e.OnLeaves)
                 .Include(e => e.Disciplines)
                 .Include(e => e.Rewards)
