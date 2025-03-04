@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DA_QLNhanSu.Models;
 using X.PagedList;
+using ClosedXML.Excel;
 
 namespace DA_QLNhanSu.Areas.Admins.Controllers
 {
@@ -177,6 +178,62 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         private bool RewardExists(int id)
         {
             return _context.Rewards.Any(e => e.Id == id);
+        }
+        public IActionResult ExportToExcel()
+        {
+            var rewardList = _context.Rewards
+                .Select(r => new
+                {
+                    TenNhanSu = r.IdeNavigation.Name,
+                    NgayThuong = r.RewardDate.HasValue ? r.RewardDate.Value.ToString("dd/MM/yyyy") : "",
+                    NoiDung = r.Content,
+                    PhanThuong = r.RewardGift,
+                    TrangThai = r.Status == true ? "Đã duyệt" : "Chờ duyệt"
+                })
+                .ToList();
+
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("DanhSachKhenThuong");
+
+                // Tiêu đề cột
+                worksheet.Cell(1, 1).Value = "Tên Nhân Sự";
+                worksheet.Cell(1, 2).Value = "Ngày Thưởng";
+                worksheet.Cell(1, 3).Value = "Nội Dung";
+                worksheet.Cell(1, 4).Value = "Phần Thưởng (VNĐ)";
+                worksheet.Cell(1, 5).Value = "Trạng Thái";
+
+                // Định dạng tiêu đề
+                var headerRange = worksheet.Range("A1:E1");
+                headerRange.Style.Font.Bold = true;
+                headerRange.Style.Fill.BackgroundColor = XLColor.LightBlue;
+                headerRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+                // Đổ dữ liệu vào Excel
+                int row = 2;
+                foreach (var item in rewardList)
+                {
+                    worksheet.Cell(row, 1).Value = item.TenNhanSu;
+                    worksheet.Cell(row, 2).Value = item.NgayThuong;
+                    worksheet.Cell(row, 3).Value = item.NoiDung;
+                    worksheet.Cell(row, 4).Value = item.PhanThuong;
+                    worksheet.Cell(row, 5).Value = item.TrangThai;
+                    row++;
+                }
+
+                // Tự động căn chỉnh cột
+                worksheet.Columns().AdjustToContents();
+
+                // Tạo MemoryStream nhưng KHÔNG đóng sớm
+                var stream = new MemoryStream();
+                workbook.SaveAs(stream);
+                stream.Position = 0;
+
+                string fileName = "DanhSachKhenThuong.xlsx";
+                string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+                return File(stream, contentType, fileName);
+            }
         }
     }
 }

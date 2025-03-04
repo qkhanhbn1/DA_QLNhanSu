@@ -3,7 +3,7 @@
 <aside class="main-sidebar" style="background: linear-gradient(to bottom, #a8c0ff, #3f2b96); min-height: 100vh;">
     <div class="brand-section d-flex align-items-center p-3 border-bottom text-white">
         <img src="~/dist/img/AdminLTELogo.png" alt="Logo" class="rounded-circle me-3" style="width: 40px; height: 40px;">
-        <span class="fw-bold">Quản trị hệ thống</span>
+        <span class="fw-bold text-black">Quản trị hệ thống</span>
     </div>
 
     <div class="sidebar p-3">
@@ -13,14 +13,12 @@
                 @{
                     if (HttpContextAccessor.HttpContext.Session.GetString("AdminLogin") != null)
                     {
-                        <a href="#" class=" fw-bold">@HttpContextAccessor.HttpContext.Session.GetString("AdminLogin")</a>
-                        <br />
-                        <a asp-action="Logout" asp-controller="Login" class="text-red">Đăng xuất</a>
+                        <a href="#" class=" fw-bold text-black">@HttpContextAccessor.HttpContext.Session.GetString("AdminLogin")</a>
                     }
                     else
                     {
-                        <span class="text-blue">Admin</span><br />
-                        <a asp-action="Logout" asp-controller="Login" class="text-red">Đăng xuất</a>
+                        <span class="text-black">Admin@gmail.com</span><br />
+                        
                     }
                 }
             </div>
@@ -88,7 +86,6 @@
                         <i class="fas fa-calculator me-3"></i> Bảng lương định kỳ
                     </a>
                 </li>
-
                 <li class="nav-item">
                     <a href="/admins/rewards" class="nav-link d-flex align-items-center py-2 text-white">
                         <i class="fas fa-gift me-3"></i>Danh sách thưởng
@@ -106,6 +103,11 @@
                 </li>
             </ul>
         </nav>
+        <div class="logout-section mt-auto">
+            <a asp-action="Logout" asp-controller="Login" class="nav-link d-flex align-items-center py-2 text-red">
+                <i class="fas fa-sign-out-alt me-3"></i> Đăng xuất
+            </a>
+        </div>
     </div>
 </aside>
 
@@ -134,3 +136,4 @@
         });
     });
 </script>
+

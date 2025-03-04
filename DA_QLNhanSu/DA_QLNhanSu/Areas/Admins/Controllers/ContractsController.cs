@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DA_QLNhanSu.Models;
 using X.PagedList;
+using ClosedXML.Excel;
 
 namespace DA_QLNhanSu.Areas.Admins.Controllers
 {
@@ -221,6 +222,70 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, new { success = false, message = "Lỗi khi xóa: " + ex.Message });
+            }
+        }
+        public IActionResult ExportToExcel()
+        {
+            var contracts = _context.Contracts
+                .Select(c => new
+                {
+                    TenNhanSu = c.IdeNavigation.Name,
+                    MaNhanSu = c.IdeNavigation.Code,
+                    ChucVu = c.IdeNavigation.IdpNavigation.Name,
+                    MoTa = c.Content,
+                    NgayBatDau = c.ReleaseDate,  // Giữ nguyên kiểu DateTime?
+                    NgayHetHan = c.ExpirationDate,
+                    TrangThai = c.Status == true ? "Đã ký" : "Hết hạn"
+                })
+                .ToList();
+
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Hợp đồng nhân sự");
+                var currentRow = 1;
+
+                // Tiêu đề cột
+                worksheet.Cell(currentRow, 1).Value = "STT";
+                worksheet.Cell(currentRow, 2).Value = "Tên nhân sự";
+                worksheet.Cell(currentRow, 3).Value = "Mã nhân sự";
+                worksheet.Cell(currentRow, 4).Value = "Chức vụ";
+                worksheet.Cell(currentRow, 5).Value = "Mô tả";
+                worksheet.Cell(currentRow, 6).Value = "Ngày bắt đầu";
+                worksheet.Cell(currentRow, 7).Value = "Ngày hết hạn";
+                worksheet.Cell(currentRow, 8).Value = "Trạng thái";
+
+                // Định dạng tiêu đề
+                for (int i = 1; i <= 8; i++)
+                {
+                    worksheet.Cell(currentRow, i).Style.Font.Bold = true;
+                    worksheet.Cell(currentRow, i).Style.Fill.BackgroundColor = XLColor.LightBlue;
+                    worksheet.Cell(currentRow, i).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                }
+
+                // Dữ liệu
+                int stt = 1;
+                foreach (var contract in contracts)
+                {
+                    currentRow++;
+                    worksheet.Cell(currentRow, 1).Value = stt++;
+                    worksheet.Cell(currentRow, 2).Value = contract.TenNhanSu;
+                    worksheet.Cell(currentRow, 3).Value = contract.MaNhanSu;
+                    worksheet.Cell(currentRow, 4).Value = contract.ChucVu;
+                    worksheet.Cell(currentRow, 5).Value = contract.MoTa;
+                    worksheet.Cell(currentRow, 6).Value = contract.NgayBatDau;
+                    worksheet.Cell(currentRow, 7).Value = contract.NgayHetHan;
+                    worksheet.Cell(currentRow, 8).Value = contract.TrangThai;
+                }
+
+                // Auto-fit columns
+                worksheet.Columns().AdjustToContents();
+
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var content = stream.ToArray();
+                    return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DanhSachHopDong.xlsx");
+                }
             }
         }
     }

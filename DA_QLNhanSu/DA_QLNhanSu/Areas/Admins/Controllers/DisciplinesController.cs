@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DA_QLNhanSu.Models;
 using X.PagedList;
+using ClosedXML.Excel;
 
 namespace DA_QLNhanSu.Areas.Admins.Controllers
 {
@@ -178,6 +179,62 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         private bool DisciplineExists(int id)
         {
             return _context.Disciplines.Any(e => e.Id == id);
+        }
+        public IActionResult ExportToExcel()
+        {
+            var disciplineList = _context.Disciplines
+                .Select(d => new
+                {
+                    TenNhanSu = d.IdeNavigation.Name,
+                    NgayPhat = d.DisciplineDate.HasValue ? d.DisciplineDate.Value.ToString("dd/MM/yyyy") : "",
+                    NoiDung = d.Content,
+                    HinhThucPhat = d.Punishment,
+                    TrangThai = d.Status == true ? "Đã duyệt" : "Chờ duyệt"
+                })
+                .ToList();
+
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("DanhSachKyLuat");
+
+                // Tiêu đề cột
+                worksheet.Cell(1, 1).Value = "Tên Nhân Sự";
+                worksheet.Cell(1, 2).Value = "Ngày Phạt";
+                worksheet.Cell(1, 3).Value = "Nội Dung";
+                worksheet.Cell(1, 4).Value = "Hình Thức Phạt";
+                worksheet.Cell(1, 5).Value = "Trạng Thái";
+
+                // Định dạng tiêu đề
+                var headerRange = worksheet.Range("A1:E1");
+                headerRange.Style.Font.Bold = true;
+                headerRange.Style.Fill.BackgroundColor = XLColor.LightBlue;
+                headerRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+                // Đổ dữ liệu vào Excel
+                int row = 2;
+                foreach (var item in disciplineList)
+                {
+                    worksheet.Cell(row, 1).Value = item.TenNhanSu;
+                    worksheet.Cell(row, 2).Value = item.NgayPhat;
+                    worksheet.Cell(row, 3).Value = item.NoiDung;
+                    worksheet.Cell(row, 4).Value = item.HinhThucPhat;
+                    worksheet.Cell(row, 5).Value = item.TrangThai;
+                    row++;
+                }
+
+                // Tự động căn chỉnh cột
+                worksheet.Columns().AdjustToContents();
+
+                // Xuất file Excel
+                var stream = new MemoryStream();
+                workbook.SaveAs(stream);
+                stream.Position = 0;
+
+                string fileName = "DanhSachKyLuat.xlsx";
+                string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+                return File(stream, contentType, fileName);
+            }
         }
     }
 }

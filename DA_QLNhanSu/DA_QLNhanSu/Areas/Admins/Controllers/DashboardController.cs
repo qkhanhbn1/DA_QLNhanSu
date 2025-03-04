@@ -24,6 +24,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
             ViewData["ContractCount"] = contractCount;
             ViewData["RewardCount"] = rewardCount;
             ViewData["DisciplineCount"] = disciplineCount;
+            
             return View();
         }
     }

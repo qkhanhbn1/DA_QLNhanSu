@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DA_QLNhanSu.Models;
 using X.PagedList;
+using ClosedXML.Excel;
 
 namespace DA_QLNhanSu.Areas.Admins.Controllers
 {
@@ -178,6 +179,62 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         private bool SalaryAdvanceExists(int id)
         {
             return _context.SalaryAdvances.Any(e => e.Idsa == id);
+        }
+        public IActionResult ExportToExcel()
+        {
+            var salaryAdvanceList = _context.SalaryAdvances
+                .Select(c => new
+                {
+                    TenNhanSu = c.IdeNavigation.Name,
+                    SoTien = c.Money,
+                    Thang = c.Month,
+                    Nam = c.Year,
+                    TrangThai = c.Status == true ? "Đã duyệt" : "Chờ duyệt"
+                })
+                .ToList();
+
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("DanhSachUngLuong");
+
+                // Tiêu đề cột
+                worksheet.Cell(1, 1).Value = "Tên Nhân Sự";
+                worksheet.Cell(1, 2).Value = "Số Tiền";
+                worksheet.Cell(1, 3).Value = "Tháng";
+                worksheet.Cell(1, 4).Value = "Năm";
+                worksheet.Cell(1, 5).Value = "Trạng Thái";
+
+                // Định dạng tiêu đề
+                var headerRange = worksheet.Range("A1:E1");
+                headerRange.Style.Font.Bold = true;
+                headerRange.Style.Fill.BackgroundColor = XLColor.LightBlue;
+                headerRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+                // Đổ dữ liệu vào Excel
+                int row = 2;
+                foreach (var item in salaryAdvanceList)
+                {
+                    worksheet.Cell(row, 1).Value = item.TenNhanSu;
+                    worksheet.Cell(row, 2).Value = item.SoTien;
+                    worksheet.Cell(row, 3).Value = item.Thang;
+                    worksheet.Cell(row, 4).Value = item.Nam;
+                    worksheet.Cell(row, 5).Value = item.TrangThai;
+                    row++;
+                }
+
+                // Tự động căn chỉnh cột
+                worksheet.Columns().AdjustToContents();
+
+                // Tạo MemoryStream nhưng KHÔNG đóng sớm
+                var stream = new MemoryStream();
+                workbook.SaveAs(stream);
+                stream.Position = 0;
+
+                string fileName = "DanhSachUngLuong.xlsx";
+                string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+                return File(stream, contentType, fileName);
+            }
         }
     }
 }

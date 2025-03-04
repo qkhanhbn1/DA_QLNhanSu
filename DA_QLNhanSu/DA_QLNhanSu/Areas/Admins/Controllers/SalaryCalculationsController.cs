@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DA_QLNhanSu.Models;
 using X.PagedList;
+using ClosedXML.Excel;
 
 namespace DA_QLNhanSu.Areas.Admins.Controllers
 {
@@ -379,7 +380,71 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 return StatusCode(500, new { success = false, message = "Lỗi khi xóa: " + ex.Message });
             }
         }
+        public IActionResult ExportToExcel()
+        {
+            var salaryList = _context.SalaryCalculations
+                .Select(s => new
+                {
+                    TenNhanSu = s.IdeNavigation.Name,
+                    Thang = s.Month,
+                    Nam = s.Year,
+                    SoNgayLam = s.Workday,
+                    PhuCap = s.IdEmployeeallowanceNavigation != null ? s.IdEmployeeallowanceNavigation.Money : 0,
+                    TangCa = s.IdOvertimeNavigation != null ? s.IdOvertimeNavigation.OvertimePay : 0,
+                    UngLuong = s.IdSalaryadvanceNavigation != null ? s.IdSalaryadvanceNavigation.Money : 0,
+                    TongTien = s.TotalSalary
+                })
+                .ToList();
 
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("BangLuongDinhKy");
+
+                // Tiêu đề cột
+                worksheet.Cell(1, 1).Value = "Tên Nhân Sự";
+                worksheet.Cell(1, 2).Value = "Tháng";
+                worksheet.Cell(1, 3).Value = "Năm";
+                worksheet.Cell(1, 4).Value = "Số Ngày Làm";
+                worksheet.Cell(1, 5).Value = "Phụ Cấp";
+                worksheet.Cell(1, 6).Value = "Tăng Ca";
+                worksheet.Cell(1, 7).Value = "Ứng Lương";
+                worksheet.Cell(1, 8).Value = "Tổng Tiền";
+
+                // Định dạng tiêu đề
+                var headerRange = worksheet.Range("A1:H1");
+                headerRange.Style.Font.Bold = true;
+                headerRange.Style.Fill.BackgroundColor = XLColor.LightBlue;
+                headerRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+                // Đổ dữ liệu vào Excel
+                int row = 2;
+                foreach (var item in salaryList)
+                {
+                    worksheet.Cell(row, 1).Value = item.TenNhanSu;
+                    worksheet.Cell(row, 2).Value = item.Thang;
+                    worksheet.Cell(row, 3).Value = item.Nam;
+                    worksheet.Cell(row, 4).Value = item.SoNgayLam;
+                    worksheet.Cell(row, 5).Value = item.PhuCap;
+                    worksheet.Cell(row, 6).Value = item.TangCa;
+                    worksheet.Cell(row, 7).Value = item.UngLuong;
+                    worksheet.Cell(row, 8).Value = item.TongTien;
+                    row++;
+                }
+
+                // Tự động căn chỉnh cột
+                worksheet.Columns().AdjustToContents();
+
+                // Tạo MemoryStream nhưng KHÔNG đóng sớm
+                var stream = new MemoryStream();
+                workbook.SaveAs(stream);
+                stream.Position = 0;
+
+                string fileName = "BangLuongDinhKy.xlsx";
+                string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+                return File(stream, contentType, fileName);
+            }
+        }
 
     }
 }
