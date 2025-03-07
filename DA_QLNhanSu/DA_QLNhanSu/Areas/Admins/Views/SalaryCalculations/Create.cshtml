@@ -1,163 +1,66 @@
 ﻿@model DA_QLNhanSu.Models.SalaryCalculation
 
 @{
-    ViewData["Title"] = "Tạo bảng lương";
+    ViewData["Title"] = "Create";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1 class="text-center my-4 text-primary">Thêm mới bảng lương</h1>
+<h1>Create</h1>
 
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card shadow-lg">
-            <div class="card-body">
-                <form asp-action="Create">
+<h4>SalaryCalculation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="mb-3">
-                        <label asp-for="Ide" class="form-label">Nhân viên</label>
-                        <select asp-for="Ide" class="form-select" asp-items="ViewBag.Ide" id="IdeDropdown"></select>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label asp-for="Month" class="form-label">Tháng</label>
-                            <input asp-for="Month" class="form-control" type="number" min="1" max="12" />
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label asp-for="Year" class="form-label">Năm</label>
-                            <input asp-for="Year" class="form-control" type="number" />
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label asp-for="Workday" class="form-label">Số ngày làm</label>
-                        <input asp-for="Workday" class="form-control" readonly />
-                    </div>
-                    <div class="mb-3">
-                <label asp-for="IdPosition" class="control-label">Chức vụ</label>
-                <select asp-for="IdPosition" class="form-control" asp-items="ViewBag.IdPosition" id="IdPositionDropdown" readonly></select>
+            <div class="form-group">
+                <label asp-for="Ide" class="control-label"></label>
+                <select asp-for="Ide" class ="form-control" asp-items="ViewBag.Ide"></select>
             </div>
-                    <div class="mb-3">
-                <label>Tiền lương hàng ngày</label>
-                <input type="text" id="DailyWage" class="form-control" readonly />
+            <div class="form-group">
+                <label asp-for="IdSalaryhistory" class="control-label"></label>
+                <select asp-for="IdSalaryhistory" class ="form-control" asp-items="ViewBag.IdSalaryhistory"></select>
             </div>
-                    <div class="mb-3" style="display: none;">
-                <label asp-for="IdOvertime" class="control-label"></label>
-                <select asp-for="IdOvertime" class="form-control" asp-items="ViewBag.IdOvertime" id="IdOvertimeDropdown" readonly></select>
-            </div>
-                    <div class="mb-3">
-                <label>Tiền tăng ca</label>
-                <input type="text" id="OvertimePay" class="form-control" readonly />
-            </div>
-                    <div class="mb-3" style="display: none;">
+            <div class="form-group">
                 <label asp-for="IdEmployeeallowance" class="control-label"></label>
-                <select asp-for="IdEmployeeallowance" class="form-control" asp-items="ViewBag.IdEmployeeallowance" id="IdEmployeeAllowanceDropdown" readonly></select>
+                <select asp-for="IdEmployeeallowance" class ="form-control" asp-items="ViewBag.IdEmployeeallowance"></select>
             </div>
-                    <div class="mb-3">
-                <label>Tiền phụ cấp</label>
-                <input type="text" id="AllowanceMoney" class="form-control" readonly />
+            <div class="form-group">
+                <label asp-for="IdTimesheet" class="control-label"></label>
+                <select asp-for="IdTimesheet" class ="form-control" asp-items="ViewBag.IdTimesheet"></select>
             </div>
-                    <div class="mb-3" style="display: none;">
+            <div class="form-group">
                 <label asp-for="IdSalaryadvance" class="control-label"></label>
-                <select asp-for="IdSalaryadvance" class="form-control" asp-items="ViewBag.IdSalaryadvance" id="IdSalaryAdvanceDropdown" readonly></select>
+                <select asp-for="IdSalaryadvance" class ="form-control" asp-items="ViewBag.IdSalaryadvance"></select>
             </div>
-                    <div class="mb-3">
-                <label>Tiền ứng lương</label>
-                <input type="text" id="AdvanceMoney" class="form-control" readonly />
+            <div class="form-group">
+                <label asp-for="Month" class="control-label"></label>
+                <input asp-for="Month" class="form-control" />
+                <span asp-validation-for="Month" class="text-danger"></span>
             </div>
-                    <div class="mb-3">
-                <label asp-for="TotalSalary" class="control-label">Tổng tiền</label>
-                <input asp-for="TotalSalary" class="form-control" readonly />
+            <div class="form-group">
+                <label asp-for="Year" class="control-label"></label>
+                <input asp-for="Year" class="form-control" />
+                <span asp-validation-for="Year" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalSalary" class="control-label"></label>
+                <input asp-for="TotalSalary" class="form-control" />
                 <span asp-validation-for="TotalSalary" class="text-danger"></span>
             </div>
-            
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary w-30">Tạo</button>
-                    </div>
-                </form>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
             </div>
-        </div>
-
-        <div class="text-center mt-3">
-            <a asp-action="Index" class="btn btn-outline-secondary">Quay lại</a>
-        </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Quay lại</a>
+    <a asp-action="Index">Back to List</a>
 </div>
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-    function fetchEmployeeData(ide, month, year) {
-        if (ide && month && year) {
-            $.ajax({
-                url: '/Admins/SalaryCalculations/GetEmployeeDetails',
-                type: 'GET',
-                data: { ide: ide, month: month, year: year },
-                success: function (data) {
-                    $('#IdPositionDropdown').val(data.idPosition);
-                    $('#DailyWage').val(data.dailyWage);
-                    $('#OvertimePay').val(data.overtimePay);
-                    $('#AllowanceMoney').val(data.allowanceMoney);
-                    $('#AdvanceMoney').val(data.advanceMoney);
-                    calculateTotalSalary();
-                },
-                error: function () {
-                    alert('Error fetching employee data.');
-                    $('#DailyWage, #OvertimePay, #AllowanceMoney, #AdvanceMoney, #TotalSalary').val('');
-                }
-            });
-        } else {
-            $('#DailyWage, #OvertimePay, #AllowanceMoney, #AdvanceMoney, #TotalSalary').val('');
-        }
-    }
 
-    function fetchWorkday(ide, month, year) {
-        if (ide && month && year) {
-            $.ajax({
-                url: '/Admins/SalaryCalculations/GetWorkday',
-                type: 'GET',
-                data: { ide: ide, month: month, year: year },
-                success: function (data) {
-                    $('#Workday').val(data.workday || '');
-                    calculateTotalSalary();
-                },
-                error: function () {
-                    alert('Error fetching workday data.');
-                    $('#Workday').val('');
-                }
-            });
-        } else {
-            $('#Workday').val('');
-        }
-    }
-
-    function calculateTotalSalary() {
-        var workday = parseInt($('#Workday').val()) || 0;
-        var dailyWage = parseFloat($('#DailyWage').val()) || 0.0;
-        var overtimePay = parseFloat($('#OvertimePay').val()) || 0.0;
-        var allowanceMoney = parseFloat($('#AllowanceMoney').val()) || 0.0;
-        var advanceMoney = parseFloat($('#AdvanceMoney').val()) || 0.0;
-
-        var totalSalary = (workday * dailyWage) + overtimePay + allowanceMoney - advanceMoney;
-        $('#TotalSalary').val(totalSalary.toFixed(2));
-    }
-
-    $('#IdeDropdown, #Month, #Year').change(function () {
-        var ide = $('#IdeDropdown').val();
-        var month = $('#Month').val();
-        var year = $('#Year').val();
-
-        fetchEmployeeData(ide, month, year);
-        fetchWorkday(ide, month, year);
-    });
-
-    $('#Workday, #DailyWage, #OvertimePay, #AllowanceMoney, #AdvanceMoney').change(function () {
-        calculateTotalSalary();
-    });
-});
-    </script>
-
-
-}

@@ -86,7 +86,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Ide,Name,Code,Gender,Birthday,Email,Phone,Cccd,Address,Image,Idd,Idp,Idq,Marry,Status")] Employee employee)
+        public async Task<IActionResult> Create([Bind("Ide,Name,Code,Gender,Birthday,Email,Phone,Cccd,Address,Image,Idd,Idp,Idq,Marry,Status,Idrole")] Employee employee)
         {
             try
             {
@@ -140,7 +140,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Ide,Name,Code,Gender,Birthday,Email,Phone,Cccd,Address,Image,Idd,Idp,Idq,Marry,Status")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("Ide,Name,Code,Gender,Birthday,Email,Phone,Cccd,Address,Image,Idd,Idp,Idq,Marry,Status,Idrole")] Employee employee)
         {
             if (id != employee.Ide)
             {

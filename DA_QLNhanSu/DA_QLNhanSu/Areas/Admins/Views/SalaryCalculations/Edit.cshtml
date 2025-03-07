@@ -1,103 +1,72 @@
 ﻿@model DA_QLNhanSu.Models.SalaryCalculation
 
 @{
-    ViewData["Title"] = "Chỉnh sửa lương";
+    ViewData["Title"] = "Edit";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1 class="text-center text-primary mt-4">Chỉnh sửa thông tin lương</h1>
+<h1>Edit</h1>
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-lg">
-                <div class="card-body">
-                    <form asp-action="Edit">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input type="hidden" asp-for="Ids" />
-
-                        <!-- Nhân viên -->
-                        @if (!string.IsNullOrEmpty(Model.IdeNavigation?.Image))
-                        {
-                            <div class="text-center mb-3">
-                                <img src="@Model.IdeNavigation.Image" alt="Ảnh nhân sự" width="120" height="120" class="rounded-circle border border-2 shadow-sm" />
-                            </div>
-                        }
-
-                        <div class="form-group mb-3">
-                            <label asp-for="Ide" class="form-label">Tên nhân sự</label>
-                            <select asp-for="Ide" class="form-select" asp-items="ViewBag.Ide"></select>
-                            <span asp-validation-for="Ide" class="text-danger"></span>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="Month" class="form-label">Tháng</label>
-                                <input asp-for="Month" class="form-control" />
-                                <span asp-validation-for="Month" class="text-danger"></span>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="Year" class="form-label">Năm</label>
-                                <input asp-for="Year" class="form-control" />
-                                <span asp-validation-for="Year" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="Workday" class="form-label">Số ngày làm</label>
-                            <input asp-for="Workday" class="form-control" />
-                            <span asp-validation-for="Workday" class="text-danger"></span>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="IdPosition" class="form-label">Chức vụ</label>
-                                <select asp-for="IdPosition" class="form-select" asp-items="ViewBag.IdPosition"></select>
-                                <span asp-validation-for="IdPosition" class="text-danger"></span>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="IdOvertime" class="form-label">Tiền tăng ca</label>
-                                <select asp-for="IdOvertime" class="form-select" asp-items="ViewBag.IdOvertime"></select>
-                                <span asp-validation-for="IdOvertime" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="IdEmployeeallowance" class="form-label">Tiền phụ cấp</label>
-                                <select asp-for="IdEmployeeallowance" class="form-select" asp-items="ViewBag.IdEmployeeallowance"></select>
-                                <span asp-validation-for="IdEmployeeallowance" class="text-danger"></span>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="IdSalaryadvance" class="form-label">Tiền ứng lương</label>
-                                <select asp-for="IdSalaryadvance" class="form-select" asp-items="ViewBag.IdSalaryadvance"></select>
-                                <span asp-validation-for="IdSalaryadvance" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="TotalSalary" class="form-label">Tổng tiền</label>
-                            <input asp-for="TotalSalary" class="form-control" />
-                            <span asp-validation-for="TotalSalary" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="Date" class="form-label">Ngày tạo</label>
-                            <input asp-for="Date" class="form-control" />
-                            <span asp-validation-for="Date" class="text-danger"></span>
-                        </div>
-
-                        <!-- Nút Lưu -->
-                        <div class="text-center">
-                            <input type="submit" value="Lưu" class="btn btn-primary px-4 py-2 shadow" />
-                        </div>
-                    </form>
-                </div>
+<h4>SalaryCalculation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Ids" />
+            <div class="form-group">
+                <label asp-for="Ide" class="control-label"></label>
+                <select asp-for="Ide" class="form-control" asp-items="ViewBag.Ide"></select>
+                <span asp-validation-for="Ide" class="text-danger"></span>
             </div>
-
-            <div class="text-center mt-3">
-                <a asp-action="Index" class="btn btn-outline-secondary">Quay lại</a>
+            <div class="form-group">
+                <label asp-for="IdSalaryhistory" class="control-label"></label>
+                <select asp-for="IdSalaryhistory" class="form-control" asp-items="ViewBag.IdSalaryhistory"></select>
+                <span asp-validation-for="IdSalaryhistory" class="text-danger"></span>
             </div>
-        </div>
+            <div class="form-group">
+                <label asp-for="IdEmployeeallowance" class="control-label"></label>
+                <select asp-for="IdEmployeeallowance" class="form-control" asp-items="ViewBag.IdEmployeeallowance"></select>
+                <span asp-validation-for="IdEmployeeallowance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdTimesheet" class="control-label"></label>
+                <select asp-for="IdTimesheet" class="form-control" asp-items="ViewBag.IdTimesheet"></select>
+                <span asp-validation-for="IdTimesheet" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdSalaryadvance" class="control-label"></label>
+                <select asp-for="IdSalaryadvance" class="form-control" asp-items="ViewBag.IdSalaryadvance"></select>
+                <span asp-validation-for="IdSalaryadvance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Month" class="control-label"></label>
+                <input asp-for="Month" class="form-control" />
+                <span asp-validation-for="Month" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Year" class="control-label"></label>
+                <input asp-for="Year" class="form-control" />
+                <span asp-validation-for="Year" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalSalary" class="control-label"></label>
+                <input asp-for="TotalSalary" class="form-control" />
+                <span asp-validation-for="TotalSalary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
 </div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

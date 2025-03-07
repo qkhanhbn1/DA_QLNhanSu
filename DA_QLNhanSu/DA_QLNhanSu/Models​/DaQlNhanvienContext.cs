@@ -35,17 +35,19 @@ public partial class DaQlNhanvienContext : DbContext
 
     public virtual DbSet<OnLeave> OnLeaves { get; set; }
 
-    public virtual DbSet<Overtime> Overtimes { get; set; }
-
     public virtual DbSet<Position> Positions { get; set; }
 
     public virtual DbSet<Qualification> Qualifications { get; set; }
 
     public virtual DbSet<Reward> Rewards { get; set; }
 
+    public virtual DbSet<Role> Roles { get; set; }
+
     public virtual DbSet<SalaryAdvance> SalaryAdvances { get; set; }
 
     public virtual DbSet<SalaryCalculation> SalaryCalculations { get; set; }
+
+    public virtual DbSet<SalaryHistory> SalaryHistories { get; set; }
 
     public virtual DbSet<TimeSheet> TimeSheets { get; set; }
 
@@ -63,9 +65,14 @@ public partial class DaQlNhanvienContext : DbContext
             entity.Property(e => e.Email)
                 .HasMaxLength(250)
                 .HasColumnName("EMAIL");
+            entity.Property(e => e.Idrole).HasColumnName("IDROLE");
             entity.Property(e => e.Password)
                 .HasMaxLength(250)
                 .HasColumnName("PASSWORD");
+
+            entity.HasOne(d => d.IdroleNavigation).WithMany(p => p.Accounts)
+                .HasForeignKey(d => d.Idrole)
+                .HasConstraintName("FK_ACCOUNT_ROLE");
         });
 
         modelBuilder.Entity<Allowance>(entity =>
@@ -201,6 +208,7 @@ public partial class DaQlNhanvienContext : DbContext
             entity.Property(e => e.Idd).HasColumnName("IDD");
             entity.Property(e => e.Idp).HasColumnName("IDP");
             entity.Property(e => e.Idq).HasColumnName("IDQ");
+            entity.Property(e => e.Idrole).HasColumnName("IDROLE");
             entity.Property(e => e.Image)
                 .HasMaxLength(250)
                 .HasColumnName("IMAGE");
@@ -224,6 +232,10 @@ public partial class DaQlNhanvienContext : DbContext
             entity.HasOne(d => d.IdqNavigation).WithMany(p => p.Employees)
                 .HasForeignKey(d => d.Idq)
                 .HasConstraintName("FK_EMPLOYEE_QUALIFICATION");
+
+            entity.HasOne(d => d.IdroleNavigation).WithMany(p => p.Employees)
+                .HasForeignKey(d => d.Idrole)
+                .HasConstraintName("FK_EMPLOYEE_ACCOUNT");
         });
 
         modelBuilder.Entity<EmployeeAllowance>(entity =>
@@ -295,30 +307,6 @@ public partial class DaQlNhanvienContext : DbContext
                 .HasConstraintName("FK_LEAVE_EMPLOYEE");
         });
 
-        modelBuilder.Entity<Overtime>(entity =>
-        {
-            entity.HasKey(e => e.Ido);
-
-            entity.ToTable("OVERTIME", tb => tb.HasTrigger("CalculateOvertimePay"));
-
-            entity.Property(e => e.Ido).HasColumnName("IDO");
-            entity.Property(e => e.HourlyWage)
-                .HasColumnType("decimal(10, 0)")
-                .HasColumnName("HOURLY_WAGE");
-            entity.Property(e => e.Ide).HasColumnName("IDE");
-            entity.Property(e => e.Month).HasColumnName("month");
-            entity.Property(e => e.OvertimePay)
-                .HasColumnType("decimal(10, 0)")
-                .HasColumnName("OVERTIME_PAY");
-            entity.Property(e => e.SalaryCoeficient).HasColumnName("SALARY_COEFICIENT");
-            entity.Property(e => e.WorkingHours).HasColumnName("WORKING_HOURS");
-            entity.Property(e => e.Year).HasColumnName("year");
-
-            entity.HasOne(d => d.IdeNavigation).WithMany(p => p.Overtimes)
-                .HasForeignKey(d => d.Ide)
-                .HasConstraintName("FK_OVERTIME_EMPLOYEE");
-        });
-
         modelBuilder.Entity<Position>(entity =>
         {
             entity.HasKey(e => e.Idp);
@@ -326,9 +314,6 @@ public partial class DaQlNhanvienContext : DbContext
             entity.ToTable("POSITION");
 
             entity.Property(e => e.Idp).HasColumnName("IDP");
-            entity.Property(e => e.DailyWage)
-                .HasColumnType("decimal(10, 0)")
-                .HasColumnName("DAILY_WAGE");
             entity.Property(e => e.Description)
                 .HasMaxLength(250)
                 .HasColumnName("DESCRIPTION");
@@ -374,6 +359,16 @@ public partial class DaQlNhanvienContext : DbContext
                 .HasConstraintName("FK_REWARD_EMPLOYEE");
         });
 
+        modelBuilder.Entity<Role>(entity =>
+        {
+            entity.ToTable("ROLE");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Name)
+                .HasMaxLength(50)
+                .HasColumnName("NAME");
+        });
+
         modelBuilder.Entity<SalaryAdvance>(entity =>
         {
             entity.HasKey(e => e.Idsa);
@@ -405,33 +400,27 @@ public partial class DaQlNhanvienContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("DATE");
             entity.Property(e => e.IdEmployeeallowance).HasColumnName("ID_EMPLOYEEALLOWANCE");
-            entity.Property(e => e.IdOvertime).HasColumnName("ID_OVERTIME");
-            entity.Property(e => e.IdPosition).HasColumnName("ID_POSITION");
             entity.Property(e => e.IdSalaryadvance).HasColumnName("ID_SALARYADVANCE");
+            entity.Property(e => e.IdSalaryhistory).HasColumnName("ID_SALARYHISTORY");
             entity.Property(e => e.IdTimesheet).HasColumnName("ID_TIMESHEET");
             entity.Property(e => e.Ide).HasColumnName("IDE");
             entity.Property(e => e.Month).HasColumnName("MONTH");
             entity.Property(e => e.TotalSalary)
                 .HasColumnType("decimal(10, 0)")
                 .HasColumnName("TOTAL_SALARY");
-            entity.Property(e => e.Workday).HasColumnName("WORKDAY");
             entity.Property(e => e.Year).HasColumnName("YEAR");
 
             entity.HasOne(d => d.IdEmployeeallowanceNavigation).WithMany(p => p.SalaryCalculations)
                 .HasForeignKey(d => d.IdEmployeeallowance)
                 .HasConstraintName("FK_SALARY_CALCULATION_EMPLOYEE_ALLOWANCE");
 
-            entity.HasOne(d => d.IdOvertimeNavigation).WithMany(p => p.SalaryCalculations)
-                .HasForeignKey(d => d.IdOvertime)
-                .HasConstraintName("FK_SALARY_CALCULATION_OVERTIME");
-
-            entity.HasOne(d => d.IdPositionNavigation).WithMany(p => p.SalaryCalculations)
-                .HasForeignKey(d => d.IdPosition)
-                .HasConstraintName("FK_SALARY_CALCULATION_POSITION");
-
             entity.HasOne(d => d.IdSalaryadvanceNavigation).WithMany(p => p.SalaryCalculations)
                 .HasForeignKey(d => d.IdSalaryadvance)
                 .HasConstraintName("FK_SALARY_CALCULATION_SALARY_ADVANCE");
+
+            entity.HasOne(d => d.IdSalaryhistoryNavigation).WithMany(p => p.SalaryCalculations)
+                .HasForeignKey(d => d.IdSalaryhistory)
+                .HasConstraintName("FK_SALARY_CALCULATION_SALARY_HISTORY");
 
             entity.HasOne(d => d.IdTimesheetNavigation).WithMany(p => p.SalaryCalculations)
                 .HasForeignKey(d => d.IdTimesheet)
@@ -440,6 +429,25 @@ public partial class DaQlNhanvienContext : DbContext
             entity.HasOne(d => d.IdeNavigation).WithMany(p => p.SalaryCalculations)
                 .HasForeignKey(d => d.Ide)
                 .HasConstraintName("FK_SALARY_CALCULATION_EMPLOYEE");
+        });
+
+        modelBuilder.Entity<SalaryHistory>(entity =>
+        {
+            entity.ToTable("SALARY_HISTORY");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.EffectiveDate).HasColumnName("EFFECTIVE_DATE");
+            entity.Property(e => e.Ide).HasColumnName("IDE");
+            entity.Property(e => e.Note)
+                .HasMaxLength(50)
+                .HasColumnName("NOTE");
+            entity.Property(e => e.Salary)
+                .HasColumnType("decimal(18, 0)")
+                .HasColumnName("SALARY");
+
+            entity.HasOne(d => d.IdeNavigation).WithMany(p => p.SalaryHistories)
+                .HasForeignKey(d => d.Ide)
+                .HasConstraintName("FK_SALARY_HISTORY_EMPLOYEE");
         });
 
         modelBuilder.Entity<TimeSheet>(entity =>
