@@ -9,11 +9,11 @@ public partial class OnLeave
 
     public int? Ide { get; set; }
 
-    public DateTime? RequestDate { get; set; }
+    public DateOnly? RequestDate { get; set; }
 
-    public DateTime? ReleaseDate { get; set; }
+    public DateOnly? ReleaseDate { get; set; }
 
-    public DateTime? ExpirationDate { get; set; }
+    public DateOnly? ExpirationDate { get; set; }
 
     public string? Content { get; set; }
 

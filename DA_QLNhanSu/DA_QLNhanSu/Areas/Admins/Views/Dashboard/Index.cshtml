@@ -2,15 +2,6 @@
     ViewData["Title"] = "DashBoard";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
-<div class="card mb-4 shadow-sm">
-    <div class="card-body d-flex align-items-center">
-        <img src="~/Images/admin.webp" alt="User Avatar" class="rounded-circle me-3" width="60" height="60">
-        <div>
-            <h5 class="mb-1">Mừng trở lại,</h5>
-            <p class="mb-0">Bạn đang truy cập hệ thống quản lý nhân sự.</p>
-        </div>
-    </div>
-</div>
 <!-- Small boxes (Stat box) -->
 <div class="row">
     <div class="col-lg-3 col-6">
@@ -22,7 +13,7 @@
             <div class="icon">
                 <i class="ion ion-person"></i>
             </div>
-            <a href="/admins/products" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="/admins/employees" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <div class="col-lg-3 col-6">
@@ -34,7 +25,7 @@
             <div class="icon">
                 <i class="ion ion-document-text"></i>
             </div>
-            <a href="/admins/news" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="/admins/contracts" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <div class="col-lg-3 col-6">
@@ -46,7 +37,7 @@
             <div class="icon">
                 <i class="ion ion-ribbon"></i>
             </div>
-            <a href="/admins/customers" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="/admins/rewards" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <div class="col-lg-3 col-6">
@@ -58,7 +49,68 @@
             <div class="icon">
                 <i class="ion ion-alert"></i>
             </div>
-            <a href="/admins/contacts" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="/admins/disciplines" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
 </div>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Tổng Quỹ Lương Hàng Tháng</h3>
+    </div>
+    <div class="card-body">
+        <canvas id="salaryChart" ></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch('/Admins/Dashboard/GetTotalSalary')
+            .then(response => response.json())
+            .then(data => {
+                console.log("Dữ liệu từ API:", data);
+
+                if (!Array.isArray(data) || data.length === 0) {
+                    console.error('Dữ liệu trống hoặc sai định dạng:', data);
+                    return;
+                }
+
+                let labels = data.map(item => `${item.month}/${item.year}`);
+                let salaries = data.map(item => item.totalSalary);
+
+                console.log("Labels:", labels);
+                console.log("Salaries:", salaries);
+
+                let ctx = document.getElementById('salaryChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Tổng Quỹ Lương',
+                            data: salaries,
+                            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { beginAtZero: true }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Lỗi khi tải dữ liệu:', error));
+    });
+</script>
+<style>
+    #salaryChart {
+        max-width: 800px;
+        max-height: 700px;
+    }
+
+</style>
+
+

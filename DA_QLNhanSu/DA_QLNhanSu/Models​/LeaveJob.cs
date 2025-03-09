@@ -11,7 +11,7 @@ public partial class LeaveJob
 
     public bool? Status { get; set; }
 
-    public DateTime? Date { get; set; }
+    public DateOnly? Date { get; set; }
 
     public string? ReasonLeave { get; set; }
 

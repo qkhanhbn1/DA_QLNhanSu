@@ -11,7 +11,7 @@ public partial class SalaryHistory
 
     public decimal? Salary { get; set; }
 
-    public DateOnly? EffectiveDate { get; set; }
+    public DateTime? EffectiveDate { get; set; }
 
     public string? Note { get; set; }
 

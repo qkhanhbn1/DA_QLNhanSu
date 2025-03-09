@@ -23,7 +23,7 @@ public partial class SalaryCalculation
 
     public decimal? TotalSalary { get; set; }
 
-    public DateTime? Date { get; set; }
+    public DateOnly? Date { get; set; }
 
     public virtual EmployeeAllowance? IdEmployeeallowanceNavigation { get; set; }
 

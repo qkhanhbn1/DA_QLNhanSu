@@ -28,10 +28,10 @@
                         var startDate = Model.Contracts.OrderByDescending(c => c.ReleaseDate).FirstOrDefault()?.ReleaseDate;
                         if (startDate != null)
                         {
-                            var now = DateTime.Now;
-                            var difference = now - startDate.Value;
-                            var years = (int)(difference.TotalDays / 365);
-                            var days = (int)(difference.TotalDays % 365);
+                            var now = DateOnly.FromDateTime(DateTime.Now); // Chuyển DateTime thành DateOnly
+                            var difference = now.DayNumber - startDate.Value.DayNumber; // Tính khoảng cách theo ngày
+                            var years = difference / 365;
+                            var days = difference % 365;
                             @($"{years} năm {days} ngày")
                         }
                         else
@@ -276,6 +276,10 @@
                     </tbody>
                 </table>
             </div>
+            <div class="card shadow-sm p-4 mb-4 bg-white rounded-3 border-0">
+                <h2 class="text-primary"><i class="fas fa-chart-line"></i> Biểu đồ tăng lương</h2>
+                <canvas id="salaryChart"></canvas>
+            </div>
         </div>
 
 
@@ -514,6 +518,96 @@
     }
 
 </style>
+@* bieu do luong *@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var employeeId = @Model.Ide; // Lấy ID nhân viên từ Model
+
+        fetch(`/Admins/Employees/GetSalaryHistory?id=${employeeId}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log("Dữ liệu API nhận được:", JSON.stringify(data, null, 2));
+
+                if (!data || data.length === 0) {
+                    console.error("❌ Dữ liệu API trống.");
+                    return;
+                }
+
+                var labels = [];
+                var salaries = [];
+
+                data.forEach(item => {
+                    let date = item.effectiveDate || item.EffectiveDate;
+                    let salary = item.salary || item.Salary;
+
+                    if (date && salary) {
+                        let d = new Date(date);
+                        labels.push((d.getMonth() + 1) + '/' + d.getFullYear());  // Lấy tháng/năm
+                        salaries.push(salary);
+                    } else {
+                        console.warn("⚠️ Bỏ qua dữ liệu không hợp lệ:", item);
+                    }
+                });
+                console.log("✅ Labels hợp lệ:", labels);
+                console.log("✅ Salaries hợp lệ:", salaries);
+
+                if (labels.length === 0 || salaries.length === 0) {
+                    console.error("❌ Không có dữ liệu hợp lệ, không thể vẽ biểu đồ.");
+                    return;
+                }
+
+                var ctx = document.getElementById('salaryChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Mức lương theo thời gian',
+                            data: salaries,
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 5,
+                            pointBackgroundColor: '#3b82f6',
+                            pointBorderColor: '#fff',
+                            pointHoverRadius: 7
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        return context.raw.toLocaleString() + ' VNĐ';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: { display: true, text: 'Năm' }
+                            },
+                            y: {
+                                title: { display: true, text: 'Lương (VNĐ)' },
+                                ticks: {
+                                    callback: function (value) {
+                                        return value / 1000000 + 'M';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('❌ Lỗi khi tải dữ liệu:', error));
+
+    });
+</script>
+
 
 
 

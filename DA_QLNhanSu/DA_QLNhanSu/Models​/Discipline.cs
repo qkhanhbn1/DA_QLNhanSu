@@ -9,7 +9,7 @@ public partial class Discipline
 
     public int? Ide { get; set; }
 
-    public DateTime? DisciplineDate { get; set; }
+    public DateOnly? DisciplineDate { get; set; }
 
     public string? Content { get; set; }
 

@@ -1,29 +1,49 @@
-﻿@model IEnumerable<DA_QLNhanSu.Models.SalaryHistory>
-
+﻿@model X.PagedList.IPagedList<DA_QLNhanSu.Models.SalaryHistory>
+@using X.PagedList.Mvc.Core;
+@using System.Text.RegularExpressions;
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lịch sử lương";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Index</h1>
+<h1 class="text-primary text-center my-4 fw-bold">LỊCH SỬ LƯƠNG</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
+<div class="row my-4 align-items-center">
+    <!-- Ô tìm kiếm -->
+    <form action="" method="post" class="form-inline col-md-6 d-flex">
+        <div class="input-group w-75">
+            <input class="form-control border-primary" name="name" id="keyword" placeholder="Nhập tên cần tìm..." />
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-search"></i> Tìm kiếm
+            </button>
+        </div>
+    </form>
+
+    <!-- Nút "Tạo mới" và "Xuất Excel" -->
+    <div class="col-md-6 d-flex justify-content-end gap-2">
+        <a asp-action="Create" class="btn btn-warning shadow-sm">
+            <i class="bi bi-plus-circle"></i> Tạo mới
+        </a>
+        <a asp-action="ExportToExcel" class="btn btn-success shadow-sm">
+            <i class="bi bi-file-earmark-excel"></i> Xuất Excel
+        </a>
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table table-hover table-bordered shadow-sm">
+        <thead class="table-primary text-center">
+            <tr class="align-middle">
             <th>
-                @Html.DisplayNameFor(model => model.Salary)
+                    <i class="bi bi-person-circle"></i> NHÂN SỰ
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EffectiveDate)
+                    <i class="bi bi-cash"></i> LƯƠNG
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Note)
+                    <i class="bi bi-calendar2"></i> NGÀY ÁP DỤNG
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdeNavigation)
+                    <i class="bi bi-box-arrow-right"></i> GHI CHÚ
             </th>
             <th></th>
         </tr>
@@ -31,6 +51,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdeNavigation.Name)
+                    </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Salary)
             </td>
@@ -40,15 +63,68 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Note)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdeNavigation.Ide)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+                    <td class="text-center">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm shadow-sm">
+                            <i class="bi bi-pencil-square"></i> Sửa
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm shadow-sm">
+                            <i class="bi bi-eye"></i> Xem
+                        </a>
+                        <button class="btn btn-danger btn-sm shadow-sm" onclick="confirmDelete('@Url.Action("DeleteAjax", new { id = item.Id })')">
+                            <i class="bi bi-trash"></i> Xóa
+                        </button>
+                    </td>
         </tr>
 }
     </tbody>
 </table>
+</div>
+<div class="mt-3 d-flex justify-content-center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), new X.PagedList.Web.Common.PagedListRenderOptions
+{
+    LiElementClasses = new string[] { "page-item" },
+    PageClasses = new string[] { "page-link" }
+})
+</div>
+<style>
+    .btn-expired {
+        background-color: #ffe6e6 !important; /* Nền hồng nhạt hơn */
+        color: orange !important; /* Chữ đỏ đậm hơn */
+        border: none !important; /* Xóa viền */
+        font-weight: bold !important; /* Chữ đậm hơn */
+    }
+
+</style>
+@* /delete---------- *@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDelete(url) {
+        Swal.fire({
+            title: "Xóa dữ liệu này?",
+            text: "Dữ liệu xóa sẽ không thể khôi phục!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#6c757d",
+            confirmButtonText: "OK",
+            cancelButtonText: "Cancel"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(url, { method: 'POST' }) // Gửi yêu cầu xóa
+                    .then(response => response.json()) // Chuyển về JSON
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire("Đã xóa!", data.message, "success")
+                                .then(() => location.reload());
+                        } else {
+                            Swal.fire("Lỗi!", data.message, "error");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Lỗi:", error);
+                        Swal.fire("Lỗi!", "Đã xảy ra lỗi trong quá trình xóa.", "error");
+                    });
+            }
+        });
+    }
+</script>

@@ -9,7 +9,7 @@ public partial class Reward
 
     public int? Ide { get; set; }
 
-    public DateTime? RewardDate { get; set; }
+    public DateOnly? RewardDate { get; set; }
 
     public string? Content { get; set; }
 

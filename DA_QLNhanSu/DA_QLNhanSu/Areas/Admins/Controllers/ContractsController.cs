@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DA_QLNhanSu.Models;
 using X.PagedList;
 using ClosedXML.Excel;
+using System.Globalization;
 
 namespace DA_QLNhanSu.Areas.Admins.Controllers
 {
@@ -227,17 +228,17 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         public IActionResult ExportToExcel()
         {
             var contracts = _context.Contracts
-                .Select(c => new
-                {
-                    TenNhanSu = c.IdeNavigation.Name,
-                    MaNhanSu = c.IdeNavigation.Code,
-                    ChucVu = c.IdeNavigation.IdpNavigation.Name,
-                    MoTa = c.Content,
-                    NgayBatDau = c.ReleaseDate,  // Giữ nguyên kiểu DateTime?
-                    NgayHetHan = c.ExpirationDate,
-                    TrangThai = c.Status == true ? "Đã ký" : "Hết hạn"
-                })
-                .ToList();
+            .Select(c => new
+            {
+            TenNhanSu = c.IdeNavigation.Name,
+            MaNhanSu = c.IdeNavigation.Code,
+            ChucVu = c.IdeNavigation.IdpNavigation.Name,
+            MoTa = c.Content,
+            NgayBatDau = c.ReleaseDate.HasValue ? c.ReleaseDate.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) : "",
+            NgayHetHan = c.ExpirationDate.HasValue ? c.ExpirationDate.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) : "",
+            TrangThai = c.Status == true ? "Đã ký" : "Hết hạn"
+            })
+            .ToList();
 
             using (var workbook = new XLWorkbook())
             {

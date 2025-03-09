@@ -1,5 +1,6 @@
 ﻿using DA_QLNhanSu.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DA_QLNhanSu.Areas.Admins.Controllers
 {
@@ -27,5 +28,26 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
             
             return View();
         }
+        public async Task<IActionResult> GetTotalSalary()
+        {
+            var totalSalaries = await _context.SalaryCalculations
+                .GroupBy(s => new { s.Year, s.Month })
+                .Select(g => new
+                {
+                    Year = g.Key.Year,
+                    Month = g.Key.Month,
+                    TotalSalary = g.Sum(s => s.TotalSalary)
+                })
+                .OrderBy(g => g.Year).ThenBy(g => g.Month)
+                .ToListAsync();
+
+            if (!totalSalaries.Any())
+            {
+                return Json(new { error = "No data found" });
+            }
+
+            return Json(totalSalaries);
+        }
+    
     }
 }

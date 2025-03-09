@@ -17,7 +17,7 @@ public partial class CareerDevelopment
 
     public bool? Status { get; set; }
 
-    public DateTime? Date { get; set; }
+    public DateOnly? Date { get; set; }
 
     public virtual Employee? IdeNavigation { get; set; }
 }

@@ -153,39 +153,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         }
 
         // GET: Admins/LeaveJobs/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var leaveJob = await _context.LeaveJobs
-                .Include(l => l.IdeNavigation)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (leaveJob == null)
-            {
-                return NotFound();
-            }
-
-            return View(leaveJob);
-        }
-
-        // POST: Admins/LeaveJobs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var leaveJob = await _context.LeaveJobs.FindAsync(id);
-            if (leaveJob != null)
-            {
-                _context.LeaveJobs.Remove(leaveJob);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
+        
         private bool LeaveJobExists(int id)
         {
             return _context.LeaveJobs.Any(e => e.Id == id);

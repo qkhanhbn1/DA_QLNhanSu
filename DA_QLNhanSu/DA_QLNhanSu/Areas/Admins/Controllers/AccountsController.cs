@@ -26,7 +26,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
             int limit = 5; // Số bản ghi trên mỗi trang
 
             var query = _context.Accounts
-                                          // Include Qualification
+                  .Include(e => e.IdroleNavigation)        
                 .OrderBy(c => c.Id);
 
             if (!string.IsNullOrEmpty(name))

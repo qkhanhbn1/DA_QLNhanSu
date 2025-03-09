@@ -14,45 +14,43 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Ide" class="control-label"></label>
-                <select asp-for="Ide" class ="form-control" asp-items="ViewBag.Ide"></select>
+                <label asp-for="Ide" class="control-label">Nhân sự</label>
+                <select asp-for="Ide" class="form-select" asp-items="ViewBag.Ide">
+                    <option value="">-- Chọn nhân viên --</option>
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="IdSalaryhistory" class="control-label"></label>
-                <select asp-for="IdSalaryhistory" class ="form-control" asp-items="ViewBag.IdSalaryhistory"></select>
+                <label asp-for="Month" class="control-label">Tháng</label>
+                <input asp-for="Month" class="form-control" type="number" min="1" max="12" />
+               
             </div>
             <div class="form-group">
-                <label asp-for="IdEmployeeallowance" class="control-label"></label>
-                <select asp-for="IdEmployeeallowance" class ="form-control" asp-items="ViewBag.IdEmployeeallowance"></select>
+                <label asp-for="Year" class="control-label">Năm</label>
+                <input asp-for="Year" class="form-control"/>
             </div>
             <div class="form-group">
-                <label asp-for="IdTimesheet" class="control-label"></label>
-                <select asp-for="IdTimesheet" class ="form-control" asp-items="ViewBag.IdTimesheet"></select>
+                <label asp-for="IdTimesheet" class="control-label">Số ngày làm</label>
+                <input asp-for="IdTimesheet" id="IdTimesheet" class="form-control" readonly />
             </div>
             <div class="form-group">
-                <label asp-for="IdSalaryadvance" class="control-label"></label>
-                <select asp-for="IdSalaryadvance" class ="form-control" asp-items="ViewBag.IdSalaryadvance"></select>
+                <label asp-for="IdSalaryhistory" class="control-label">Lương cứng</label>
+                <input asp-for="IdSalaryhistory" id="IdSalaryhistory" class="form-control" readonly />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IdEmployeeallowance" class="control-label">Phụ cấp</label>
+                <input asp-for="IdEmployeeallowance" id="IdEmployeeallowance" class="form-control" readonly />
             </div>
             <div class="form-group">
-                <label asp-for="Month" class="control-label"></label>
-                <input asp-for="Month" class="form-control" />
-                <span asp-validation-for="Month" class="text-danger"></span>
+                <label asp-for="IdSalaryadvance" class="control-label">Ứng lương</label>
+                <input asp-for="IdSalaryadvance" class="form-control" readonly />
             </div>
             <div class="form-group">
-                <label asp-for="Year" class="control-label"></label>
-                <input asp-for="Year" class="form-control" />
-                <span asp-validation-for="Year" class="text-danger"></span>
+                <label asp-for="TotalSalary" class="control-label">Tổng tiền</label>
+                <input asp-for="TotalSalary" id="TotalSalary" class="form-control" readonly />
             </div>
-            <div class="form-group">
-                <label asp-for="TotalSalary" class="control-label"></label>
-                <input asp-for="TotalSalary" class="form-control" />
-                <span asp-validation-for="TotalSalary" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
-            </div>
+
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -63,4 +61,134 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        function updateWorkday() {
+            var ide = $("#Ide").val();
+            var month = $("#Month").val();
+            var year = $("#Year").val();
+
+            if (ide && month && year) {
+                $.ajax({
+                    url: "/Admins/SalaryCalculations/GetWorkday",
+                    type: "GET",
+                    data: { ide: ide, month: month, year: year },
+                    success: function (data) {
+                        console.log("Dữ liệu nhận được:", data); // Debug
+                        $("#IdTimesheet").val(data.workday || 0);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Lỗi AJAX:", error);
+                    }
+                });
+            }
+        }
+
+        $("#Ide, #Month, #Year").change(updateWorkday);
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        function updateMaxSalary() {
+            var ide = $("#Ide").val();
+
+            if (ide) {
+                $.ajax({
+                    url: "/Admins/SalaryCalculations/GetMaxSalary",
+                    type: "GET",
+                    data: { ide: ide },
+                    success: function (data) {
+                        console.log("Lương cứng lớn nhất:", data); // Debug
+                        $("#IdSalaryhistory").val(data.maxSalary || 0);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Lỗi AJAX:", error);
+                    }
+                });
+            }
+        }
+
+        $("#Ide").change(updateMaxSalary);
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        function updateEmployeeAllowance() {
+            var ide = $("#Ide").val();
+
+            if (ide) {
+                $.ajax({
+                    url: "/Admins/SalaryCalculations/GetEmployeeAllowance",
+                    type: "GET",
+                    data: { ide: ide },
+                    success: function (data) {
+                        console.log("Phụ cấp nhận được:", data); // Debug
+                        $("#IdEmployeeallowance").val(data.allowance || 0);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Lỗi AJAX:", error);
+                    }
+                });
+            }
+        }
+
+        $("#Ide").change(updateEmployeeAllowance);
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        function updateSalaryAdvance() {
+            var ide = $("#Ide").val();
+            var month = $("#Month").val();
+            var year = $("#Year").val();
+
+            if (ide && month && year) {
+                $.ajax({
+                    url: "/Admins/SalaryCalculations/GetSalaryAdvance",
+                    type: "GET",
+                    data: { ide: ide, month: month, year: year },
+                    success: function (data) {
+                        console.log("Ứng lương:", data); // Debug
+                        $("#IdSalaryadvance").val(data.advanceSalary || 0);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Lỗi AJAX:", error);
+                    }
+                });
+            }
+        }
+
+        $("#Ide, #Month, #Year").change(updateSalaryAdvance);
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        function updateTotalSalary() {
+            var ide = $("#Ide").val();
+            var month = $("#Month").val();
+            var year = $("#Year").val();
+
+            if (ide && month && year) {
+                $.ajax({
+                    url: "/Admins/SalaryCalculations/CalculateTotalSalary",
+                    type: "GET",
+                    data: { ide: ide, month: month, year: year },
+                    success: function (data) {
+                        console.log("Tổng tiền lương:", data.totalSalary); // Debug
+                        $("#TotalSalary").val(data.totalSalary.toFixed(0)); // Làm tròn số tiền
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Lỗi AJAX:", error);
+                    }
+                });
+            }
+        }
+
+        $("#Ide, #Month, #Year").change(updateTotalSalary);
+    });
+</script>
+
+
 

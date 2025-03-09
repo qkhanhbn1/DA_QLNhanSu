@@ -33,6 +33,7 @@
             <tr class="align-middle">
                 <th><i class="bi bi-envelope"></i> EMAIL</th>
                 <th><i class="bi bi-key"></i> MẬT KHẨU</th>
+                <th><i class="bi bi-key"></i> VAI TRÒ</th>
                 <th></th>
             </tr>
         </thead>
@@ -42,6 +43,7 @@
                 <tr class="align-middle">
                     <td class="text-center">@Html.DisplayFor(modelItem => item.Email)</td>
                     <td class="text-center">@Html.DisplayFor(modelItem => item.Password)</td>
+                    <td class="text-center">@Html.DisplayFor(modelItem => item.IdroleNavigation.Name)</td>
                     <td class="text-center">
                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm shadow-sm">
                             <i class="bi bi-pencil-square"></i> Sửa

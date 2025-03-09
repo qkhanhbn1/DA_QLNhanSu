@@ -97,9 +97,7 @@ public partial class DaQlNhanvienContext : DbContext
             entity.ToTable("CAREER_DEVELOPMENT");
 
             entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Date)
-                .HasColumnType("datetime")
-                .HasColumnName("DATE");
+            entity.Property(e => e.Date).HasColumnName("DATE");
             entity.Property(e => e.Fromrole)
                 .HasMaxLength(250)
                 .HasColumnName("FROMROLE");
@@ -128,16 +126,10 @@ public partial class DaQlNhanvienContext : DbContext
             entity.Property(e => e.Content)
                 .HasMaxLength(250)
                 .HasColumnName("CONTENT");
-            entity.Property(e => e.ExpirationDate)
-                .HasColumnType("datetime")
-                .HasColumnName("EXPIRATION_DATE");
+            entity.Property(e => e.ExpirationDate).HasColumnName("EXPIRATION_DATE");
             entity.Property(e => e.Ide).HasColumnName("IDE");
-            entity.Property(e => e.ReleaseDate)
-                .HasColumnType("datetime")
-                .HasColumnName("RELEASE_DATE");
-            entity.Property(e => e.SigningDate)
-                .HasColumnType("datetime")
-                .HasColumnName("SIGNING_DATE");
+            entity.Property(e => e.ReleaseDate).HasColumnName("RELEASE_DATE");
+            entity.Property(e => e.SigningDate).HasColumnName("SIGNING_DATE");
             entity.Property(e => e.Status).HasColumnName("STATUS");
 
             entity.HasOne(d => d.IdeNavigation).WithMany(p => p.Contracts)
@@ -168,9 +160,7 @@ public partial class DaQlNhanvienContext : DbContext
             entity.Property(e => e.Content)
                 .HasMaxLength(250)
                 .HasColumnName("CONTENT");
-            entity.Property(e => e.DisciplineDate)
-                .HasColumnType("datetime")
-                .HasColumnName("DISCIPLINE_DATE");
+            entity.Property(e => e.DisciplineDate).HasColumnName("DISCIPLINE_DATE");
             entity.Property(e => e.Ide).HasColumnName("IDE");
             entity.Property(e => e.Punishment)
                 .HasMaxLength(50)
@@ -263,9 +253,7 @@ public partial class DaQlNhanvienContext : DbContext
             entity.ToTable("LEAVE_JOB");
 
             entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Date)
-                .HasColumnType("datetime")
-                .HasColumnName("DATE");
+            entity.Property(e => e.Date).HasColumnName("DATE");
             entity.Property(e => e.Ide).HasColumnName("IDE");
             entity.Property(e => e.ReasonLeave)
                 .HasMaxLength(250)
@@ -290,16 +278,10 @@ public partial class DaQlNhanvienContext : DbContext
             entity.Property(e => e.Content)
                 .HasMaxLength(250)
                 .HasColumnName("CONTENT");
-            entity.Property(e => e.ExpirationDate)
-                .HasColumnType("datetime")
-                .HasColumnName("EXPIRATION_DATE");
+            entity.Property(e => e.ExpirationDate).HasColumnName("EXPIRATION_DATE");
             entity.Property(e => e.Ide).HasColumnName("IDE");
-            entity.Property(e => e.ReleaseDate)
-                .HasColumnType("datetime")
-                .HasColumnName("RELEASE_DATE");
-            entity.Property(e => e.RequestDate)
-                .HasColumnType("datetime")
-                .HasColumnName("REQUEST_DATE");
+            entity.Property(e => e.ReleaseDate).HasColumnName("RELEASE_DATE");
+            entity.Property(e => e.RequestDate).HasColumnName("REQUEST_DATE");
             entity.Property(e => e.Status).HasColumnName("STATUS");
 
             entity.HasOne(d => d.IdeNavigation).WithMany(p => p.OnLeaves)
@@ -346,9 +328,7 @@ public partial class DaQlNhanvienContext : DbContext
                 .HasMaxLength(250)
                 .HasColumnName("CONTENT");
             entity.Property(e => e.Ide).HasColumnName("IDE");
-            entity.Property(e => e.RewardDate)
-                .HasColumnType("datetime")
-                .HasColumnName("REWARD_DATE");
+            entity.Property(e => e.RewardDate).HasColumnName("REWARD_DATE");
             entity.Property(e => e.RewardGift)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("REWARD_GIFT");
@@ -396,9 +376,7 @@ public partial class DaQlNhanvienContext : DbContext
             entity.ToTable("SALARY_CALCULATION");
 
             entity.Property(e => e.Ids).HasColumnName("IDS");
-            entity.Property(e => e.Date)
-                .HasColumnType("datetime")
-                .HasColumnName("DATE");
+            entity.Property(e => e.Date).HasColumnName("DATE");
             entity.Property(e => e.IdEmployeeallowance).HasColumnName("ID_EMPLOYEEALLOWANCE");
             entity.Property(e => e.IdSalaryadvance).HasColumnName("ID_SALARYADVANCE");
             entity.Property(e => e.IdSalaryhistory).HasColumnName("ID_SALARYHISTORY");
@@ -436,7 +414,9 @@ public partial class DaQlNhanvienContext : DbContext
             entity.ToTable("SALARY_HISTORY");
 
             entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.EffectiveDate).HasColumnName("EFFECTIVE_DATE");
+            entity.Property(e => e.EffectiveDate)
+                .HasColumnType("datetime")
+                .HasColumnName("EFFECTIVE_DATE");
             entity.Property(e => e.Ide).HasColumnName("IDE");
             entity.Property(e => e.Note)
                 .HasMaxLength(50)

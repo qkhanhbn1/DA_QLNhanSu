@@ -57,7 +57,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 .Include(e => e.IdpNavigation)
                 .Include(e => e.IdqNavigation)
                 .Include(e => e.Contracts)
-                
+                .Include(e => e.SalaryHistories)
                 .Include(e => e.OnLeaves)
                 .Include(e => e.Disciplines)
                 .Include(e => e.Rewards)
@@ -271,6 +271,21 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
             {
                 return StatusCode(500, new { success = false, message = "Lỗi khi xóa: " + ex.Message });
             }
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetSalaryHistory(int id)
+        {
+            var salaryHistory = await _context.SalaryHistories
+                .Where(sh => sh.Ide == id)
+                .OrderBy(sh => sh.EffectiveDate)
+                .Select(sh => new
+                {
+                    EffectiveDate = sh.EffectiveDate.HasValue ? sh.EffectiveDate.Value.ToString("yyyy-MM-dd") : "",
+                    Salary = sh.Salary ?? 0
+                })
+                .ToListAsync();
+
+            return Json(salaryHistory);
         }
 
     }
