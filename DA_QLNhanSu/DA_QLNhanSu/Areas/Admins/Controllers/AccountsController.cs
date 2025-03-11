@@ -11,7 +11,7 @@ using X.PagedList;
 namespace DA_QLNhanSu.Areas.Admins.Controllers
 {
     [Area("Admins")]
-    public class AccountsController : Controller
+    public class AccountsController : BaseController // Kế thừa BaseController
     {
         private readonly DaQlNhanvienContext _context;
 

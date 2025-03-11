@@ -23,7 +23,9 @@
                 }
             </div>
         </div>
-
+        @{
+            var userRole = Context.Session.GetInt32("UserRole") ?? 2; // Mặc định là nhân viên
+        }
         <nav>
             <ul class="list-unstyled">
                 <li class="nav-item">
@@ -36,71 +38,74 @@
                         <i class="fas fa-user me-3"></i> Danh sách nhân sự
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="/admins/Departments" class="nav-link d-flex align-items-center py-2 text-white">
-                        <i class="fas fa-file-contract me-3"></i>Quản lý phòng ban
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/admins/Contracts" class="nav-link d-flex align-items-center py-2 text-white">
-                        <i class="fas fa-file-contract me-3"></i>Hợp đồng lao động
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/admins/Leavejobs" class="nav-link d-flex align-items-center py-2 text-white">
-                        <i class="fas fa-user-times me-3"></i>Nhân sự nghỉ việc
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/admins/careerdevelopments" class="nav-link d-flex align-items-center py-2 text-white">
-                        <i class="fas fa-chart-line me-3"></i>Phát triển sự nghiệp
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/admins/onleaves" class="nav-link d-flex align-items-center py-2 text-white">
-                        <i class="fas fa-calendar-alt me-3"></i>Nhân sự nghỉ phép
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/admins/Salaryhistories" class="nav-link d-flex align-items-center py-2 text-white">
-                        <i class="fas fa-user-clock me-3"></i> Lịch sử lương
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/admins/timesheets" class="nav-link d-flex align-items-center py-2 text-white">
-                        <i class="fas fa-clock me-3"></i> Quản lý chấm công
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/admins/salaryadvances" class="nav-link d-flex align-items-center py-2 text-white">
-                        <i class="fas fa-money-bill-wave me-3"></i> Ứng lương
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/admins/employeeallowances" class="nav-link d-flex align-items-center py-2 text-white">
-                        <i class="fas fa-hand-holding-usd me-3"></i> Phụ cấp
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/admins/salarycalculations" class="nav-link d-flex align-items-center py-2 text-white">
-                        <i class="fas fa-calculator me-3"></i> Bảng lương định kỳ
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/admins/rewards" class="nav-link d-flex align-items-center py-2 text-white">
-                        <i class="fas fa-gift me-3"></i>Danh sách thưởng
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/admins/disciplines" class="nav-link d-flex align-items-center py-2 text-white">
-                        <i class="fas fa-exclamation-triangle me-3"></i>Danh sách kỷ luật
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/admins/accounts" class="nav-link d-flex align-items-center py-2 text-white">
-                        <i class="fas fa-user-shield me-3"></i>Tài khoản quản trị
-                    </a>
-                </li>
+                @if (userRole == 1)
+                {
+                    <li class="nav-item">
+                        <a href="/admins/Departments" class="nav-link d-flex align-items-center py-2 text-white">
+                            <i class="fas fa-file-contract me-3"></i>Quản lý phòng ban
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admins/Contracts" class="nav-link d-flex align-items-center py-2 text-white">
+                            <i class="fas fa-file-contract me-3"></i>Hợp đồng lao động
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admins/Leavejobs" class="nav-link d-flex align-items-center py-2 text-white">
+                            <i class="fas fa-user-times me-3"></i>Nhân sự nghỉ việc
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admins/careerdevelopments" class="nav-link d-flex align-items-center py-2 text-white">
+                            <i class="fas fa-chart-line me-3"></i>Phát triển sự nghiệp
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admins/onleaves" class="nav-link d-flex align-items-center py-2 text-white">
+                            <i class="fas fa-calendar-alt me-3"></i>Nhân sự nghỉ phép
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admins/Salaryhistories" class="nav-link d-flex align-items-center py-2 text-white">
+                            <i class="fas fa-user-clock me-3"></i> Lịch sử lương
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admins/timesheets" class="nav-link d-flex align-items-center py-2 text-white">
+                            <i class="fas fa-clock me-3"></i> Quản lý chấm công
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admins/salaryadvances" class="nav-link d-flex align-items-center py-2 text-white">
+                            <i class="fas fa-money-bill-wave me-3"></i> Ứng lương
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admins/employeeallowances" class="nav-link d-flex align-items-center py-2 text-white">
+                            <i class="fas fa-hand-holding-usd me-3"></i> Phụ cấp
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admins/salarycalculations" class="nav-link d-flex align-items-center py-2 text-white">
+                            <i class="fas fa-calculator me-3"></i> Bảng lương định kỳ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admins/rewards" class="nav-link d-flex align-items-center py-2 text-white">
+                            <i class="fas fa-gift me-3"></i>Danh sách thưởng
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admins/disciplines" class="nav-link d-flex align-items-center py-2 text-white">
+                            <i class="fas fa-exclamation-triangle me-3"></i>Danh sách kỷ luật
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admins/accounts" class="nav-link d-flex align-items-center py-2 text-white">
+                            <i class="fas fa-user-shield me-3"></i>Tài khoản quản trị
+                        </a>
+                    </li>
+                }
             </ul>
         </nav>
         <div class="logout-section mt-auto">

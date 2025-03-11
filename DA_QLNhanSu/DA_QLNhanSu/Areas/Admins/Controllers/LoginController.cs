@@ -1,5 +1,6 @@
 ﻿using DA_QLNhanSu.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 
 namespace DA_QLNhanSu.Areas.Admins.Controllers
@@ -19,32 +20,39 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         {
             return View();
         }
-        [HttpPost] // POST -> khi submit form
+        [HttpPost]
         public IActionResult Index(Models.Login model)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);// trả về trạng thái lỗi
+                ViewBag.ErrorMessage = "Dữ liệu không hợp lệ.";
+                return View(model);
             }
-            // sẽ xử lý logic phần đăng nhập tại đây
+
             var pass = model.Password;
-            var dataLogin = _context.Accounts.Where(x => x.Email.Equals(model.Email) && x.Password.Equals(pass)).FirstOrDefault();
+            var dataLogin = _context.Accounts
+            .Where(x => x.Email == model.Email && x.Password == pass)
+            .Select(x => new { x.Email, x.Idrole }) // Chỉ lấy Email & IdRole
+            .FirstOrDefault();
+
             if (dataLogin != null)
             {
-                // Lưu session khi đăng nhập thành công
-                HttpContext.Session.SetString("AdminLogin", model.Email);
-
+                HttpContext.Session.SetString("AdminLogin", dataLogin.Email);
+                HttpContext.Session.SetInt32("UserRole", dataLogin.Idrole ?? 2); // Mặc định là nhân viên (2)
 
                 return RedirectToAction("Index", "Dashboard");
             }
-            return View(model);
 
+            ViewBag.ErrorMessage = "Email hoặc mật khẩu không đúng!";
+            return View(model);
         }
-        [HttpGet]// thoát đăng nhập, huỷ session
+
+
+
+        [HttpGet]
         public IActionResult Logout()
         {
-            HttpContext.Session.Remove("AdminLogin"); // huỷ session với key AdminLogin đã lưu trước đó
-
+            HttpContext.Session.Clear(); // Xóa toàn bộ session khi đăng xuất
             return RedirectToAction("Index");
         }
     }
