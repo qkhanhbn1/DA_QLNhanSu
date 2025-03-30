@@ -1,45 +1,55 @@
 ﻿@model DA_QLNhanSu.Models.SalaryHistory
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Thêm mới lịch sử lương";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Create</h1>
+<h1 class="text-center my-4 text-primary">Thêm mới tăng lương</h1>
 
-<h4>SalaryHistory</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Ide" class="control-label"></label>
-                <select asp-for="Ide" class ="form-control" asp-items="ViewBag.Ide"></select>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Ide" class="form-label">Nhân viên</label>
+                        <select asp-for="Ide" class="form-select" asp-items="ViewBag.Ide">
+                            <option value="">-- Chọn nhân viên --</option>
+                        </select>
+                        <span asp-validation-for="Ide" class="text-danger"></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Salary" class="form-label">Mức lương</label>
+                            <input asp-for="Salary" type="number" class="form-control" placeholder="Nhập mức lương..." />
+                            <span asp-validation-for="Salary" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="EffectiveDate" class="form-label">Ngày áp dụng</label>
+                            <input asp-for="EffectiveDate" type="date" class="form-control" />
+                            <span asp-validation-for="EffectiveDate" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Note" class="form-label">Ghi chú</label>
+                        <textarea asp-for="Note" class="form-control" rows="3" placeholder="Nhập ghi chú..."></textarea>
+                        <span asp-validation-for="Note" class="text-danger"></span>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary w-30">Tạo</button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="Salary" class="control-label"></label>
-                <input asp-for="Salary" class="form-control" />
-                <span asp-validation-for="Salary" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EffectiveDate" class="control-label"></label>
-                <input asp-for="EffectiveDate" class="form-control" />
-                <span asp-validation-for="EffectiveDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Note" class="control-label"></label>
-                <input asp-for="Note" class="form-control" />
-                <span asp-validation-for="Note" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+
+        <div class="text-center mt-3">
+            <a asp-action="Index" class="btn btn-outline-secondary">Quay lại</a>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

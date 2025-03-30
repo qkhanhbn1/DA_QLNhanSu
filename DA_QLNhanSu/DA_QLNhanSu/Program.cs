@@ -18,7 +18,7 @@ namespace DA_QLNhanSu
             builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(60);
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
                 options.Cookie.Name = "DATotNghiep.Session";
@@ -42,10 +42,25 @@ namespace DA_QLNhanSu
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            
 
             // Sử dụng session đã khai báo ở trên
             app.UseSession();
+
+            app.Use(async (context, next) =>
+            {
+                if (string.IsNullOrEmpty(context.Session.GetString("AdminLogin")) &&
+                    context.Request.Cookies.ContainsKey("UserEmail"))
+                {
+                    // Nếu Session mất nhưng Cookie vẫn còn, thì khôi phục lại
+                    context.Session.SetString("AdminLogin", context.Request.Cookies["UserEmail"]);
+                    context.Session.SetInt32("UserRole", int.Parse(context.Request.Cookies["UserRole"]));
+                }
+
+                await next();
+            });
+
+            app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "areas",

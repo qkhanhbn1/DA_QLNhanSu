@@ -51,25 +51,27 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdeNavigation.Name)
+                    <td class="align-items-center">
+                        <img src="@item.IdeNavigation.Image" alt="@item.IdeNavigation.Name" class="rounded-circle border border-primary" style="width:35px; height:35px;" />
+                        <a asp-controller="Employees" asp-action="Details" asp-route-id="@item.IdeNavigation.Ide" class="text-dark fw-bold text-decoration-none">
+                            @Html.DisplayFor(modelItem => item.IdeNavigation.Name)
+                        </a>
                     </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Salary)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EffectiveDate)
-            </td>
-            <td>
+
+                    <td class="text-center text-success fw-bold">
+                            @string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:C0}", item.Salary)
+                    </td>
+                    <td class="text-center">
+                        @(item.EffectiveDate?.ToString("dd/MM/yyyy"))
+                    </td>
+                    <td class="text-center">
                 @Html.DisplayFor(modelItem => item.Note)
             </td>
                     <td class="text-center">
                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm shadow-sm">
                             <i class="bi bi-pencil-square"></i> Sửa
                         </a>
-                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm shadow-sm">
-                            <i class="bi bi-eye"></i> Xem
-                        </a>
+                        
                         <button class="btn btn-danger btn-sm shadow-sm" onclick="confirmDelete('@Url.Action("DeleteAjax", new { id = item.Id })')">
                             <i class="bi bi-trash"></i> Xóa
                         </button>

@@ -54,8 +54,11 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
 
             var contract = await _context.Contracts
                 .Include(c => c.IdeNavigation)
-                .ThenInclude(e => e.IdpNavigation)
+                    .ThenInclude(e => e.IdpNavigation) // Chức vụ
+                .Include(c => c.IdeNavigation)
+                    .ThenInclude(e => e.SalaryHistories) // Thêm SalaryHistories
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (contract == null)
             {
                 return NotFound();
@@ -63,6 +66,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
 
             return View(contract);
         }
+
 
         // GET: Admins/Contracts/Create
         public IActionResult Create()

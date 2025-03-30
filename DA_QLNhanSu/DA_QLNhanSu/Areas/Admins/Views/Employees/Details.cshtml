@@ -229,7 +229,14 @@
 
             <div class="mt-3 text-center">
                 <a asp-action="Edit" asp-route-id="@Model?.Ide" class="btn btn-warning"><i class="fas fa-edit"></i> Sửa thông tin</a>
-                <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Quay lại</a>
+                @{
+                    var userRole = Context.Session.GetInt32("UserRole") ?? 2; // Mặc định là nhân viên
+                    var userId = Context.Session.GetInt32("UserId"); // Lấy ID của nhân sự từ Session
+                }
+                @if (userRole == 1)
+                {
+                    <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Quay lại</a>
+                }
             </div>
         </div>
 
@@ -251,7 +258,7 @@
                     <tbody>
                         <tr>
                             <td>@Model.IdpNavigation.Name</td>
-                            <td></td>
+                            <td>@(Model.SalaryHistories.OrderByDescending(c => c.Salary).FirstOrDefault()?.Salary)</td>
                             <td>Chi nhánh Hà Nội</td>
                             <td>Lịch VP</td>
                         </tr>

@@ -4,7 +4,10 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
-
+@{
+    var userRole = Context.Session.GetInt32("UserRole") ?? 2; // Mặc định là nhân viên
+    var userId = Context.Session.GetInt32("UserId"); // Lấy ID của nhân sự từ Session
+}
 <h1 class="text-center text-primary mt-4">Sửa thông tin nhân viên</h1>
 
 <div class="container">
@@ -93,25 +96,26 @@
                             <input asp-for="Address" class="form-control" />
                             <span asp-validation-for="Address" class="text-danger"></span>
                         </div>
-
-                        <!-- Phòng ban - Chức vụ - Trình độ -->
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <label asp-for="Idd" class="form-label">Phòng ban</label>
-                                <select asp-for="Idd" class="form-select" asp-items="ViewBag.Idd"></select>
-                                <span asp-validation-for="Idd" class="text-danger"></span>
+                        
+                            <!-- Phòng ban - Chức vụ - Trình độ -->
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label asp-for="Idd" class="form-label">Phòng ban</label>
+                                    <select asp-for="Idd" class="form-select" asp-items="ViewBag.Idd"></select>
+                                    <span asp-validation-for="Idd" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label asp-for="Idp" class="form-label">Chức vụ</label>
+                                    <select asp-for="Idp" class="form-select" asp-items="ViewBag.Idp"></select>
+                                    <span asp-validation-for="Idp" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label asp-for="Idq" class="form-label">Trình độ</label>
+                                    <select asp-for="Idq" class="form-select" asp-items="ViewBag.Idq"></select>
+                                    <span asp-validation-for="Idq" class="text-danger"></span>
+                                </div>
                             </div>
-                            <div class="col-md-4 mb-3">
-                                <label asp-for="Idp" class="form-label">Chức vụ</label>
-                                <select asp-for="Idp" class="form-select" asp-items="ViewBag.Idp"></select>
-                                <span asp-validation-for="Idp" class="text-danger"></span>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label asp-for="Idq" class="form-label">Trình độ</label>
-                                <select asp-for="Idq" class="form-select" asp-items="ViewBag.Idq"></select>
-                                <span asp-validation-for="Idq" class="text-danger"></span>
-                            </div>
-                        </div>
+                        
                         <div class="form-group mb-3">
                             <label asp-for="Status" class="form-label">Trạng thái</label>
                             <select asp-for="Status" class="form-select">
@@ -127,10 +131,12 @@
                     </form>
                 </div>
             </div>
-
+            @if (userRole == 1)
+    {
             <div class="text-center mt-3">
                 <a asp-action="Index" class="btn btn-outline-secondary">Quay lại</a>
-            </div>
+            </div> 
+    }
         </div>
     </div>
 </div>

@@ -2,6 +2,10 @@
     ViewData["Title"] = "DashBoard";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
+@{
+    var userRole = Context.Session.GetInt32("UserRole") ?? 2; // Mặc định là nhân viên
+    var userId = Context.Session.GetInt32("UserId"); // Lấy ID của nhân sự từ Session
+}
 <!-- Small boxes (Stat box) -->
 <div class="row">
     <div class="col-lg-3 col-6">
@@ -13,7 +17,11 @@
             <div class="icon">
                 <i class="ion ion-person"></i>
             </div>
-            <a href="/admins/employees" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+
+            @if (userRole == 1)
+            {
+                <a href="/admins/employees" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+            }
         </div>
     </div>
     <div class="col-lg-3 col-6">
@@ -25,7 +33,10 @@
             <div class="icon">
                 <i class="ion ion-document-text"></i>
             </div>
-            <a href="/admins/contracts" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+            @if (userRole == 1)
+            {
+                <a href="/admins/contracts" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+            }
         </div>
     </div>
     <div class="col-lg-3 col-6">
@@ -37,7 +48,10 @@
             <div class="icon">
                 <i class="ion ion-ribbon"></i>
             </div>
-            <a href="/admins/rewards" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+            @if (userRole == 1)
+            {
+                <a href="/admins/rewards" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+            }
         </div>
     </div>
     <div class="col-lg-3 col-6">
@@ -49,7 +63,10 @@
             <div class="icon">
                 <i class="ion ion-alert"></i>
             </div>
-            <a href="/admins/disciplines" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+            @if (userRole == 1)
+            {
+                <a href="/admins/disciplines" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+            }
         </div>
     </div>
 </div>

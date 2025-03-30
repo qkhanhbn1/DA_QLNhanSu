@@ -141,6 +141,18 @@
             <p><span class="bold">Chức vụ:</span> @Model.IdeNavigation?.IdpNavigation?.Name</p>
             <p><span class="bold">Ngày bắt đầu:</span> @(Model.ReleaseDate?.ToString("dd/MM/yyyy"))</p>
             <p><span class="bold">Ngày kết thúc:</span> @(Model.ExpirationDate?.ToString("dd/MM/yyyy"))</p>
+            @{
+                var oldestSalary = Model.IdeNavigation?.SalaryHistories?
+                .OrderBy(sh => sh.EffectiveDate)
+                .FirstOrDefault();
+            }
+
+            @if (oldestSalary != null && oldestSalary.Salary.HasValue)
+            {
+                <p><span class="bold">Mức lương cứng đã ký:</span> @oldestSalary.Salary VNĐ</p>
+                
+            }
+
         </div>
 
         <div class="terms">
@@ -149,11 +161,8 @@
                 - Điều 1: Chế độ làm việc
                 Thời gian làm việc: Từ thứ Hai đến thứ Sáu, 08h00 – 17h30 (nghỉ trưa từ 12h00 – 13h30).
                 Nghỉ lễ, nghỉ phép: Theo quy định của Bộ luật Lao động và nội quy công ty.<br />
-                - Điều 2: Tiền lương và chế độ đãi ngộ
-                Mức lương chính: 10.000.000 VNĐ/tháng (Mười triệu đồng chẵn).
-                Phụ cấp:
-                Phụ cấp ăn trưa: 500.000 VNĐ/tháng.
-                Phụ cấp xăng xe, điện thoại: 1.000.000 VNĐ/tháng.
+                - Điều 2: Chế độ đãi ngộ
+                Phụ cấp ăn trưa, đi lại: 1.500.000 VNĐ
                 Thưởng doanh số: Theo chính sách của công ty.
                 Phương thức thanh toán: Chuyển khoản vào ngày 05 hàng tháng.<br />
                 - Điều 3: Chế độ bảo hiểm và phúc lợi
@@ -161,12 +170,10 @@
                 Bên B được hưởng chế độ nghỉ ốm, thai sản, tai nạn lao động theo Luật Lao động.<br />
                 - Điều 4: Quyền và nghĩa vụ của các bên
                 1. Quyền và nghĩa vụ của Bên A:
-
                 Bố trí công việc phù hợp với chức danh đã ký kết.
                 Thanh toán lương đầy đủ và đúng hạn.
                 Cung cấp trang thiết bị cần thiết cho công việc.
                 2. Quyền và nghĩa vụ của Bên B:
-
                 Thực hiện công việc theo hợp đồng và tuân thủ nội quy công ty.
                 Giữ gìn bí mật kinh doanh, không làm việc cho đối thủ cạnh tranh trong thời gian hợp đồng có hiệu lực.<br />
                 - Điều 5: Chấm dứt hợp đồng

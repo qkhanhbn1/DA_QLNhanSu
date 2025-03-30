@@ -59,7 +59,12 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 .Include(s => s.IdSalaryadvanceNavigation)
                 .Include(s => s.IdSalaryhistoryNavigation)
                 .Include(s => s.IdTimesheetNavigation)
-                .Include(s => s.IdeNavigation)
+                .Include(o => o.IdeNavigation)
+                .ThenInclude(e => e.IddNavigation)
+                .Include(o => o.IdeNavigation)
+                .ThenInclude(e => e.IdpNavigation)
+                .Include(o => o.IdeNavigation)
+                .ThenInclude(e => e.IdqNavigation)
                 .FirstOrDefaultAsync(m => m.Ids == id);
             if (salaryCalculation == null)
             {
@@ -164,7 +169,8 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
             }
 
             var salaryCalculation = await _context.SalaryCalculations
-    .Include(s => s.IdSalaryadvanceNavigation) // Nạp dữ liệu ứng lương
+    .Include(s => s.IdSalaryadvanceNavigation)
+    .Include(s => s.IdeNavigation)
     .FirstOrDefaultAsync(s => s.Ids == id);
             if (salaryCalculation == null)
             {

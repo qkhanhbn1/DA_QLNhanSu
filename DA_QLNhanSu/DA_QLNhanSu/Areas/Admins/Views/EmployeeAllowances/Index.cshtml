@@ -50,7 +50,9 @@
                             @Html.DisplayFor(modelItem => item.IdeNavigation.Name)
                         </a>
                     </td>
-                    <td class="text-center">@Html.DisplayFor(modelItem => item.Money)</td>
+                    <td class="text-center text-success fw-bold">
+                        @string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:C0}", item.Money)
+                    </td>
                     <td class="text-center">@Html.DisplayFor(modelItem => item.IdAllowancesNavigation.Name)</td>
                     <td class="text-center">
                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm shadow-sm">

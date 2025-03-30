@@ -54,7 +54,7 @@
                     </td>
                     <td class="text-center">@(item.RewardDate?.ToString("dd/MM/yyyy"))</td>
                     <td class="text-center">@Html.DisplayFor(modelItem => item.Content)</td>
-                    <td class="text-center">@Html.DisplayFor(modelItem => item.RewardGift) VNĐ</td>
+                    <td class="text-center text-success fw-bold">@string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:C0}", item.RewardGift)</td>
                     <td class="text-center">
                         <button class="btn btn-status @(item.Status == true ? "btn-success text-white" : "btn-expired")"
                                 data-id="@item.Id"

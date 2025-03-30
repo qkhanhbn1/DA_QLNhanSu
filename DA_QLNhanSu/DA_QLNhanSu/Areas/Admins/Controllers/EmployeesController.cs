@@ -13,7 +13,7 @@ using System.IO;
 namespace DA_QLNhanSu.Areas.Admins.Controllers
 {
     [Area("Admins")]
-    public class EmployeesController : Controller
+    public class EmployeesController : BaseController
     {
         private readonly DaQlNhanvienContext _context;
 
@@ -25,6 +25,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/Employees
         public async Task<IActionResult> Index(string name, int page = 1)
         {
+            
             int limit = 12; // Số bản ghi trên mỗi trang
 
             var query = _context.Employees
@@ -62,6 +63,8 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                 .Include(e => e.Disciplines)
                 .Include(e => e.Rewards)
                 .Include(e => e.LeaveJobs)
+                .Include(e => e.IdroleNavigation)
+                .Include(e => e.SalaryHistories)
                 .FirstOrDefaultAsync(m => m.Ide == id);
 
             if (employee == null)
@@ -75,6 +78,10 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/Employees/Create
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetInt32("UserRole") != 1) // Chỉ admin (idrole = 1) mới được truy cập
+            {
+                return RedirectToAction("Index");
+            }
             ViewData["Idd"] = new SelectList(_context.Departments, "Idd", "Name");
             ViewData["Idp"] = new SelectList(_context.Positions, "Idp", "Name");
             ViewData["Idq"] = new SelectList(_context.Qualifications, "Idq", "Name");
@@ -88,6 +95,10 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Ide,Name,Code,Gender,Birthday,Email,Phone,Cccd,Address,Image,Idd,Idp,Idq,Marry,Status,Idrole")] Employee employee)
         {
+            if (HttpContext.Session.GetInt32("UserRole") != 1)
+            {
+                return RedirectToAction("Index");
+            }
             try
             {
                 var files = HttpContext.Request.Form.Files;
@@ -119,6 +130,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/Employees/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            
             if (id == null)
             {
                 return NotFound();
@@ -184,6 +196,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
                         return View(employee);
                     }
                 }
+
                 
             }
             // Đưa ra lỗi của modelState để bạn có thể debug
@@ -207,6 +220,10 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         }
         public IActionResult ExportToExcel()
         {
+            if (HttpContext.Session.GetInt32("UserRole") != 1)
+            {
+                return RedirectToAction("Index");
+            }
             var employees = _context.Employees
                 .Include(e => e.IddNavigation)
                 .Include(e => e.IdpNavigation)
@@ -255,6 +272,10 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteAjax(int id)
         {
+            if (HttpContext.Session.GetInt32("UserRole") != 1)
+            {
+                return Json(new { success = false, message = "Bạn không có quyền xóa nhân viên!" });
+            }
             var employee = await _context.Employees.FindAsync(id);
             if (employee == null)
             {

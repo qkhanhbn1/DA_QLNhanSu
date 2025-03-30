@@ -1,73 +1,78 @@
 ﻿@model DA_QLNhanSu.Models.SalaryCalculation
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Chi tiết bảng lương";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
+@{
+    var userRole = Context.Session.GetInt32("UserRole") ?? 2; // Mặc định là nhân viên
+    var userId = Context.Session.GetInt32("UserId"); // Lấy ID của nhân sự từ Session
+}
+<h1 class="text-center text-primary mb-4">Chi tiết bảng lương</h1>
 
-<h1>Details</h1>
+<div class="card shadow-lg">
+    <div class="card-header bg-info text-white">
+        <h4>@Model.IdeNavigation.Name - Lương tháng @Model.Month/@Model.Year</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <!-- Cột trái hiển thị ảnh -->
+            <div class="col-md-4 text-center">
+                @if (!string.IsNullOrEmpty(Model.IdeNavigation?.Image))
+                {
+                    <img src="@Model.IdeNavigation.Image" alt="@Model.IdeNavigation.Name" class="img-fluid rounded border shadow-sm" style="max-width: 250px;">
+                }
+                else
+                {
+                    <p class="text-muted">Không có ảnh</p>
+                }
+            </div>
 
-<div>
-    <h4>SalaryCalculation</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Month)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Month)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Year)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Year)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalSalary)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TotalSalary)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdEmployeeallowanceNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdEmployeeallowanceNavigation.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdSalaryadvanceNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdSalaryadvanceNavigation.Idsa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdSalaryhistoryNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdSalaryhistoryNavigation.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdTimesheetNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdTimesheetNavigation.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdeNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdeNavigation.Ide)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Ids">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+            <!-- Cột phải hiển thị thông tin -->
+            <div class="col-md-8">
+                <dl class="row">
+                    <dt class="col-sm-4">Tên nhân sự</dt>
+                    <dd class="col-sm-8 fw-bold">@Html.DisplayFor(model => model.IdeNavigation.Name)</dd>
+
+                    <dt class="col-sm-4">Mã nhân sự</dt>
+                    <dd class="col-sm-8">@Model.IdeNavigation?.Code</dd>
+
+                    <dt class="col-sm-4">Chức vụ</dt>
+                    <dd class="col-sm-8">@Model.IdeNavigation?.IdpNavigation?.Name</dd>
+
+                    <dt class="col-sm-4">Phòng ban</dt>
+                    <dd class="col-sm-8">@Model.IdeNavigation?.IddNavigation?.Name</dd>
+
+                    <dt class="col-sm-4">Tháng lương</dt>
+                    <dd class="col-sm-8">@Model.Month/@Model.Year</dd>
+
+                    <dt class="col-sm-4">Số ngày làm</dt>
+                    <dd class="col-sm-8">@Model.IdTimesheetNavigation?.Workday</dd>
+
+                    <dt class="col-sm-4">Lương cứng</dt>
+                    <dd class="col-sm-8">@Model.IdSalaryhistoryNavigation?.Salary</dd>
+
+                    <dt class="col-sm-4">Phụ cấp</dt>
+                    <dd class="col-sm-8">@Model.IdEmployeeallowanceNavigation?.Money</dd>
+
+                    <dt class="col-sm-4">Ứng lương</dt>
+                    <dd class="col-sm-8">@Model.IdSalaryadvanceNavigation?.Money VNĐ</dd>
+
+                    <dt class="col-sm-4">Tổng lương</dt>
+                    <dd class="col-sm-8 fw-bold text-danger">@Model.TotalSalary VNĐ</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-center">
+        @if (userRole == 1)
+                {
+        <a asp-action="Edit" asp-route-id="@Model?.Ids" class="btn btn-primary me-2">
+            <i class="bi bi-pencil-square"></i> Chỉnh sửa
+        </a>
+                }
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Quay lại danh sách
+        </a>
+    </div>
 </div>

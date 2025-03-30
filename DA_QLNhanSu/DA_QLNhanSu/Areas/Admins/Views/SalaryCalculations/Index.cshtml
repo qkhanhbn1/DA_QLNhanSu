@@ -5,6 +5,10 @@
     ViewData["Title"] = "Quản lý tính lương";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
+@{
+    var userRole = Context.Session.GetInt32("UserRole") ?? 2; // Mặc định là nhân viên
+    var userId = Context.Session.GetInt32("UserId"); // Lấy ID của nhân sự từ Session
+}
 <h1 class="text-primary text-center my-4 fw-bold">BẢNG TÍNH LƯƠNG</h1>
 
 <div class="row my-4 align-items-center">
@@ -17,7 +21,8 @@
             </button>
         </div>
     </form>
-
+    @if (userRole == 1)
+                {
     <!-- Nút "Tạo mới" và "Xuất Excel" -->
     <div class="col-md-6 d-flex justify-content-end gap-2">
         <a asp-action="Create" class="btn btn-warning shadow-sm">
@@ -27,6 +32,7 @@
             <i class="bi bi-file-earmark-excel"></i> Xuất Excel
         </a>
     </div>
+                }
 </div>
 <div class="table-responsive">
     <table class="table table-hover table-bordered shadow-sm">
@@ -65,50 +71,56 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-                    <td>
+                    <td class="text-center">
                         @Html.DisplayFor(modelItem => item.IdeNavigation.Name)
                     </td>
-            <td>
+                    <td class="text-center">
                 @Html.DisplayFor(modelItem => item.Month)
             </td>
-            <td>
+                    <td class="text-center">
                 @Html.DisplayFor(modelItem => item.Year)
             </td>
-                    <td>
+                    <td class="text-center">
                         @Html.DisplayFor(modelItem => item.IdTimesheetNavigation.Workday) <!-- Số ngày làm -->
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdSalaryhistoryNavigation.Salary) <!-- Lương cứng -->
+                    <td class="text-center">
+                        @string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:C0}", item.IdSalaryhistoryNavigation.Salary) <!-- Lương cứng -->
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdEmployeeallowanceNavigation.Money) <!-- Phụ cấp -->
+                    <td class="text-center">
+                        @string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:C0}", item.IdEmployeeallowanceNavigation.Money) <!-- Phụ cấp -->
                     </td>
-                    <td>
+                    <td class="text-center">
                         @if (item.IdSalaryadvanceNavigation != null)
                         {
-                            @item.IdSalaryadvanceNavigation.Money
+                            @string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:C0}", item.IdSalaryadvanceNavigation.Money)
                         }
                         else
                         {
                             <text>0</text>
                         }
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TotalSalary)
+                    <td class="text-center text-success fw-bold">
+                        @string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:C0}", item.TotalSalary)
                     </td>
-                    <td>
+                    <td class="text-center">
                         @Html.DisplayFor(modelItem => item.Date)
                     </td>
                     <td class="text-center">
-                        <a asp-action="Edit" asp-route-id="@item.Ids" class="btn btn-warning btn-sm shadow-sm">
-                            <i class="bi bi-pencil-square"></i> Sửa
-                        </a>
+                        @if (userRole == 1)
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Ids" class="btn btn-warning btn-sm shadow-sm">
+                                <i class="bi bi-pencil-square"></i> Sửa
+                            </a>
+                        }
                         <a asp-action="Details" asp-route-id="@item.Ids" class="btn btn-info btn-sm shadow-sm">
                             <i class="bi bi-eye"></i> Xem
                         </a>
-                        <button class="btn btn-danger btn-sm shadow-sm" onclick="confirmDelete('@Url.Action("DeleteAjax", new { id = item.Ids })')">
-                            <i class="bi bi-trash"></i> Xóa
-                        </button>
+                        @if (userRole == 1)
+                        {
+                            <button class="btn btn-danger btn-sm shadow-sm" onclick="confirmDelete('@Url.Action("DeleteAjax", new { id = item.Ids })')">
+                                <i class="bi bi-trash"></i> Xóa
+                            </button>
+                        }
                     </td>
         </tr>
 }

@@ -52,7 +52,7 @@
                             @Html.DisplayFor(modelItem => item.IdeNavigation.Name)
                         </a>
                     </td>
-                    <td class="text-center text-success fw-bold">@Html.DisplayFor(modelItem => item.Money)</td>
+                    <td class="text-center text-success fw-bold">@string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:C0}", item.Money)</td>
                     <td class="text-center">@Html.DisplayFor(modelItem => item.Month)</td>
                     <td class="text-center">@Html.DisplayFor(modelItem => item.Year)</td>
                     <td class="text-center">
