@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\areas\\admins\\views\\salarycalculations\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\areas\\admins\\views\\salarycalculations\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|solutionrelative:da_qlnhansu\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8C38A89B-EE75-4AD9-9F5C-E0548F692D7D}|DA_QLNhanSu\\DA_QLNhanSu.csproj|f:\\dev2409gh-t2356\\datotnghiep\\da_qlnhansu\\da_qlnhansu\\areas\\admins\\views\\salarycalculations\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -35,14 +35,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\SalaryCalculations\\Index.cshtml",
-              "RelativeDocumentMoniker": "DA_QLNhanSu\\Areas\\Admins\\Views\\SalaryCalculations\\Index.cshtml",
-              "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Areas\\Admins\\Views\\SalaryCalculations\\Index.cshtml",
-              "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Views\\SalaryCalculations\\Index.cshtml",
-              "ViewState": "AQIAAEgAAAAAAAAAAAAAAFEAAAARAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-30T12:41:14.088Z",
+              "Title": "Program.cs",
+              "DocumentMoniker": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Program.cs",
+              "RelativeDocumentMoniker": "DA_QLNhanSu\\Program.cs",
+              "ToolTip": "F:\\dev2409gh-t2356\\DATotNghiep\\DA_QLNhanSu\\DA_QLNhanSu\\Program.cs",
+              "RelativeToolTip": "DA_QLNhanSu\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T13:03:39.481Z",
               "EditorCaption": ""
             },
             {
@@ -55,8 +55,7 @@
               "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Views\\SalaryCalculations\\Details.cshtml",
               "ViewState": "AQIAADAAAAAAAAAAAAAAAAkAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-30T12:40:20.109Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-30T12:40:20.109Z"
             },
             {
               "$type": "Document",
@@ -68,8 +67,7 @@
               "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Views\\OnLeaves\\Details.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-30T12:40:03.205Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-30T12:40:03.205Z"
             },
             {
               "$type": "Document",
@@ -81,8 +79,7 @@
               "RelativeToolTip": "DA_QLNhanSu\\Areas\\Admins\\Views\\OnLeaves\\Index.cshtml",
               "ViewState": "AQIAAFcAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-30T12:39:55.866Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-30T12:39:55.866Z"
             }
           ]
         }

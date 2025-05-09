@@ -1,6 +1,7 @@
 using DA_QLNhanSu.Models;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace DA_QLNhanSu
 {
     public class Program
