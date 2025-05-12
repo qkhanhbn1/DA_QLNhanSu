@@ -17,11 +17,20 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-                    <div class="mb-3">
+            <div class="mb-3">
                 <label asp-for="Password" class="control-label"></label>
                 <input asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
+            @* <div class="mb-3">
+                <label asp-for="IdroleNavigation" class="control-label">vai tro</label>
+                        <select asp-for="IdroleNavigation" class="form-select">
+                            <option value="">-- Chọn vai tro --</option>
+                            <option value="true">qtv</option>
+                            <option value="false">nhan vien</option>
+                        </select>
+                <span asp-validation-for="IdroleNavigation" class="text-danger"></span>
+            </div> *@
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary w-30">Tạo</button>
                     </div>
