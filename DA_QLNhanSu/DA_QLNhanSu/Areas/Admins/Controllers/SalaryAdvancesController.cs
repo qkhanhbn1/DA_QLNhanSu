@@ -51,7 +51,12 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
             }
 
             var salaryAdvance = await _context.SalaryAdvances
-                .Include(s => s.IdeNavigation)
+                .Include(o => o.IdeNavigation)
+                .ThenInclude(e => e.IddNavigation)
+                .Include(o => o.IdeNavigation)
+                .ThenInclude(e => e.IdpNavigation)
+                .Include(o => o.IdeNavigation)
+                .ThenInclude(e => e.IdqNavigation)
                 .FirstOrDefaultAsync(m => m.Idsa == id);
             if (salaryAdvance == null)
             {

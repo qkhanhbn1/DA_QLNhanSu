@@ -21,5 +21,7 @@ public partial class Contract
 
     public bool? Status { get; set; }
 
+    public virtual ICollection<ContractAppendix> ContractAppendices { get; set; } = new List<ContractAppendix>();
+
     public virtual Employee? IdeNavigation { get; set; }
 }

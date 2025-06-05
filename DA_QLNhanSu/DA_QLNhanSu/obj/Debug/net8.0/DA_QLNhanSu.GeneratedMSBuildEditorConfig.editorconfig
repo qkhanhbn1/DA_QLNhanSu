@@ -42,20 +42,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXEFjY291bnRzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/CareerDevelopments/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXENhcmVlckRldmVsb3BtZW50c1xDcmVhdGUuY3NodG1s
+[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/ContractAppendixes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXENvbnRyYWN0QXBwZW5kaXhlc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/CareerDevelopments/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXENhcmVlckRldmVsb3BtZW50c1xEZXRhaWxzLmNzaHRtbA==
+[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/ContractAppendixes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXENvbnRyYWN0QXBwZW5kaXhlc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/CareerDevelopments/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXENhcmVlckRldmVsb3BtZW50c1xFZGl0LmNzaHRtbA==
+[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/ContractAppendixes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXENvbnRyYWN0QXBwZW5kaXhlc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/CareerDevelopments/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXENhcmVlckRldmVsb3BtZW50c1xJbmRleC5jc2h0bWw=
+[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/ContractAppendixes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXENvbnRyYWN0QXBwZW5kaXhlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Contracts/Create.cshtml]
@@ -178,6 +178,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXE9uTGVhdmVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/PositionChanges/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXFBvc2l0aW9uQ2hhbmdlc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/PositionChanges/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXFBvc2l0aW9uQ2hhbmdlc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/PositionChanges/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXFBvc2l0aW9uQ2hhbmdlc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/PositionChanges/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXFBvc2l0aW9uQ2hhbmdlc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/Rewards/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXFJld2FyZHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -196,6 +212,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/SalaryAdvances/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXFNhbGFyeUFkdmFuY2VzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/SalaryAdvances/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5zXFZpZXdzXFNhbGFyeUFkdmFuY2VzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [F:/dev2409gh-t2356/DATotNghiep/DA_QLNhanSu/DA_QLNhanSu/Areas/Admins/Views/SalaryAdvances/Edit.cshtml]

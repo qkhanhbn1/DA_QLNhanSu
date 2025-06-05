@@ -15,6 +15,10 @@ public partial class SalaryHistory
 
     public string? Note { get; set; }
 
+    public int? IdAppendix { get; set; }
+
+    public virtual ContractAppendix? IdAppendixNavigation { get; set; }
+
     public virtual Employee? IdeNavigation { get; set; }
 
     public virtual ICollection<SalaryCalculation> SalaryCalculations { get; set; } = new List<SalaryCalculation>();

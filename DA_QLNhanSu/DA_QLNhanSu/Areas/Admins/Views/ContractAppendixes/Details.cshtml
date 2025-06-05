@@ -1,0 +1,64 @@
+﻿@model DA_QLNhanSu.Models.ContractAppendix
+
+@{
+    ViewData["Title"] = "Chi tiết phụ lục hợp đồng";
+    Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1 class="text-center text-primary mb-4">Chi tiết phụ lục hợp đồng</h1>
+
+<div class="card shadow-lg">
+    <div class="card-header bg-info text-white">
+        <h4>@Model.IdContractNavigation?.IdeNavigation?.Name</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <!-- Cột trái hiển thị ảnh -->
+            <div class="col-md-4 text-center">
+                @if (!string.IsNullOrEmpty(Model.IdContractNavigation?.IdeNavigation?.Image))
+                {
+                    <img src="@Model.IdContractNavigation.IdeNavigation.Image"
+                         alt="@Model.IdContractNavigation.IdeNavigation.Name"
+                         class="img-fluid rounded border shadow-sm"
+                         style="max-width: 250px;">
+                }
+                else
+                {
+                    <p class="text-muted">Không có ảnh</p>
+                }
+            </div>
+
+            <!-- Cột phải hiển thị thông tin -->
+            <div class="col-md-8">
+                <dl class="row">
+                    <dt class="col-sm-4">Tên nhân sự</dt>
+                    <dd class="col-sm-8 fw-bold">@Model.IdContractNavigation?.IdeNavigation?.Name</dd>
+
+                    <dt class="col-sm-4">Mã nhân sự</dt>
+                    <dd class="col-sm-8">@Model.IdContractNavigation?.IdeNavigation?.Code</dd>
+                    <dt class="col-sm-4">Mã phụ lục hợp đồng</dt>
+                    <dd class="col-sm-8">@Model.Id</dd>
+                    <dt class="col-sm-4">Mã hợp đồng</dt>
+                    <dd class="col-sm-8">@Model.IdContractNavigation?.Codecontract</dd>
+
+                    <dt class="col-sm-4">Ngày ký phụ lục</dt>
+                    <dd class="col-sm-8">@Model.SigningDate?.ToString("dd/MM/yyyy")</dd>
+
+                    <dt class="col-sm-4">Loại phụ lục</dt>
+                    <dd class="col-sm-8">@Model.TypeAppendix</dd>
+
+                    <dt class="col-sm-4">Nội dung</dt>
+                    <dd class="col-sm-8" style="white-space: pre-line">@Model.Content</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-center">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary me-2">
+            <i class="bi bi-pencil-square"></i> Chỉnh sửa
+        </a>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Quay lại danh sách
+        </a>
+    </div>
+</div>

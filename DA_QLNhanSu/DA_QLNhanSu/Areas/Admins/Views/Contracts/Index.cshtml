@@ -6,7 +6,7 @@
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1 class="text-primary text-center my-4 fw-bold">DANH SÁCH HỢP ĐỒNG NHÂN SỰ</h1>
+<h1 class="text-primary text-center my-4 fw-bold">DANH SÁCH HỢP ĐỒNG</h1>
 
 <div class="row my-4 align-items-center">
     <!-- Ô tìm kiếm -->
@@ -36,6 +36,7 @@
             <tr class="align-middle">
                 <th>STT</th>
                 <th><i class="bi bi-person-circle"></i> NHÂN SỰ</th>
+                <th><i class="bi bi-file-earmark-code"></i>MÃ HỢP ĐỒNG</th>
                 <th><i class="bi bi-card-text"></i> MÔ TẢ</th>
                 <th><i class="bi bi-toggle-on"></i> TRẠNG THÁI</th>
                 <th></th>
@@ -56,6 +57,9 @@
                         </a>
                         <br />
                         <small class="text-muted" style="margin-left: 45px;">@item.IdeNavigation?.Code - @item.IdeNavigation?.IdpNavigation?.Name</small>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Codecontract)
                     </td>
                     <td>
                         <strong>@Html.DisplayFor(modelItem => item.Content)</strong>

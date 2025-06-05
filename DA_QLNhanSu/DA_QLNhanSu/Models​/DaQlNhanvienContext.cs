@@ -19,9 +19,9 @@ public partial class DaQlNhanvienContext : DbContext
 
     public virtual DbSet<Allowance> Allowances { get; set; }
 
-    public virtual DbSet<CareerDevelopment> CareerDevelopments { get; set; }
-
     public virtual DbSet<Contract> Contracts { get; set; }
+
+    public virtual DbSet<ContractAppendix> ContractAppendices { get; set; }
 
     public virtual DbSet<Department> Departments { get; set; }
 
@@ -36,6 +36,8 @@ public partial class DaQlNhanvienContext : DbContext
     public virtual DbSet<OnLeave> OnLeaves { get; set; }
 
     public virtual DbSet<Position> Positions { get; set; }
+
+    public virtual DbSet<PositionChange> PositionChanges { get; set; }
 
     public virtual DbSet<Qualification> Qualifications { get; set; }
 
@@ -90,31 +92,6 @@ public partial class DaQlNhanvienContext : DbContext
                 .HasColumnName("NAME");
         });
 
-        modelBuilder.Entity<CareerDevelopment>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK_CAREER_DEVELOPMENT_1");
-
-            entity.ToTable("CAREER_DEVELOPMENT");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Date).HasColumnName("DATE");
-            entity.Property(e => e.Fromrole)
-                .HasMaxLength(250)
-                .HasColumnName("FROMROLE");
-            entity.Property(e => e.Ide).HasColumnName("IDE");
-            entity.Property(e => e.Status).HasColumnName("STATUS");
-            entity.Property(e => e.Torole)
-                .HasMaxLength(250)
-                .HasColumnName("TOROLE");
-            entity.Property(e => e.Type)
-                .HasMaxLength(50)
-                .HasColumnName("TYPE");
-
-            entity.HasOne(d => d.IdeNavigation).WithMany(p => p.CareerDevelopments)
-                .HasForeignKey(d => d.Ide)
-                .HasConstraintName("FK_CAREER_DEVELOPMENT_EMPLOYEE1");
-        });
-
         modelBuilder.Entity<Contract>(entity =>
         {
             entity.ToTable("CONTRACT");
@@ -135,6 +112,25 @@ public partial class DaQlNhanvienContext : DbContext
             entity.HasOne(d => d.IdeNavigation).WithMany(p => p.Contracts)
                 .HasForeignKey(d => d.Ide)
                 .HasConstraintName("FK_CONTRACT_EMPLOYEE");
+        });
+
+        modelBuilder.Entity<ContractAppendix>(entity =>
+        {
+            entity.ToTable("CONTRACT_APPENDIX");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Content)
+                .HasMaxLength(250)
+                .HasColumnName("CONTENT");
+            entity.Property(e => e.IdContract).HasColumnName("ID_CONTRACT");
+            entity.Property(e => e.SigningDate).HasColumnName("SIGNING_DATE");
+            entity.Property(e => e.TypeAppendix)
+                .HasMaxLength(50)
+                .HasColumnName("TYPE_APPENDIX");
+
+            entity.HasOne(d => d.IdContractNavigation).WithMany(p => p.ContractAppendices)
+                .HasForeignKey(d => d.IdContract)
+                .HasConstraintName("FK_CONTRACT_APPENDIX_CONTRACT");
         });
 
         modelBuilder.Entity<Department>(entity =>
@@ -304,6 +300,36 @@ public partial class DaQlNhanvienContext : DbContext
                 .HasColumnName("NAME");
         });
 
+        modelBuilder.Entity<PositionChange>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_CAREER_DEVELOPMENT_1");
+
+            entity.ToTable("POSITION_CHANGES");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Date).HasColumnName("DATE");
+            entity.Property(e => e.Fromrole)
+                .HasMaxLength(250)
+                .HasColumnName("FROMROLE");
+            entity.Property(e => e.IdAppendix).HasColumnName("ID_APPENDIX");
+            entity.Property(e => e.Ide).HasColumnName("IDE");
+            entity.Property(e => e.Status).HasColumnName("STATUS");
+            entity.Property(e => e.Torole)
+                .HasMaxLength(250)
+                .HasColumnName("TOROLE");
+            entity.Property(e => e.Type)
+                .HasMaxLength(50)
+                .HasColumnName("TYPE");
+
+            entity.HasOne(d => d.IdAppendixNavigation).WithMany(p => p.PositionChanges)
+                .HasForeignKey(d => d.IdAppendix)
+                .HasConstraintName("FK_POSITION_CHANGES_CONTRACT_APPENDIX");
+
+            entity.HasOne(d => d.IdeNavigation).WithMany(p => p.PositionChanges)
+                .HasForeignKey(d => d.Ide)
+                .HasConstraintName("FK_CAREER_DEVELOPMENT_EMPLOYEE1");
+        });
+
         modelBuilder.Entity<Qualification>(entity =>
         {
             entity.HasKey(e => e.Idq);
@@ -417,6 +443,7 @@ public partial class DaQlNhanvienContext : DbContext
             entity.Property(e => e.EffectiveDate)
                 .HasColumnType("datetime")
                 .HasColumnName("EFFECTIVE_DATE");
+            entity.Property(e => e.IdAppendix).HasColumnName("ID_APPENDIX");
             entity.Property(e => e.Ide).HasColumnName("IDE");
             entity.Property(e => e.Note)
                 .HasMaxLength(50)
@@ -424,6 +451,10 @@ public partial class DaQlNhanvienContext : DbContext
             entity.Property(e => e.Salary)
                 .HasColumnType("decimal(18, 0)")
                 .HasColumnName("SALARY");
+
+            entity.HasOne(d => d.IdAppendixNavigation).WithMany(p => p.SalaryHistories)
+                .HasForeignKey(d => d.IdAppendix)
+                .HasConstraintName("FK_SALARY_HISTORY_CONTRACT_APPENDIX");
 
             entity.HasOne(d => d.IdeNavigation).WithMany(p => p.SalaryHistories)
                 .HasForeignKey(d => d.Ide)

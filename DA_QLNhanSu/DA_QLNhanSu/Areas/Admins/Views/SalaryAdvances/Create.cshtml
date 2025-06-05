@@ -4,7 +4,10 @@
     ViewData["Title"] = "Tạo mới ứng lương";
     Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
 }
-
+@{
+    var userRole = Context.Session.GetInt32("UserRole") ?? 2; // Mặc định là nhân viên
+    var userId = Context.Session.GetInt32("UserId"); // Lấy ID của nhân sự từ Session
+}
 <h1 class="text-center my-4 text-primary">Thêm mới ứng lương</h1>
 
 <div class="row justify-content-center">
@@ -27,17 +30,18 @@
                         <input asp-for="Money" class="form-control" />
                         <span asp-validation-for="Money" class="text-danger"></span>
                     </div>
-
-                    <div class="mb-3">
-                        <label asp-for="Status" class="form-label">Trạng thái</label>
-                        <select asp-for="Status" class="form-select">
-                            <option value="">-- Chọn trạng thái --</option>
-                            <option value="true">Đã duyệt</option>
-                            <option value="false">Chờ duyệt</option>
-                        </select>
-                        <span asp-validation-for="Status" class="text-danger"></span>
-                    </div>
-
+                    @if (userRole == 1)
+                    {
+                        <div class="mb-3">
+                            <label asp-for="Status" class="form-label">Trạng thái</label>
+                            <select asp-for="Status" class="form-select">
+                                <option value="">-- Chọn trạng thái --</option>
+                                <option value="true">Đã duyệt</option>
+                                <option value="false">Chờ duyệt</option>
+                            </select>
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
+                    }
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label asp-for="Month" class="form-label">Tháng</label>

@@ -38,18 +38,18 @@
                 {
                     <li class="nav-item">
                         <a href="/admins/employees/details/@userId" class="nav-link d-flex align-items-center py-2 text-white">
-                            <i class="fas fa-th me-3"></i> Thông tin nhân sự
+                            <i class="fas fa-th me-3"></i> Thông tin cá nhân
                         </a>
                     </li>
                 }
-                <li class="nav-item">
-                    <a href="/admins/employees" class="nav-link d-flex align-items-center py-2 text-white">
-                        <i class="fas fa-user me-3"></i> Danh sách nhân sự
-                    </a>
-                </li>
+                
                 @if (userRole == 1)
                 {
-
+                    <li class="nav-item">
+                        <a href="/admins/employees" class="nav-link d-flex align-items-center py-2 text-white">
+                            <i class="fas fa-user me-3"></i> Danh sách nhân sự
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a href="/admins/Departments" class="nav-link d-flex align-items-center py-2 text-white">
                             <i class="fas fa-file-contract me-3"></i>Quản lý phòng ban
@@ -61,13 +61,23 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/admins/Leavejobs" class="nav-link d-flex align-items-center py-2 text-white">
-                            <i class="fas fa-user-times me-3"></i>Nhân sự nghỉ việc
+                        <a href="/admins/ContractAppendixes" class="nav-link d-flex align-items-center py-2 text-white">
+                            <i class="fas fa-file-contract me-3"></i>Phụ lục hợp đồng
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/admins/careerdevelopments" class="nav-link d-flex align-items-center py-2 text-white">
-                            <i class="fas fa-chart-line me-3"></i>Phát triển sự nghiệp
+                        <a href="/admins/Positionchanges" class="nav-link d-flex align-items-center py-2 text-white">
+                            <i class="fas fa-chart-line me-3"></i>Biến động chức vụ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admins/Salaryhistories" class="nav-link d-flex align-items-center py-2 text-white">
+                            <i class="fas fa-user-clock me-3"></i>Lịch sử lương
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admins/Leavejobs" class="nav-link d-flex align-items-center py-2 text-white">
+                            <i class="fas fa-user-times me-3"></i>Nhân sự nghỉ việc
                         </a>
                     </li>
                 }
@@ -76,37 +86,32 @@
                             <i class="fas fa-calendar-alt me-3"></i>Nhân sự nghỉ phép
                         </a>
                     </li>
-                @if (userRole == 1)
-                {
-                    <li class="nav-item">
-                        <a href="/admins/Salaryhistories" class="nav-link d-flex align-items-center py-2 text-white">
-                            <i class="fas fa-user-clock me-3"></i> Lịch sử lương
-                        </a>
-                    </li>
-                }
                 <li class="nav-item">
                         <a href="/admins/timesheets" class="nav-link d-flex align-items-center py-2 text-white">
                             <i class="fas fa-clock me-3"></i> Quản lý chấm công
                         </a>
-                    </li>
+                </li>
                 <li class="nav-item">
-                    <a href="/admins/salarycalculations" class="nav-link d-flex align-items-center py-2 text-white">
-                        <i class="fas fa-calculator me-3"></i> Bảng lương định kỳ
+                    <a href="/admins/salaryadvances" class="nav-link d-flex align-items-center py-2 text-white">
+                        <i class="fas fa-money-bill-wave me-3"></i> Ứng lương
                     </a>
                 </li>
                 @if (userRole == 1)
                 {
                     <li class="nav-item">
-                        <a href="/admins/salaryadvances" class="nav-link d-flex align-items-center py-2 text-white">
-                            <i class="fas fa-money-bill-wave me-3"></i> Ứng lương
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="/admins/employeeallowances" class="nav-link d-flex align-items-center py-2 text-white">
                             <i class="fas fa-hand-holding-usd me-3"></i> Phụ cấp
                         </a>
                     </li>
-                    
+                }
+                <li class="nav-item">
+                    <a href="/admins/salarycalculations" class="nav-link d-flex align-items-center py-2 text-white">
+                        <i class="fas fa-calculator me-3"></i> Bảng lương định kỳ
+                    </a>
+                </li>
+                
+                @if (userRole == 1)
+                {
                     <li class="nav-item">
                         <a href="/admins/rewards" class="nav-link d-flex align-items-center py-2 text-white">
                             <i class="fas fa-gift me-3"></i>Danh sách thưởng

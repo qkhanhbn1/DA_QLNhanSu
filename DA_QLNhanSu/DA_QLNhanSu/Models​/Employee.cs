@@ -37,8 +37,6 @@ public partial class Employee
 
     public int? Idrole { get; set; }
 
-    public virtual ICollection<CareerDevelopment> CareerDevelopments { get; set; } = new List<CareerDevelopment>();
-
     public virtual ICollection<Contract> Contracts { get; set; } = new List<Contract>();
 
     public virtual ICollection<Discipline> Disciplines { get; set; } = new List<Discipline>();
@@ -56,6 +54,8 @@ public partial class Employee
     public virtual ICollection<LeaveJob> LeaveJobs { get; set; } = new List<LeaveJob>();
 
     public virtual ICollection<OnLeave> OnLeaves { get; set; } = new List<OnLeave>();
+
+    public virtual ICollection<PositionChange> PositionChanges { get; set; } = new List<PositionChange>();
 
     public virtual ICollection<Reward> Rewards { get; set; } = new List<Reward>();
 

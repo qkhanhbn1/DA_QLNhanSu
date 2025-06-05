@@ -51,7 +51,12 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
             }
 
             var salaryHistory = await _context.SalaryHistories
-                .Include(s => s.IdeNavigation)
+                .Include(o => o.IdeNavigation)
+                .ThenInclude(e => e.IddNavigation)
+                .Include(o => o.IdeNavigation)
+                .ThenInclude(e => e.IdpNavigation)
+                .Include(o => o.IdeNavigation)
+                .ThenInclude(e => e.IdqNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (salaryHistory == null)
             {
@@ -73,7 +78,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Ide,Salary,EffectiveDate,Note")] SalaryHistory salaryHistory)
+        public async Task<IActionResult> Create([Bind("Id,Ide,Salary,EffectiveDate,Note,IdAppendix")] SalaryHistory salaryHistory)
         {
             if (ModelState.IsValid)
             {
@@ -107,7 +112,7 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Ide,Salary,EffectiveDate,Note")] SalaryHistory salaryHistory)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Ide,Salary,EffectiveDate,Note,IdAppendix")] SalaryHistory salaryHistory)
         {
             if (id != salaryHistory.Id)
             {

@@ -25,23 +25,28 @@ namespace DA_QLNhanSu.Areas.Admins.Controllers
         // GET: Admins/Contracts
         public async Task<IActionResult> Index(string name, int page = 1)
         {
-            int limit = 15; // Số bản ghi trên mỗi trang
+            int limit = 15;
 
             var query = _context.Contracts
                 .Include(e => e.IdeNavigation)
-                .ThenInclude(e => e.IdpNavigation)
-                .OrderBy(c => c.Id); // Sắp xếp theo Id để đảm bảo thứ tự trong DB
+                    .ThenInclude(e => e.IdpNavigation)
+                .AsQueryable();
 
             if (!string.IsNullOrEmpty(name))
             {
-                query = query.Where(c => c.IdeNavigation.Name.Contains(name)).OrderBy(c => c.Id);
+                query = query.Where(c =>
+                    c.IdeNavigation.Name.Contains(name) ||
+                    c.Codecontract.Contains(name));
             }
 
-            var contracts = await query.ToPagedListAsync(page, limit);
+            var contracts = await query
+                .OrderBy(c => c.Id)
+                .ToPagedListAsync(page, limit);
 
             ViewBag.keyword = name;
             return View(contracts);
         }
+
 
 
         // GET: Admins/Contracts/Details/5

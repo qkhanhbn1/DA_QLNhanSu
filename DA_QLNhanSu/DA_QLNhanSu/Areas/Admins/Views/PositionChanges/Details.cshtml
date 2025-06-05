@@ -1,0 +1,80 @@
+﻿@model DA_QLNhanSu.Models.PositionChange
+
+@{
+    ViewData["Title"] = "Chi tiết điều chuyển chức vụ";
+    Layout = "~/Areas/Admins/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1 class="text-center text-primary mb-4">Chi tiết điều chuyển chức vụ</h1>
+
+<div class="card shadow-lg">
+    <div class="card-header bg-info text-white">
+        <h4>@Model.IdeNavigation?.Name</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <!-- Ảnh nhân sự -->
+            <div class="col-md-4 text-center">
+                @if (!string.IsNullOrEmpty(Model.IdeNavigation?.Image))
+                {
+                    <img src="@Model.IdeNavigation.Image" alt="@Model.IdeNavigation.Name" class="img-fluid rounded border shadow-sm" style="max-width: 250px;" />
+                }
+                else
+                {
+                    <div class="text-muted fst-italic">Chưa có ảnh</div>
+                }
+            </div>
+
+            <!-- Thông tin điều chuyển -->
+            <div class="col-md-8">
+                <dl class="row">
+                    <dt class="col-sm-4">Tên nhân sự</dt>
+                    <dd class="col-sm-8 fw-bold">@Model.IdeNavigation?.Name</dd>
+
+                    <dt class="col-sm-4">Mã nhân sự</dt>
+                    <dd class="col-sm-8">@Model.IdeNavigation?.Code</dd>
+
+                    <dt class="col-sm-4">Chức vụ cũ</dt>
+                    <dd class="col-sm-8">@Model.Fromrole</dd>
+
+                    <dt class="col-sm-4">Chức vụ mới</dt>
+                    <dd class="col-sm-8">@Model.Torole</dd>
+
+                    <dt class="col-sm-4">Loại điều chuyển</dt>
+                    <dd class="col-sm-8">@Model.Type</dd>
+
+                    <dt class="col-sm-4">Ngày điều chuyển</dt>
+                    <dd class="col-sm-8">@(Model.Date?.ToString("dd/MM/yyyy"))</dd>
+
+                    <dt class="col-sm-4">Trạng thái</dt>
+                    <dd class="col-sm-8">
+                        <span class="badge @(Model.Status == true ? "bg-success" : "bg-secondary")">
+                            @(Model.Status == true ? "Đã duyệt" : "Chờ duyệt")
+                        </span>
+                    </dd>
+
+                    <dt class="col-sm-4">Phụ lục hợp đồng</dt>
+                    <dd class="col-sm-8">
+                        @if (Model.IdAppendixNavigation != null)
+                        {
+                            <span><strong>@Model.IdAppendixNavigation.Id</strong> </span>
+                        }
+                        else
+                        {
+                            <span class="text-muted fst-italic">Không có</span>
+                        }
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-footer text-center">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary me-2">
+            <i class="bi bi-pencil-square"></i> Chỉnh sửa
+        </a>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Quay lại danh sách
+        </a>
+    </div>
+</div>
